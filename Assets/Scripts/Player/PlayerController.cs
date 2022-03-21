@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("RunSpeed")]
+    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] float speed = 0.5f;
+
+    [Header("Fall")]
     [SerializeField] float fallSpeed = 0.1f;
     [SerializeField] float maxFallSpeed = 0.2f;
 
@@ -13,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 acceleration = Vector2.zero;
 
     private bool isGrounded = false;
+
     void Update()
     {
         Move();
@@ -26,12 +32,29 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         transform.position += new Vector3(velocity.x, velocity.y, 0); //adds the velocity to the player every frame
+
+        print(velocity);
+
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            acceleration.x = speed * Time.deltaTime;
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            acceleration.x = -speed * Time.deltaTime;
+        }
+        else
+        {
+            acceleration.x = 0;
+            velocity.x = 0;
+        }
     }
 
     void SimulatePhysics()
     {
         velocity += acceleration;
         velocity.y = Mathf.Clamp(velocity.y,maxFallSpeed,10);
+        velocity.x = Mathf.Clamp(velocity.x,-maxSpeed,maxSpeed);
 
         if (!isGrounded)
         {
@@ -46,7 +69,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision);
         if (collision.gameObject.CompareTag(groundTag))
         {
             isGrounded = true;
