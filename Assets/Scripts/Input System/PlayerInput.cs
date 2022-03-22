@@ -72,7 +72,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""4b4b9004-ec7c-4ae9-a51b-c9c65b876230"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -277,7 +277,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cf399fb7-7685-4594-92e0-5822b3755006"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

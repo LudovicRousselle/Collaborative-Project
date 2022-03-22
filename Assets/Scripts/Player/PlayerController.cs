@@ -9,9 +9,10 @@ public class PlayerController : MonoBehaviour
     private PlayerInput input;
 
     [Header("RunSpeed")]
-    [SerializeField] float maxSpeed = 5f;
-    [SerializeField] float speed = 0.5f;
+    [SerializeField] float walkingSpeed = 0.5f;
+    [SerializeField] float maxWalkingSpeed = 5f;
     [SerializeField] float airSpeed = 0.1f;
+    [SerializeField] float runMultiplier = 2;
 
     [Header("Jump")]
     [SerializeField] float jumpImpulse = 5;
@@ -24,10 +25,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundFriction = 0.2f;
     [SerializeField] float airFriction = 0.1f;
 
+    [Space(20)]
     [SerializeField] string groundTag = "Ground";
 
-    private Vector2 velocity = Vector2.zero;
-    private Vector2 acceleration = Vector2.zero;
+    private float speed = 1;
+    private float maxSpeed = 1;
+    private float runningSpeed = 1;
+    private float maxRunningSpeed = 1;
+
+    [SerializeField] private Vector2 velocity = Vector2.zero;
+    [SerializeField] private Vector2 acceleration = Vector2.zero;
     private Vector2 inputMove = Vector2.zero;
 
     private bool isGrounded = false;
@@ -35,11 +42,17 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         input = new PlayerInput();
-        maxSpeed /= 100;
+
+        runningSpeed = walkingSpeed * runMultiplier;
+        maxRunningSpeed = maxWalkingSpeed * runMultiplier;
+
+        speed = runningSpeed;
+        maxSpeed = maxRunningSpeed;
 
         SetupAllInputs();
     }
 
+    #region Updates
     void Update()
     {
         Move();
@@ -49,10 +62,12 @@ public class PlayerController : MonoBehaviour
     {
         SimulatePhysics();
     }
+    #endregion
 
     private void SetupAllInputs()
     {
         input.Default.Jump.performed += ctx => Jump();
+        input.Default.Run.performed += ctx => Run();
 
         input.Default.Move.performed += ctx => inputMove = ctx.ReadValue<Vector2>();
         input.Default.Move.canceled += ctx => inputMove = Vector2.zero;
@@ -65,9 +80,24 @@ public class PlayerController : MonoBehaviour
         acceleration.y = jumpImpulse;
     }
 
+    private void Run()
+    {
+        print("run");
+        if (speed == walkingSpeed)
+        {
+            speed = runningSpeed;
+            maxSpeed = maxRunningSpeed;
+        } 
+        else if (speed == runningSpeed)
+        {
+            speed = walkingSpeed;
+            maxSpeed = maxWalkingSpeed;
+        }
+    }
+
     void Move()
     {
-        transform.position += new Vector3(velocity.x, velocity.y, 0); //adds the velocity to the player every frame
+        transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime; //adds the velocity to the player every frame
 
         if (inputMove.x > 0)
         {
@@ -110,13 +140,11 @@ public class PlayerController : MonoBehaviour
                 velocity.x -= velocitySymbol * groundFriction * Time.deltaTime;
             }
 
-            if (Mathf.Abs(velocity.x) <= 0.005 && inputMove.x == 0)
+            if (Mathf.Abs(velocity.x) <= 0.5 && inputMove.x == 0)
             {
                 velocity.x = 0;
             }
         }
-
-
     }
 
     void OnCollisionEnter(Collision collision)
@@ -129,6 +157,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Enable/Disable
     private void OnEnable()
     {
         input?.Enable();
@@ -138,4 +167,9 @@ public class PlayerController : MonoBehaviour
     {
         input?.Disable();
     }
+    #endregion
+
+    //RaycastHit hit;
+    //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down)* rayDistance, Color.red);
+    //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, layers))
 }
