@@ -88,25 +88,33 @@ public class PlayerController : MonoBehaviour
 
     void SimulatePhysics()
     {
+        print("input" + (inputMove.x == 0));
+        print(Mathf.Abs(acceleration.x) <= 0.2f);
+
         velocity += acceleration;
         velocity.y = Mathf.Clamp(velocity.y,-maxFallSpeed,10);
         velocity.x = Mathf.Clamp(velocity.x,-maxSpeed,maxSpeed);
 
-        if (!isGrounded)
+        if (acceleration.x != 0)
         {
-            acceleration.y = -fallSpeed * Time.deltaTime;
-            if (acceleration.x > 0) acceleration.x -= airFriction * Time.deltaTime;
-            else if (acceleration.x < 0) acceleration.x += airFriction * Time.deltaTime;
-        }
-        else
-        {
-            if (acceleration.x > 0) acceleration.x -= groundFriction * Time.deltaTime;
-            else if (acceleration.x < 0) acceleration.x += groundFriction * Time.deltaTime;
+            if (!isGrounded)
+            {
+                acceleration.y = -fallSpeed * Time.deltaTime;
+
+                if (acceleration.x > 0) acceleration.x -= airFriction * Time.deltaTime;
+                else if (acceleration.x < 0) acceleration.x += airFriction * Time.deltaTime;
+            }
+            else
+            {
+                if (acceleration.x > 0) acceleration.x -= groundFriction * Time.deltaTime;
+                else if (acceleration.x < 0) acceleration.x += groundFriction * Time.deltaTime;
+            }
         }
 
-        if (inputMove.x != 0)
+        if (inputMove.x == 0)
         {
-            if (0.1 > Mathf.Abs(acceleration.x > -0.1)
+            if (Mathf.Abs(acceleration.x) <= 0.2f)
+                    acceleration.x = 0;
         }
     }
 
