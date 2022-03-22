@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    //References
-    public PlayerInput playerInput;
+    private void Update()
+    {
+        
+    }
 }
