@@ -24,7 +24,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""d9fefd82-5388-4c5e-8fbd-3c41c5b93642"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Interact"",
@@ -51,7 +51,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""WalkAround"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""7c7dd59f-a332-454a-807f-74a4ce32f0b6"",
                     ""expectedControlType"": ""Vector2"",
@@ -80,7 +80,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""1c434dc1-48b4-4831-9ddb-5944d4df00fa"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
@@ -111,6 +111,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b59dcbeb-95c0-4e84-9609-46484ffb4842"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d4e50db6-6125-4114-83eb-081b2514b480"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
@@ -124,6 +135,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""0a93e9ab-6288-4601-8921-812eb3aa1a35"",
                     ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rewind"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e58d059a-f8ca-4963-84ba-39d1c98254eb"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -160,9 +182,64 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""WalkAround"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""KeyboardAxis"",
+                    ""id"": ""a4e68cbd-6984-4f12-a30d-b7d0302e8228"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""21dda5d4-61bb-4d0b-94d1-1d329503c3b4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9c2a5010-9c44-4b32-8e8c-4b496ec6e91f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""868f93b1-2a48-490d-92c9-38f95ce88fbb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""28f5beca-f7e1-4bb8-94f4-8fe57a2fd92d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -177,8 +254,41 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""44535219-f890-49f1-8986-27b7a9e8a0c1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1e85f2ea-3967-48d7-866f-2faf522c3311"",
                     ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf399fb7-7685-4594-92e0-5822b3755006"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37c0a0fb-7f00-45db-b223-5796b5192da9"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -197,7 +307,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Default_Interact = m_Default.FindAction("Interact", throwIfNotFound: true);
         m_Default_Rewind = m_Default.FindAction("Rewind", throwIfNotFound: true);
         m_Default_MarkObject = m_Default.FindAction("MarkObject", throwIfNotFound: true);
-        m_Default_WalkAround = m_Default.FindAction("WalkAround", throwIfNotFound: true);
+        m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
         m_Default_PauseGame = m_Default.FindAction("PauseGame", throwIfNotFound: true);
         m_Default_Run = m_Default.FindAction("Run", throwIfNotFound: true);
     }
@@ -253,7 +363,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Default_Interact;
     private readonly InputAction m_Default_Rewind;
     private readonly InputAction m_Default_MarkObject;
-    private readonly InputAction m_Default_WalkAround;
+    private readonly InputAction m_Default_Move;
     private readonly InputAction m_Default_PauseGame;
     private readonly InputAction m_Default_Run;
     public struct DefaultActions
@@ -264,7 +374,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Default_Interact;
         public InputAction @Rewind => m_Wrapper.m_Default_Rewind;
         public InputAction @MarkObject => m_Wrapper.m_Default_MarkObject;
-        public InputAction @WalkAround => m_Wrapper.m_Default_WalkAround;
+        public InputAction @Move => m_Wrapper.m_Default_Move;
         public InputAction @PauseGame => m_Wrapper.m_Default_PauseGame;
         public InputAction @Run => m_Wrapper.m_Default_Run;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
@@ -288,9 +398,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MarkObject.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMarkObject;
                 @MarkObject.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMarkObject;
                 @MarkObject.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMarkObject;
-                @WalkAround.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalkAround;
-                @WalkAround.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalkAround;
-                @WalkAround.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalkAround;
+                @Move.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                 @PauseGame.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
@@ -313,9 +423,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MarkObject.started += instance.OnMarkObject;
                 @MarkObject.performed += instance.OnMarkObject;
                 @MarkObject.canceled += instance.OnMarkObject;
-                @WalkAround.started += instance.OnWalkAround;
-                @WalkAround.performed += instance.OnWalkAround;
-                @WalkAround.canceled += instance.OnWalkAround;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
@@ -332,7 +442,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnRewind(InputAction.CallbackContext context);
         void OnMarkObject(InputAction.CallbackContext context);
-        void OnWalkAround(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
     }

@@ -1,23 +1,45 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerInput input;
+
     [Header("RunSpeed")]
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float speed = 0.5f;
+    [SerializeField] float airSpeed = 0.1f;
+
+    [Header("Jump")]
+    [SerializeField] float jumpImpulse = 5;
 
     [Header("Fall")]
     [SerializeField] float fallSpeed = 0.1f;
     [SerializeField] float maxFallSpeed = 0.2f;
 
+    [Header("Physics")]
+    [SerializeField] float groundFriction = 0.2f;
+    [SerializeField] float airFriction = 0.1f;
+
     [SerializeField] string groundTag = "Ground";
 
     private Vector2 velocity = Vector2.zero;
     private Vector2 acceleration = Vector2.zero;
+    private Vector2 inputMove = Vector2.zero;
 
     private bool isGrounded = false;
+
+    private void Awake()
+    {
+        input = new PlayerInput();
+        jumpImpulse /= 100;
+        maxSpeed /= 100;
+
+        SetupAllInputs();
+    }
 
     void Update()
     {
@@ -29,49 +51,82 @@ public class PlayerController : MonoBehaviour
         SimulatePhysics();
     }
 
+    private void SetupAllInputs()
+    {
+        input.Default.Jump.performed += ctx => Jump();
+
+        input.Default.Move.performed += ctx => inputMove = ctx.ReadValue<Vector2>();
+        input.Default.Move.canceled += ctx => inputMove = Vector2.zero;
+    }
+
+    private void Jump()
+    {
+        if (!isGrounded) return;
+        isGrounded = false;
+        acceleration.y = jumpImpulse;
+    }
+
     void Move()
     {
         transform.position += new Vector3(velocity.x, velocity.y, 0); //adds the velocity to the player every frame
 
-        print(velocity);
-
-        if (Input.GetAxis("Horizontal") > 0)
+        if (inputMove.x > 0)
         {
-            acceleration.x = speed * Time.deltaTime;
+            if (isGrounded)
+                acceleration.x = speed * Time.deltaTime;
+            else if(!isGrounded)
+                acceleration.x = airSpeed * Time.deltaTime;
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (inputMove.x < 0)
         {
-            acceleration.x = -speed * Time.deltaTime;
-        }
-        else
-        {
-            acceleration.x = 0;
-            velocity.x = 0;
+            if (isGrounded)
+                acceleration.x = -speed * Time.deltaTime;
+            else if (!isGrounded)
+                acceleration.x = -airSpeed * Time.deltaTime;
         }
     }
 
     void SimulatePhysics()
     {
         velocity += acceleration;
-        velocity.y = Mathf.Clamp(velocity.y,maxFallSpeed,10);
+        velocity.y = Mathf.Clamp(velocity.y,-maxFallSpeed,10);
         velocity.x = Mathf.Clamp(velocity.x,-maxSpeed,maxSpeed);
 
         if (!isGrounded)
         {
             acceleration.y = -fallSpeed * Time.deltaTime;
+            if (acceleration.x > 0) acceleration.x -= airFriction * Time.deltaTime;
+            else if (acceleration.x < 0) acceleration.x += airFriction * Time.deltaTime;
         }
         else
         {
-            acceleration.y = 0;
-            velocity.y = 0;
+            if (acceleration.x > 0) acceleration.x -= groundFriction * Time.deltaTime;
+            else if (acceleration.x < 0) acceleration.x += groundFriction * Time.deltaTime;
+        }
+
+        if (inputMove.x != 0)
+        {
+            if (0.1 > Mathf.Abs(acceleration.x > -0.1)
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(groundTag))
         {
+            acceleration.y = 0;
+            velocity.y = 0;
             isGrounded = true;
         }
+    }
+
+    private void OnEnable()
+    {
+        input?.Enable();
+    }
+
+    private void OnDisable()
+    {
+        input?.Disable();
     }
 }
