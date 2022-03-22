@@ -751,10 +751,10 @@ MonoBehaviour:
   speed: 2.5
   airSpeed: 0.1
   jumpImpulse: 5
-  fallSpeed: 0.1
-  maxFallSpeed: 0.2
-  groundFriction: 2
-  airFriction: 1
+  fallSpeed: 0.2
+  maxFallSpeed: 0.5
+  groundFriction: 0.1
+  airFriction: 0.05
   groundTag: Ground
 --- !u!1 &2143049422
 GameObject:

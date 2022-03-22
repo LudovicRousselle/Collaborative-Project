@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         input = new PlayerInput();
-        jumpImpulse /= 100;
         maxSpeed /= 100;
 
         SetupAllInputs();
@@ -73,49 +72,51 @@ public class PlayerController : MonoBehaviour
         if (inputMove.x > 0)
         {
             if (isGrounded)
-                acceleration.x = speed * Time.deltaTime;
+                acceleration.x = speed;
             else if(!isGrounded)
-                acceleration.x = airSpeed * Time.deltaTime;
+                acceleration.x = airSpeed;
         }
         else if (inputMove.x < 0)
         {
             if (isGrounded)
-                acceleration.x = -speed * Time.deltaTime;
+                acceleration.x = -speed;
             else if (!isGrounded)
-                acceleration.x = -airSpeed * Time.deltaTime;
+                acceleration.x = -airSpeed;
         }
+        else acceleration.x = 0;
     }
 
     void SimulatePhysics()
     {
-        print("input" + (inputMove.x == 0));
-        print(Mathf.Abs(acceleration.x) <= 0.2f);
-
-        velocity += acceleration;
-        velocity.y = Mathf.Clamp(velocity.y,-maxFallSpeed,10);
+        velocity += acceleration * Time.deltaTime;
+        velocity.y = Mathf.Clamp(velocity.y,-maxFallSpeed,100);
         velocity.x = Mathf.Clamp(velocity.x,-maxSpeed,maxSpeed);
 
-        if (acceleration.x != 0)
+        if (!isGrounded)
         {
-            if (!isGrounded)
-            {
-                acceleration.y = -fallSpeed * Time.deltaTime;
+            acceleration.y = -fallSpeed;
+        }
 
-                if (acceleration.x > 0) acceleration.x -= airFriction * Time.deltaTime;
-                else if (acceleration.x < 0) acceleration.x += airFriction * Time.deltaTime;
+        if (velocity.x != 0)
+        {
+            float velocitySymbol = (velocity.x / Mathf.Abs(velocity.x));
+
+            if (!isGrounded) 
+            {
+                velocity.x -= velocitySymbol * airFriction * Time.deltaTime;
             }
             else
             {
-                if (acceleration.x > 0) acceleration.x -= groundFriction * Time.deltaTime;
-                else if (acceleration.x < 0) acceleration.x += groundFriction * Time.deltaTime;
+                velocity.x -= velocitySymbol * groundFriction * Time.deltaTime;
+            }
+
+            if (Mathf.Abs(velocity.x) <= 0.005 && inputMove.x == 0)
+            {
+                velocity.x = 0;
             }
         }
 
-        if (inputMove.x == 0)
-        {
-            if (Mathf.Abs(acceleration.x) <= 0.2f)
-                    acceleration.x = 0;
-        }
+
     }
 
     void OnCollisionEnter(Collision collision)
