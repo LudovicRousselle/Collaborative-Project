@@ -67,6 +67,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""BackMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""371d59c6-0b6e-4351-994c-88519ae482e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
                     ""id"": ""4b4b9004-ec7c-4ae9-a51b-c9c65b876230"",
@@ -168,7 +176,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""14a818b4-3b8f-4bd4-80fc-3bee8a24b629"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PauseGame"",
@@ -185,6 +193,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da84c7d0-a12d-4c23-a031-d140b157f22a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +218,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Default_MarkObject = m_Default.FindAction("MarkObject", throwIfNotFound: true);
         m_Default_WalkAround = m_Default.FindAction("WalkAround", throwIfNotFound: true);
         m_Default_PauseGame = m_Default.FindAction("PauseGame", throwIfNotFound: true);
+        m_Default_BackMenu = m_Default.FindAction("BackMenu", throwIfNotFound: true);
         m_Default_Run = m_Default.FindAction("Run", throwIfNotFound: true);
     }
 
@@ -255,6 +275,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Default_MarkObject;
     private readonly InputAction m_Default_WalkAround;
     private readonly InputAction m_Default_PauseGame;
+    private readonly InputAction m_Default_BackMenu;
     private readonly InputAction m_Default_Run;
     public struct DefaultActions
     {
@@ -266,6 +287,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @MarkObject => m_Wrapper.m_Default_MarkObject;
         public InputAction @WalkAround => m_Wrapper.m_Default_WalkAround;
         public InputAction @PauseGame => m_Wrapper.m_Default_PauseGame;
+        public InputAction @BackMenu => m_Wrapper.m_Default_BackMenu;
         public InputAction @Run => m_Wrapper.m_Default_Run;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
@@ -294,6 +316,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @PauseGame.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnPauseGame;
+                @BackMenu.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
+                @BackMenu.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
+                @BackMenu.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
                 @Run.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
@@ -319,6 +344,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
+                @BackMenu.started += instance.OnBackMenu;
+                @BackMenu.performed += instance.OnBackMenu;
+                @BackMenu.canceled += instance.OnBackMenu;
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
@@ -334,6 +362,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMarkObject(InputAction.CallbackContext context);
         void OnWalkAround(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
+        void OnBackMenu(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
     }
 }

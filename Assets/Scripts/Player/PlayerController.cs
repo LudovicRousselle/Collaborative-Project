@@ -31,23 +31,23 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        transform.position += new Vector3(velocity.x, velocity.y, 0); //adds the velocity to the player every frame
+        //transform.position += new Vector3(velocity.x, velocity.y, 0); //adds the velocity to the player every frame
 
-        print(velocity);
+        //print(velocity);
 
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            acceleration.x = speed * Time.deltaTime;
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            acceleration.x = -speed * Time.deltaTime;
-        }
-        else
-        {
-            acceleration.x = 0;
-            velocity.x = 0;
-        }
+        //if (Input.GetAxis("Horizontal") > 0)
+        //{
+        //    acceleration.x = speed * Time.deltaTime;
+        //}
+        //else if (Input.GetAxis("Horizontal") < 0)
+        //{
+        //    acceleration.x = -speed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    acceleration.x = 0;
+        //    velocity.x = 0;
+        //}
     }
 
     void SimulatePhysics()
