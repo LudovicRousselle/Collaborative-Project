@@ -73,6 +73,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""BackMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""39dc335c-4953-45bb-9a93-277fb1a035ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -295,6 +303,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba8ae17a-d8bb-480f-9b30-957993419972"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -310,6 +329,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
         m_Default_PauseGame = m_Default.FindAction("PauseGame", throwIfNotFound: true);
         m_Default_Run = m_Default.FindAction("Run", throwIfNotFound: true);
+        m_Default_BackMenu = m_Default.FindAction("BackMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -366,6 +386,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Default_Move;
     private readonly InputAction m_Default_PauseGame;
     private readonly InputAction m_Default_Run;
+    private readonly InputAction m_Default_BackMenu;
     public struct DefaultActions
     {
         private @PlayerInput m_Wrapper;
@@ -377,6 +398,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Default_Move;
         public InputAction @PauseGame => m_Wrapper.m_Default_PauseGame;
         public InputAction @Run => m_Wrapper.m_Default_Run;
+        public InputAction @BackMenu => m_Wrapper.m_Default_BackMenu;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -407,6 +429,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnRun;
+                @BackMenu.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
+                @BackMenu.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
+                @BackMenu.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnBackMenu;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -432,6 +457,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @BackMenu.started += instance.OnBackMenu;
+                @BackMenu.performed += instance.OnBackMenu;
+                @BackMenu.canceled += instance.OnBackMenu;
             }
         }
     }
@@ -445,5 +473,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnBackMenu(InputAction.CallbackContext context);
     }
 }
