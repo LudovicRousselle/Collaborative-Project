@@ -5,6 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private SaveManager m_saveManager;
+    [SerializeField] private GameObject m_door;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class Doors : MonoBehaviour
 {
     #region singleton
-    public static SaveManager instance;
+    private static Doors instance;
     private void Awake()
     {
         if (instance == null)
@@ -20,18 +20,14 @@ public class SaveManager : MonoBehaviour
     }
     #endregion
 
-    //PlayerPosition
-    [SerializeField] private Transform m_startLevelPos;
-    public Vector3 lastCheckPointPos;
-
     // Start is called before the first frame update
     void Start()
     {
-        lastCheckPointPos = m_startLevelPos.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
 }
