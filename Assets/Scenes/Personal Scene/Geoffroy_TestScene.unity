@@ -748,17 +748,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 50
-  maxWalkingSpeed: 2.5
-  airSpeed: 0.1
+  maxWalkingSpeed: 5
+  airSpeed: 2
   runMultiplier: 2
   jumpImpulse: 500
   fallSpeed: 20
   maxFallSpeed: 50
-  groundFriction: 1
+  groundFriction: 25
   airFriction: 0.5
   groundTag: Ground
   velocity: {x: 0.3400001, y: 0}
   acceleration: {x: 0, y: 0}
+  downRayDistance: 2
+  sideRayDistance: 1.1
 --- !u!1 &2143049422
 GameObject:
   m_ObjectHideFlags: 0

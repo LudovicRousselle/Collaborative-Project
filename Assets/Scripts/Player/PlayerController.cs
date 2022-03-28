@@ -25,19 +25,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundFriction = 0.2f;
     [SerializeField] float airFriction = 0.1f;
 
+    [Header("RayCast Rays")]
+    [SerializeField] private float downRayDistance = 2;
+    [SerializeField] private float sideRayDistance = 1.1f;
+    [SerializeField] private float distToReplacePlayer = 0.1f;
+
     [Space(20)]
-    [SerializeField] string groundTag = "Ground";
+    [SerializeField] private string groundTag = "Ground";
 
     private float speed = 1;
     private float maxSpeed = 1;
     private float runningSpeed = 1;
     private float maxRunningSpeed = 1;
 
-    [SerializeField] private Vector2 velocity = Vector2.zero;
-    [SerializeField] private Vector2 acceleration = Vector2.zero;
+
+    private Vector2 velocity = Vector2.zero;
+    private Vector2 acceleration = Vector2.zero;
     private Vector2 inputMove = Vector2.zero;
 
     private bool isGrounded = false;
+    private bool canJumpBuffer = false;
 
     private void Awake()
     {
@@ -75,9 +82,13 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (!isGrounded) return;
-        isGrounded = false;
-        acceleration.y = jumpImpulse;
+        if (isGrounded || canJumpBuffer)
+        {
+            isGrounded = false;
+            canJumpBuffer = false;
+            acceleration.y = jumpImpulse;
+            velocity.y = 0;
+        }
     }
 
     private void Run()
@@ -145,6 +156,17 @@ public class PlayerController : MonoBehaviour
                 velocity.x = 0;
             }
         }
+
+        if (RaycastTest())
+        {
+            if (velocity.y < 0)
+                canJumpBuffer = true;
+            else 
+                canJumpBuffer = false;
+        }
+        else isGrounded = false;
+
+        SideRayCast();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -169,7 +191,40 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    //RaycastHit hit;
-    //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down)* rayDistance, Color.red);
-    //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, layers))
+    private bool RaycastTest()
+    {
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * downRayDistance, Color.red);
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, downRayDistance))
+        {
+            if (hit.transform.gameObject.CompareTag(groundTag))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void SideRayCast()
+    {
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * sideRayDistance, Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * sideRayDistance, Color.red);
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, sideRayDistance))
+        {
+            velocity.x = 0;
+            transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y,transform.position.z);
+        }
+        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, sideRayDistance))
+        {
+
+            velocity.x = 0;
+            transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
+        }
+    }
+    
 }
