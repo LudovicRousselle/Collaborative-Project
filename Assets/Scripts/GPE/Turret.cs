@@ -11,7 +11,6 @@ public class Turret : MonoBehaviour
     //Attack
     [SerializeField] private float m_sightRange;
 
-
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
@@ -55,13 +54,13 @@ public class Turret : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_sightRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, m_sightRange);
 
-        Vector3 dirUp =  new Vector3(0, 1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
-        Vector3 dirDown = new Vector3(0, -1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
+            Vector3 dirUp = new Vector3(0, 1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
+            Vector3 dirDown = new Vector3(0, -1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
 
-        Debug.DrawRay(transform.position, transform.TransformDirection(dirUp), Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(dirDown), Color.red);
+            Debug.DrawRay(transform.position, transform.TransformDirection(dirUp), Color.red);
+            Debug.DrawRay(transform.position, transform.TransformDirection(dirDown), Color.red);
     }
 }
