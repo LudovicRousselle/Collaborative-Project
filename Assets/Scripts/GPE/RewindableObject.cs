@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RewindableObject : InteractableObject
 {
-    private void OnButtonInteract()
+    private void DisableAble()
     {
         
     }
