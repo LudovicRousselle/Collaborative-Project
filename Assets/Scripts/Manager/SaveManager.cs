@@ -17,6 +17,8 @@ public class SaveManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        lastCheckPointPos = m_startLevelPos.position;
     }
     #endregion
 
@@ -27,7 +29,7 @@ public class SaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastCheckPointPos = m_startLevelPos.position;
+
     }
 
     // Update is called once per frame

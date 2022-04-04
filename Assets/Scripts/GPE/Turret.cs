@@ -20,6 +20,7 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
+        Attack();
     }
 
     //Idle
@@ -31,7 +32,20 @@ public class Turret : MonoBehaviour
     //Attack the Player
     private void Attack()
     {
+        Vector3 direction = transform.position - m_player.transform.position;
+        float angle = Vector3.Angle(transform.forward, -direction);
+        //Debug.Log(angle + " degrees");
 
+        if (angle < 30 && direction.magnitude <= m_sightRange)
+        {
+            Debug.Log("On Sight");
+            //EnableBackstab(true);
+        }
+        else
+        {
+            Debug.Log("Out Of Sight");
+            //EnableBackstab(false);
+        }
     }
 
     private void DestroyEnemy()
@@ -43,5 +57,11 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_sightRange);
+
+        Vector3 dirUp =  new Vector3(0, 1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
+        Vector3 dirDown = new Vector3(0, -1, 1 / Mathf.Tan(30 * Mathf.Deg2Rad)).normalized * m_sightRange;
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(dirUp), Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(dirDown), Color.red);
     }
 }
