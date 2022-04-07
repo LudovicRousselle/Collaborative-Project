@@ -5,7 +5,7 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     //Reference
-    private Animator m_Animator;
+    [SerializeField] private Animation m_Idle;
     private GameObject m_player;
 
     //Attack
@@ -13,10 +13,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private float m_timeBeforeAttack;
     private float m_loadingAttack = 0;
 
+    bool oneTime = false;
 
     private void Start()
     {
-        m_Animator = GetComponent<Animator>();
         m_player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -25,27 +25,32 @@ public class Turret : MonoBehaviour
 
     }
 
-    //Idle
-    private void IdleAI()
-    {
-
-    }
 
     bool OnSight()
     {
         Vector3 direction = transform.position - m_player.transform.position;
         float angle = Vector3.Angle(transform.forward, -direction);
 
-        if (angle < 30 && direction.magnitude <= m_sightRange)
+        if (direction.magnitude <= m_sightRange)
         {
-            m_loadingAttack += Time.deltaTime;
-            return true;
-        }
-        else
+            transform.LookAt(m_player.transform);
+
+            if (angle < 30)
+            {
+
+                m_loadingAttack += Time.deltaTime;
+                return true;
+            }
+            else
+            {
+                m_loadingAttack = 0;
+                return false;
+            }
+        }else
         {
-            m_loadingAttack = 0;
             return false;
         }
+
     }
 
     //Attack the Player
@@ -53,7 +58,13 @@ public class Turret : MonoBehaviour
     {
         if (m_loadingAttack >= m_timeBeforeAttack)
         {
-            m_player.SendMessage("Die");
+            if (!oneTime)
+            {
+                m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
+                Debug.Log("Player died");
+
+                oneTime = true;
+            }
         }
     }
 
@@ -75,7 +86,10 @@ public class Turret : MonoBehaviour
         {
             if (OnSight())
             {
-                Attack();
+                if (m_loadingAttack > m_timeBeforeAttack)
+                {
+                    Attack();
+                }
             }
         }
     }
@@ -83,6 +97,8 @@ public class Turret : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
+        {
             m_loadingAttack = 0;
+        }
     }
 }
