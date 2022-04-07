@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public virtual void OnInteract()
+    private void Awake()
     {
-
+        if (gameObject.tag != "Interactable")
+        {
+            gameObject.tag = "Interactable";
+        }
     }
+
+    public virtual void OnInteract(){}
 }

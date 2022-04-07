@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Button : InteractableObject
 {
-    [SerializeField] RewindableObject target = default;
+    [SerializeField] InteractableObject target = default;
 
     public override void OnInteract()
     {
