@@ -875,8 +875,8 @@ MonoBehaviour:
   groundFriction: 65
   airFriction: 10
   downRayDistance: 1.2
-  sideRayDistance: 0
-  distToReplacePlayer: 0
+  sideRayDistance: 0.5
+  distToReplacePlayer: 0.01
   groundTag: Ground
 --- !u!23 &144383298
 MeshRenderer:
@@ -1996,7 +1996,7 @@ GameObject:
   - component: {fileID: 501321675}
   m_Layer: 0
   m_Name: FallingCubePlaceholder
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
