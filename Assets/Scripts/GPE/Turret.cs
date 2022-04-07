@@ -33,6 +33,7 @@ public class Turret : MonoBehaviour
 
         if (direction.magnitude <= m_sightRange)
         {
+            //FeedBack targetPLayer
             transform.LookAt(m_player.transform);
 
             if (angle < 30)
