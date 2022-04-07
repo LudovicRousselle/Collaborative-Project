@@ -10,6 +10,9 @@ public class Turret : MonoBehaviour
 
     //Attack
     [SerializeField] private float m_sightRange;
+    [SerializeField] private float m_timeBeforeAttack;
+    private float m_loadingAttack = 0;
+
 
     private void Start()
     {
@@ -19,7 +22,7 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+
     }
 
     //Idle
@@ -28,28 +31,30 @@ public class Turret : MonoBehaviour
 
     }
 
-    //Attack the Player
-    private void Attack()
+    bool OnSight()
     {
         Vector3 direction = transform.position - m_player.transform.position;
         float angle = Vector3.Angle(transform.forward, -direction);
-        //Debug.Log(angle + " degrees");
 
         if (angle < 30 && direction.magnitude <= m_sightRange)
         {
-            Debug.Log("On Sight");
-            //EnableBackstab(true);
+            m_loadingAttack += Time.deltaTime;
+            return true;
         }
         else
         {
-            Debug.Log("Out Of Sight");
-            //EnableBackstab(false);
+            m_loadingAttack = 0;
+            return false;
         }
     }
 
-    private void DestroyEnemy()
+    //Attack the Player
+    private void Attack()
     {
-
+        if (m_loadingAttack >= m_timeBeforeAttack)
+        {
+            m_player.SendMessage("Die");
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -62,5 +67,22 @@ public class Turret : MonoBehaviour
 
             Debug.DrawRay(transform.position, transform.TransformDirection(dirUp), Color.red);
             Debug.DrawRay(transform.position, transform.TransformDirection(dirDown), Color.red);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (OnSight())
+            {
+                Attack();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+            m_loadingAttack = 0;
     }
 }
