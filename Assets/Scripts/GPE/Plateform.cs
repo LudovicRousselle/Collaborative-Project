@@ -6,14 +6,14 @@ public class Plateform : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") ;
+        if (other.gameObject.tag == "Player") 
         {
             other.gameObject.transform.SetParent(transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player") ;
+        if (other.gameObject.tag == "Player") 
         {
             other.gameObject.transform.SetParent(null);
         }

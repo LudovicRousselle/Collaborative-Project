@@ -16,7 +16,7 @@ public class FallingBlock : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag=="Player")
+        if (other.gameObject.tag == "Player")
         {
             rb.useGravity = true;
             rb.AddForce(Physics.gravity * fallingSpeed);
