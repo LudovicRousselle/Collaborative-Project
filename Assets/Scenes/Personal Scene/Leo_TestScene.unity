@@ -3487,7 +3487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &634417482
 Transform:
   m_ObjectHideFlags: 0
@@ -5645,7 +5645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &942313469
 Transform:
   m_ObjectHideFlags: 0
@@ -12296,7 +12296,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2284730518160095600, guid: 7c2847d8df401674a8f03c965a5cfd0c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2405539829382552355, guid: 7c2847d8df401674a8f03c965a5cfd0c, type: 3}
       propertyPath: m_RootOrder
@@ -12345,6 +12345,10 @@ PrefabInstance:
     - target: {fileID: 9004277839276451031, guid: 7c2847d8df401674a8f03c965a5cfd0c, type: 3}
       propertyPath: m_Name
       value: Falling_Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004277839276451031, guid: 7c2847d8df401674a8f03c965a5cfd0c, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c2847d8df401674a8f03c965a5cfd0c, type: 3}
