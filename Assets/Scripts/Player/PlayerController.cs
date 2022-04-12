@@ -6,24 +6,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput input;
+    public PlayerInput input;
 
     [Header("RunSpeed")]
-    [SerializeField] float walkingSpeed = 0.5f;
-    [SerializeField] float maxWalkingSpeed = 5f;
-    [SerializeField] float airSpeed = 0.1f;
-    [SerializeField] float runMultiplier = 2;
+    [SerializeField] private float walkingSpeed = 0.5f;
+    [SerializeField] private float maxWalkingSpeed = 5f;
+    [SerializeField] private float airSpeed = 0.1f;
+    [SerializeField] private float runMultiplier = 2;
 
     [Header("Jump")]
-    [SerializeField] float jumpImpulse = 5;
+    [SerializeField] private float jumpImpulse = 5;
 
     [Header("Fall")]
-    [SerializeField] float fallSpeed = 0.1f;
-    [SerializeField] float maxFallSpeed = 0.2f;
+    [SerializeField] private float fallSpeed = 0.1f;
+    [SerializeField] private float maxFallSpeed = 0.2f;
 
     [Header("Physics")]
-    [SerializeField] float groundFriction = 0.2f;
-    [SerializeField] float airFriction = 0.1f;
+    [SerializeField] private float groundFriction = 0.2f;
+    [SerializeField] private float airFriction = 0.1f;
 
     [Header("RayCast Rays")]
     [SerializeField] private float downRayDistance = 2;
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     private float maxSpeed = 1;
     private float runningSpeed = 1;
     private float maxRunningSpeed = 1;
-
 
     private Vector2 velocity = Vector2.zero;
     private Vector2 acceleration = Vector2.zero;
@@ -216,14 +215,19 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, sideRayDistance))
         {
-            velocity.x = 0;
-            transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y,transform.position.z);
+            if (hit.transform.gameObject.CompareTag(groundTag))
+            {
+                velocity.x = 0;
+                transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y, transform.position.z);
+            }
         }
         else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, sideRayDistance))
         {
-
-            velocity.x = 0;
-            transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
+            if (hit.transform.gameObject.CompareTag(groundTag))
+            {
+                velocity.x = 0;
+                transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
+            }
         }
     }
     
