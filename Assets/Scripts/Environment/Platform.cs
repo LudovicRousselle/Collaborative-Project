@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    private Button b = new Button();
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") ;
