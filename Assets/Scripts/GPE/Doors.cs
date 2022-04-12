@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour
+public class Doors : MonoBehaviour
 {
     #region singleton
-    public static GameManager instance;
+    private static Doors instance;
     private void Awake()
     {
         if (instance == null)
@@ -21,21 +20,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-
     }
-    private void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         
-    }
-
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
     }
 }
