@@ -5,13 +5,19 @@ using UnityEngine;
 public class Convoyeur : MonoBehaviour  
 {
     public float speed;
+    public bool onOff;
     void Start()
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        other.gameObject.transform.Translate(gameObject.transform.forward * speed);     
+        if(onOff==true)
+        {
+            Debug.Log("touch");
+            other.gameObject.transform.Translate(Vector3.right * speed);
+        }
+            
     }
 
     
