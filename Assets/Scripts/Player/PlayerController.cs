@@ -215,14 +215,19 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, sideRayDistance))
         {
-            velocity.x = 0;
-            transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y,transform.position.z);
+            if (hit.transform.gameObject.CompareTag(groundTag))
+            {
+                velocity.x = 0;
+                transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y, transform.position.z);
+            }
         }
         else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, sideRayDistance))
         {
-
-            velocity.x = 0;
-            transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
+            if (hit.transform.gameObject.CompareTag(groundTag))
+            {
+                velocity.x = 0;
+                transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
+            }
         }
     }
     
