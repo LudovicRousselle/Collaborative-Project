@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class Plateform : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") ;
+        if (other.gameObject.tag == "Player") 
         {
             other.gameObject.transform.SetParent(transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player") ;
+        if (other.gameObject.tag == "Player") 
         {
             other.gameObject.transform.SetParent(null);
         }
