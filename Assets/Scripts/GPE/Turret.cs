@@ -33,8 +33,6 @@ public class Turret : MonoBehaviour
 
         if (direction.magnitude <= m_sightRange)
         {
-            //FeedBack targetPLayer
-            transform.LookAt(m_player.transform);
 
             if (angle < 30)
             {
@@ -52,6 +50,9 @@ public class Turret : MonoBehaviour
                 {
                     if (hitMiddle.transform.gameObject.CompareTag("Player") || hitTop.transform.gameObject.CompareTag("Player") || hitBot.transform.gameObject.CompareTag("Player"))
                     {
+                        //FeedBack targetPLayer
+                        transform.LookAt(m_player.transform);
+
                         m_loadingAttack += Time.deltaTime;
                         return true;
                     }else
