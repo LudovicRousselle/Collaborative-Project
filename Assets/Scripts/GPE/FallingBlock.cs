@@ -12,8 +12,10 @@ public class FallingBlock : RewindableObject
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
     }
+    //update mutiple gravity 
+ 
 
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -26,7 +28,7 @@ public class FallingBlock : RewindableObject
     override protected void OnRewind()
     {
         rb.useGravity = true;
-        rb.AddForce(-Physics.gravity * fallingSpeed);
+        fallingSpeed = -Mathf.Abs(fallingSpeed);
         SetStateVoid();
     }
 
