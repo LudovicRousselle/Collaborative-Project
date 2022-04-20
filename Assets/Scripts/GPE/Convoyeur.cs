@@ -5,17 +5,21 @@ using UnityEngine;
 public class Convoyeur : MonoBehaviour  
 {
     public float speed;
-    public bool onOff;
+    public bool isOn;
+    
     void Start()
     {
         
     }
+    
     private void OnTriggerStay(Collider other)
     {
-        if(onOff==true)
+        if(isOn)
         {
             Debug.Log("touch");
-            other.gameObject.transform.Translate(Vector3.right * speed);
+            
+            // Move the object on top of the Conveyor Belt
+            other.gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
             
     }
