@@ -22,14 +22,14 @@ public class Convoyeur : RewindableObject
                     Debug.Log("touch");
 
                 // Move the object on top of the Conveyor Belt
-                if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
+                if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
                 }
                 else
                 {
                     Debug.Log("touch");
 
                 // Move the object on top of the Conveyor Belt
-                if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
+                if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
                
             }    
