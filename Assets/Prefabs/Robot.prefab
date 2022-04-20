@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4692686192107773871}
   - component: {fileID: 6036194801578454932}
+  - component: {fileID: 1470549794}
   m_Layer: 0
   m_Name: TurretScript
   m_TagString: Untagged
@@ -44,8 +45,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Idle: {fileID: 0}
+  m_parentFolder: {fileID: 7495925045695114245}
   m_sightRange: 5
   m_timeBeforeAttack: 5
+  targetingPlayer: 0
+--- !u!135 &1470549794
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638452893052196442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7495925045130793967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1210,6 @@ GameObject:
   - component: {fileID: 7495925046555474295}
   - component: {fileID: 7495925046555474187}
   - component: {fileID: 7495925046555474184}
-  - component: {fileID: 7495925046555474185}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1266,19 +1281,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7495925046555474185
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495925046555474292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7495925046583761023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,6 +1661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolFirstPos: {fileID: 7495925045275658439}
   patrolSecondPos: {fileID: 7495925045559938108}
+  m_speed: 2
+  m_speedRotation: 6
 --- !u!1 &7495925047019632063
 GameObject:
   m_ObjectHideFlags: 0

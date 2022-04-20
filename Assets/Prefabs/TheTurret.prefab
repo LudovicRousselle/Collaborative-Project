@@ -242,8 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Idle: {fileID: 0}
-  m_sightRange: 5
+  m_parentFolder: {fileID: 7804490937529567193}
+  m_sightRange: 6
   m_timeBeforeAttack: 5
+  targetingPlayer: 0
 --- !u!135 &7804490936619008924
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -255,7 +257,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &7804490936619008925
 Animator:
@@ -383,7 +385,6 @@ GameObject:
   - component: {fileID: 7804490937223870256}
   - component: {fileID: 7804490937223870263}
   - component: {fileID: 7804490937223870262}
-  - component: {fileID: 7804490937223870257}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -455,19 +456,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7804490937223870257
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7804490937223870259}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7804490937472444104
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Corentin
 public class Doors : MonoBehaviour
 {
     #region singleton

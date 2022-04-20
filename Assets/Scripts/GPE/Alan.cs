@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Corentin
 public class Alan : MonoBehaviour
 {
-    private const float LIMIT_PATROL = 5;
-
     [SerializeField] private Transform patrolFirstPos;
     [SerializeField] private Transform patrolSecondPos;
+    [SerializeField] private float m_speed = 2f;
+    [SerializeField] private float m_speedRotation = 5f;
     private Vector3 m_targetPosition;
     private Vector3 m_targetRotation;
     private Direction m_direction;
     private IEnumerator coroutine;
 
+    private Turret m_turret;
+
     // Start is called before the first frame update
     void Start()
     {
+        m_turret = GetComponentInChildren<Turret>();
         m_direction = Direction.SecondPos;
         m_targetPosition = patrolSecondPos.position;
     }
@@ -23,21 +27,24 @@ public class Alan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // Check if the position of the cube and sphere are approximately equal.
-        if (Vector3.Distance(transform.position, m_targetPosition) > 0.01f)
+        if (!m_turret.targetingPlayer)
         {
-            m_targetRotation = m_targetPosition - transform.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_targetRotation), 5f * Time.deltaTime);
-
-            transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, 5 * Time.deltaTime);
-        }else
-        {
-            //Start WaitHere
-            if (coroutine == null)
+            // Check if the position of the cube and sphere are approximately equal.
+            if (Vector3.Distance(transform.position, m_targetPosition) > 0.01f)
             {
-                coroutine = WaitHere();
-                StartCoroutine(coroutine);
+                m_targetRotation = m_targetPosition - transform.position;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_targetRotation), m_speedRotation * Time.deltaTime);
+
+                transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, m_speed * Time.deltaTime);
+            }
+            else
+            {
+                //Start WaitHere
+                if (coroutine == null)
+                {
+                    coroutine = WaitHere();
+                    StartCoroutine(coroutine);
+                }
             }
         }
     }

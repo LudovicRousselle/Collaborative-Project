@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Corentin
 public class HideMesh : MonoBehaviour
 {
     private MeshRenderer m_MeshRenderer;
