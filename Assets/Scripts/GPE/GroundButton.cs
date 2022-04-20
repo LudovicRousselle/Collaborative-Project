@@ -7,6 +7,7 @@ public class GroundButton : MonoBehaviour
     public bool isPress= false;
     public float buttonDown = 0.12f;
     public float buttonUp = 0.06f;
+    public GameObject Trigger;
 
     private void OnCollisionStay(Collision collision)
     {
@@ -19,15 +20,11 @@ public class GroundButton : MonoBehaviour
         }
         
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if ((collision.gameObject.tag == "Player") || (collision.gameObject.tag == "SBlock"))
-        {
-            isPress = false;
-            Debug.Log("Dtouch");
-            transform.position += new Vector3(0, buttonUp, 0) * Time.deltaTime;
-
-        }
+        isPress = false;
+        Debug.Log("touch");
+        transform.position -= new Vector3(0, - buttonDown, 0) * Time.deltaTime;
     }
 
 }
