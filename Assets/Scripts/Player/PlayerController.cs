@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("RunSpeed")]
     [SerializeField] private float walkingSpeed = 0.5f;
-    [SerializeField] private float maxWalkingSpeed = 5f;
+    [SerializeField] private float maxSpeedDivider = 10f; 
     [SerializeField] private float airSpeed = 0.1f;
     [SerializeField] private float runMultiplier = 2;
 
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Fall")]
     [SerializeField] private float fallSpeed = 0.1f;
     [SerializeField] private float maxFallSpeed = 0.2f;
-
+    
     [Header("Physics")]
     [SerializeField] private float groundFriction = 0.2f;
     [SerializeField] private float airFriction = 0.1f;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [Space(20)]
     [SerializeField] private string groundTag = "Ground";
 
+    private float maxWalkingSpeed = 5f;
     private float speed = 1;
     private float maxSpeed = 1;
     private float runningSpeed = 1;
@@ -49,11 +50,13 @@ public class PlayerController : MonoBehaviour
     {
         input = new PlayerInput();
 
+        maxWalkingSpeed = walkingSpeed / maxSpeedDivider;
+
         runningSpeed = walkingSpeed * runMultiplier;
         maxRunningSpeed = maxWalkingSpeed * runMultiplier;
 
-        speed = runningSpeed;
-        maxSpeed = maxRunningSpeed;
+        speed = walkingSpeed;
+        maxSpeed = maxWalkingSpeed;
 
         SetupAllInputs();
     }
@@ -62,6 +65,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+
+        print(velocity);
     }
 
     void FixedUpdate()
@@ -154,6 +159,8 @@ public class PlayerController : MonoBehaviour
             {
                 velocity.x = 0;
             }
+
+            if (acceleration.x == 0) velocity.x /= 1.0001f;
         }
 
         if (RaycastTest())
