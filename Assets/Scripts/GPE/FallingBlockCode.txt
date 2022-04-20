@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FallingBlock : RewindableObject
+{
+    [SerializeField] float fallingSpeed;
+    [SerializeField] bool isFalling;
+    private Rigidbody rb;
+
+    // ====================================
+    // Default Unity Methods
+    // ====================================
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = isFalling = false;
+    }
+
+
+    private void Update()
+    {
+        if (isFalling)
+        {
+            rb.velocity = Vector3.up * -fallingSpeed;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isFalling = true;
+        }
+    }
+
+
+    // ====================================
+    //  Rewind Methods
+    // ====================================
+
+
+    override protected void OnRewind()
+    {
+        Debug.Log("Rewind");
+        fallingSpeed = -Mathf.Abs(fallingSpeed);
+        SetStateVoid();
+    }
+
+    protected override void OnProceed()
+    {
+        fallingSpeed = Mathf.Abs(fallingSpeed);
+        SetStateVoid();
+    }
+
+}
