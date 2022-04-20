@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 8515945595658106927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -28.78, y: 5.6, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8742555, z: 0.8}
+  m_LocalScale: {x: 0.8, y: 0.875, z: 0.8}
   m_Children:
   - {fileID: 8515945595340453948}
   - {fileID: 6137756433551111654}
@@ -177,18 +177,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab03cd8e1bc58064887058a25996b4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 50
-  maxSpeedDivider: 10
-  airSpeed: 2
+  walkingSpeed: 40
+  maxSpeedDivider: 7.5
+  airSpeed: 20
   runMultiplier: 2
   jumpImpulse: 500
   fallSpeed: 20
   maxFallSpeed: 50
-  groundFriction: 25
-  airFriction: 0.2
+  groundFriction: 15
+  airFriction: 7.5
   downRayDistance: 1.2
-  sideRayDistance: 0.54
-  distToReplacePlayer: 0.002
+  sideRayDistance: 0.5
+  distToReplacePlayer: 0.01
   groundTag: Ground
 --- !u!114 &8515945595658106932
 MonoBehaviour:
