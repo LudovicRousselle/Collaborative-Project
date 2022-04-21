@@ -19,9 +19,20 @@ public class RewindableObject : InteractableObject
         if (state != State.Void) return;
 
         if (!isRewinded)
-            state = State.Rewind;
-        else 
-            state = State.Proceed;
+        {
+            {
+                isRewinded = true;
+                state = State.Rewind;
+            }
+        }
+        else
+        {
+            {
+                isRewinded = false;
+                state = State.Proceed;
+            }
+        }
+
     }
 
     private void Update()
