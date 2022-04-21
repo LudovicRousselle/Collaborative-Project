@@ -8,6 +8,7 @@ public class NewPlayerController : MonoBehaviour
 {
     [Header("Basics")]
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float speedLimit = 5f;
     [SerializeField] private float jumpImpulse = 5f;
 
     public PlayerInput input;
@@ -32,52 +33,46 @@ public class NewPlayerController : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        //Move();
+    }
+
+    private void FixedUpdate()
+    {
+        //rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -speedLimit, speedLimit),rb.velocity.y);
+        rb.velocity = new Vector2(inputMove.x * speed, rb.velocity.y);
     }
 
     void Move()
     {
         rb.velocity = new Vector2(velocity.x,rb.velocity.y);
 
-        if (inputMove.x > 0)
-        {
-            if (isGrounded)
-                acceleration.x = speed;
-            else if (!isGrounded)
-                acceleration.x = airSpeed;
-        }
-        else if (inputMove.x < 0)
-        {
-            if (isGrounded)
-                acceleration.x = -speed;
-            else if (!isGrounded)
-                acceleration.x = -airSpeed;
-        }
-        else acceleration.x = 0;
-
-        velocity += acceleration * Time.deltaTime;
-
-        if(acceleration.x == 0)
-        {
-            velocity.x *= 0.9f;
-            if (Mathf.Abs(velocity.x) <= 0.5 && inputMove.x == 0)
-            {
-                velocity.x = 0;
-            }
-        }
-
-        //if (velocity.x != 0)
+        //if (inputMove.x > 0)
         //{
-        //    float velocitySymbol = (velocity.x / Mathf.Abs(velocity.x));
-        //    velocity.x -= velocitySymbol * 5 * Time.deltaTime;
-            
+        //    if (isGrounded)
+        //        acceleration.x = speed;
+        //    else if (!isGrounded)
+        //        acceleration.x = airSpeed;
+        //}
+        //else if (inputMove.x < 0)
+        //{
+        //    if (isGrounded)
+        //        acceleration.x = -speed;
+        //    else if (!isGrounded)
+        //        acceleration.x = -airSpeed;
+        //}
+        //else acceleration.x = 0;
 
+        //velocity += acceleration * Time.deltaTime;
+
+        //if(acceleration.x == 0 || (acceleration.x*velocity.x) < 0)
+        //{
+
+        //    velocity.x *= (1 - Time.deltaTime * rb.drag);
         //    if (Mathf.Abs(velocity.x) <= 0.5 && inputMove.x == 0)
         //    {
         //        velocity.x = 0;
         //    }
         //}
-
     }
 
     private void SetupAllInputs()

@@ -16,8 +16,8 @@ public class Conveyor : RewindableObject
 
     private void Behavior()
     {
-        if (goingRight) print("goes right");
-        else print("goes left");
+        //if (goingRight) print("goes right");
+        //else print("goes left");
     }
 
     protected override void OnProceed()
