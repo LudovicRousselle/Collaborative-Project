@@ -23,15 +23,14 @@ public class FallingBlock : RewindableObject
             rb.velocity = Vector3.up * -fallingSpeed;
         }
 
-        //Debuging
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    OnRewind();
-        //}
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    OnProceed();
-        //}
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnRewind();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnProceed();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +39,7 @@ public class FallingBlock : RewindableObject
         {
             isFalling = true;
             Destroy(triggerCollider.gameObject);
-        }else if (other.gameObject.tag == "Player")
+        }else if (other.gameObject.tag == "Player" || other.gameObject.tag == "Interactable")
         {
             //Kill the player if under the box
             Destroy(other.gameObject);
