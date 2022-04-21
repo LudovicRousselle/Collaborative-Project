@@ -33,6 +33,11 @@ public class Turret : MonoBehaviour
         {
             RobotDeath();
         }
+
+        if (!targetingPlayer)
+        {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
     }
 
 
