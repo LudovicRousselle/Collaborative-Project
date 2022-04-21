@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingBlock : MonoBehaviour
+public class FallingBlock : RewindableObject
 {
     [SerializeField] private float fallingSpeed = 100;
     private Rigidbody rb;
@@ -13,7 +13,10 @@ public class FallingBlock : MonoBehaviour
         rb.useGravity = false;
     }
 
-    
+    //update mutiple gravity 
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -22,6 +25,12 @@ public class FallingBlock : MonoBehaviour
             rb.AddForce(Physics.gravity * fallingSpeed);
 
         }
+    }
+    override protected void OnRewind()
+    {
+        rb.useGravity = true;
+        rb.AddForce(Physics.gravity * (- fallingSpeed));
+        SetStateVoid();
     }
 
 }
