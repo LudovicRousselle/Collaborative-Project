@@ -7,7 +7,6 @@ public class GroundButton : MonoBehaviour
     public bool isPress= false;
     public float buttonDown = 0.12f;
     public float buttonUp = 0.06f;
-    public GameObject Trigger;
 
     private void OnCollisionStay(Collision collision)
     {
