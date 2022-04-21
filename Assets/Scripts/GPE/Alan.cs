@@ -27,14 +27,14 @@ public class Alan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_targetRotation = m_targetPosition - transform.position;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_targetRotation), m_speedRotation * Time.deltaTime);
+
         if (!m_turret.targetingPlayer)
         {
             // Check if the position of the cube and sphere are approximately equal.
             if (Vector3.Distance(transform.position, m_targetPosition) > 0.01f)
             {
-                m_targetRotation = m_targetPosition - transform.position;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_targetRotation), m_speedRotation * Time.deltaTime);
-
                 transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, m_speed * Time.deltaTime);
             }
             else

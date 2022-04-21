@@ -4,32 +4,58 @@ using UnityEngine;
 
 public class FallingBlock : RewindableObject
 {
-    [SerializeField] private float fallingSpeed = 100;
+    [SerializeField] float fallingSpeed;
+    [SerializeField] bool isFalling;
+    [SerializeField] Collider triggerCollider;
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
+        rb.useGravity = isFalling = false;
     }
 
-    //update mutiple gravity 
 
+    private void Update()
+    {
+        if (isFalling)
+        {
+            rb.velocity = Vector3.up * -fallingSpeed;
+        }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnRewind();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnProceed();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && triggerCollider != null)
         {
-            rb.useGravity = true;
-            rb.AddForce(Physics.gravity * fallingSpeed);
-
+            isFalling = true;
+            Destroy(triggerCollider.gameObject);
+        }else if (other.gameObject.tag == "Player")
+        {
+            //Kill the player if under the box
+            Destroy(other.gameObject);
         }
     }
+
     override protected void OnRewind()
     {
-        rb.useGravity = true;
-        rb.AddForce(Physics.gravity * (- fallingSpeed));
+        Debug.Log("Rewind");
+        fallingSpeed = -Mathf.Abs(fallingSpeed);
+        SetStateVoid();
+    }
+
+    protected override void OnProceed()
+    {
+        fallingSpeed = Mathf.Abs(fallingSpeed);
         SetStateVoid();
     }
 
