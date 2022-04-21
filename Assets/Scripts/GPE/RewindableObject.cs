@@ -20,17 +20,13 @@ public class RewindableObject : InteractableObject
 
         if (!isRewinded)
         {
-            {
-                isRewinded = true;
-                state = State.Rewind;
-            }
+            isRewinded = true;
+            state = State.Rewind;
         }
         else
         {
-            {
-                isRewinded = false;
-                state = State.Proceed;
-            }
+            isRewinded = false;
+            state = State.Proceed;
         }
 
     }
