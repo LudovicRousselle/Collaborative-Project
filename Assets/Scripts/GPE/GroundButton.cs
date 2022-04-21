@@ -10,7 +10,7 @@ public class GroundButton : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if ((collision.gameObject.tag == "Player") || (collision.gameObject.tag == "SBlock"))
+        if ((collision.gameObject.tag == "SBlock"))
         {
             isPress = true;
             Debug.Log("touch");
@@ -21,9 +21,13 @@ public class GroundButton : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        isPress = false;
-        Debug.Log("touch");
-        transform.position -= new Vector3(0, - buttonDown, 0) * Time.deltaTime;
+        if ((other.gameObject.tag == "SBlock"))
+        {
+            isPress = false;
+            Debug.Log("touch");
+            transform.position -= new Vector3(0, -buttonDown, 0) * Time.deltaTime;
+        }
+            
     }
 
 }
