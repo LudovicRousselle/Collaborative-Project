@@ -7,21 +7,24 @@ using UnityEngine.InputSystem;
 public class NewPlayerController : MonoBehaviour
 {
     [Header("Basics")]
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float speedLimit = 5f;
+    [SerializeField] private float walkSpeed = 6f;
+    [SerializeField] private float runSpeed = 3f;
+    [SerializeField] private float airSpeed = 3f;
     [SerializeField] private float jumpImpulse = 5f;
+
+    [Header("Physics")]
+    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f; 
 
     public PlayerInput input;
 
     private Rigidbody rb;
 
-    private Vector2 inputMove = Vector2.zero; 
-    private Vector2 velocity = Vector2.zero;
-    private Vector2 acceleration = Vector2.zero;
+    private Vector2 inputMove = Vector2.zero;
 
-    private bool isGrounded = true;
+    private bool isGrounded = false;
 
-    private float airSpeed;
+    private float currentSpeed = 0;
+    private float groundSpeed = 0;
 
     private void Awake()
     {
@@ -31,48 +34,15 @@ public class NewPlayerController : MonoBehaviour
         SetupAllInputs();
     }
 
-    private void Update()
+    private void Start()
     {
-        //Move();
-    }
+        walkSpeed *= 100;
+        runSpeed *= 100;
+        airSpeed *= 100;
+        jumpImpulse *= 1000;
 
-    private void FixedUpdate()
-    {
-        //rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -speedLimit, speedLimit),rb.velocity.y);
-        rb.velocity = new Vector2(inputMove.x * speed, rb.velocity.y);
-    }
-
-    void Move()
-    {
-        rb.velocity = new Vector2(velocity.x,rb.velocity.y);
-
-        //if (inputMove.x > 0)
-        //{
-        //    if (isGrounded)
-        //        acceleration.x = speed;
-        //    else if (!isGrounded)
-        //        acceleration.x = airSpeed;
-        //}
-        //else if (inputMove.x < 0)
-        //{
-        //    if (isGrounded)
-        //        acceleration.x = -speed;
-        //    else if (!isGrounded)
-        //        acceleration.x = -airSpeed;
-        //}
-        //else acceleration.x = 0;
-
-        //velocity += acceleration * Time.deltaTime;
-
-        //if(acceleration.x == 0 || (acceleration.x*velocity.x) < 0)
-        //{
-
-        //    velocity.x *= (1 - Time.deltaTime * rb.drag);
-        //    if (Mathf.Abs(velocity.x) <= 0.5 && inputMove.x == 0)
-        //    {
-        //        velocity.x = 0;
-        //    }
-        //}
+        groundSpeed = walkSpeed;
+        currentSpeed = groundSpeed;
     }
 
     private void SetupAllInputs()
@@ -84,11 +54,40 @@ public class NewPlayerController : MonoBehaviour
         input.Default.Move.canceled += ctx => inputMove = Vector2.zero;
     }
 
-    private void Run() { }
+    private void Update()
+    {
+        if (!isGrounded) currentSpeed = airSpeed;
+        else if (isGrounded) currentSpeed = groundSpeed;
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+
+        if (!isGrounded) rb.AddForce(new Vector3(0, -gravityIntensifier*100, 0));
+    }
+
+    private void Run() 
+    {
+        if (groundSpeed == runSpeed) groundSpeed = walkSpeed;
+        else groundSpeed = runSpeed;
+    }
 
     private void Jump() 
     {
-        rb.AddForce(new Vector3(0, jumpImpulse*100, 0));
+        if (isGrounded)
+        {
+            currentSpeed = airSpeed;
+            rb.AddForce(new Vector3(0, jumpImpulse, 0));
+        }
+    }
+
+    private void Move()
+    {
+        if (inputMove.x > 0 || inputMove.x < 0)
+        {
+            rb.AddForce(new Vector3(inputMove.x * currentSpeed, 0, 0));
+        }
     }
 
     #region Enable/Disable
@@ -100,6 +99,26 @@ public class NewPlayerController : MonoBehaviour
     private void OnDisable()
     {
         input?.Disable();
+    }
+    #endregion
+
+    #region triggers
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            print("grounded");
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+            print("not grounded");
+        }
     }
     #endregion
 }
