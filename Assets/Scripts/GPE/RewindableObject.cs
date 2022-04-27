@@ -21,10 +21,12 @@ public class RewindableObject : InteractableObject
         if (!isRewinded)
         {
             state = State.Rewind;
+            isRewinded = true;
         }
         else
         {
             state = State.Proceed;
+            isRewinded = false;
         }
     }
 
@@ -35,7 +37,6 @@ public class RewindableObject : InteractableObject
             case State.Void:
                 break;
             case State.Rewind:
-                Debug.Log("Inside State Machine");
                 OnRewind();
                 break;
             case State.Proceed:
