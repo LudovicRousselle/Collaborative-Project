@@ -14,8 +14,9 @@ public class MouvingPlatform1 : RewindableObject
 
     void Update()
     {
-        
-        if(Vector3.Distance(transform.position,waypoints[currentWaypointIndex].transform.position)<.1f)
+        StateMachine();
+
+        if (Vector3.Distance(transform.position,waypoints[currentWaypointIndex].transform.position)<.1f)
         {
             
             timer -= Time.deltaTime;
@@ -56,7 +57,6 @@ public class MouvingPlatform1 : RewindableObject
         }
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
         isRewind = false;
-
     }
     override protected void OnRewind()
     {
