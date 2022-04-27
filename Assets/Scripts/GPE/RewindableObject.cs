@@ -16,33 +16,26 @@ public class RewindableObject : InteractableObject
 
     override public void OnInteract()
     {
-        if (state != State.Void) return;
+        //if (state != State.Void) return;
 
         if (!isRewinded)
         {
-            isRewinded = true;
             state = State.Rewind;
         }
         else
         {
-            isRewinded = false;
             state = State.Proceed;
         }
-
     }
 
-    private void Update()
-    {
-        StateMachine();
-    }
-
-    private void StateMachine()
+    protected void StateMachine()
     {
         switch (state)
         {
             case State.Void:
                 break;
             case State.Rewind:
+                Debug.Log("Inside State Machine");
                 OnRewind();
                 break;
             case State.Proceed:

@@ -23,14 +23,7 @@ public class FallingBlock : RewindableObject
             rb.velocity = Vector3.up * -fallingSpeed;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            OnRewind();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            OnProceed();
-        }
+        StateMachine();
     }
 
     private void OnTriggerEnter(Collider other)

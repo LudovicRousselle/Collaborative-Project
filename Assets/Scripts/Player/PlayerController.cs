@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
 
-        print(velocity);
+        //print(velocity);
     }
 
     void FixedUpdate()

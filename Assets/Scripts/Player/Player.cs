@@ -21,12 +21,8 @@ public class Player : MonoBehaviour
         input.Default.Interact.performed += ctx => OnInteract();
     }
 
-    private void OnInteract()
+    private void Update()
     {
-        if (!interactHitBox.canInteract) return;
-
-        Debug.Log("Interact with an interactable object");
-        interactHitBox.interactableObject.OnInteract();
 
         //If the player is colliding with the roof and the plateform
         //The player die
@@ -37,9 +33,19 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    private void OnInteract()
+    {
+        if (!interactHitBox.canInteract) return;
+
+        Debug.Log("Interact with an interactable object");
+        interactHitBox.interactableObject.OnInteract();
+
+    }
+
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Roof"))
         {
             isCollindingRoof = true;
         }
@@ -52,7 +58,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Roof"))
         {
             isCollindingRoof = false;
         }
