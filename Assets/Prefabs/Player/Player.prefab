@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8515945595658106922}
   - component: {fileID: 8515945595658106923}
   - component: {fileID: 8515945595658106920}
-  - component: {fileID: 8515945595658106933}
+  - component: {fileID: 7653147560267876290}
   - component: {fileID: 8515945595658106932}
   - component: {fileID: 8515945595658106921}
   - component: {fileID: 8515945595658106926}
@@ -164,7 +164,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8515945595658106933
+--- !u!114 &7653147560267876290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,22 +173,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8515945595658106927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab03cd8e1bc58064887058a25996b4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f1ad38d0e6faed4085836280e8e13d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 50
-  maxSpeedDivider: 10
-  airSpeed: 2
-  runMultiplier: 2
-  jumpImpulse: 500
-  fallSpeed: 20
-  maxFallSpeed: 50
-  groundFriction: 25
-  airFriction: 0.2
-  downRayDistance: 1.2
-  sideRayDistance: 0.54
-  distToReplacePlayer: 0.002
-  groundTag: Ground
 --- !u!114 &8515945595658106932
 MonoBehaviour:
   m_ObjectHideFlags: 0

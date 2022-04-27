@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        input = GetComponent<PlayerController>().input;
+        input = GetComponent<NewPlayerController>().input;
         interactHitBox = GetComponentInChildren<PlayerInteractHitBox>();
 
         input.Default.Interact.performed += ctx => OnInteract();

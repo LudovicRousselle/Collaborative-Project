@@ -16,8 +16,10 @@ public class RewindableObject : InteractableObject
 
     override public void OnInteract()
     {
+        print(gameObject.name + " is being interacted with");
         if (state != State.Void) return;
 
+        print("yeah");
         if (!isRewinded)
             state = State.Rewind;
         else 
@@ -34,6 +36,7 @@ public class RewindableObject : InteractableObject
         switch (state)
         {
             case State.Void:
+                OnVoid();
                 break;
             case State.Rewind:
                 OnRewind();
@@ -48,15 +51,19 @@ public class RewindableObject : InteractableObject
 
     protected virtual void OnRewind()
     {
-        Debug.Log("Rewind");
+        Debug.Log("Rewinded");
+        isRewinded = true;
         SetStateVoid();
     }
 
     protected virtual void OnProceed()
     {
-        Debug.Log("Proceed");
+        Debug.Log("Proceeded");
+        isRewinded = false;
         SetStateVoid();
     }
+
+    protected virtual void OnVoid() { }
 
     protected void SetStateVoid()
     {
