@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [Space(20)]
     [SerializeField] private string groundTag = "Ground";
+    [SerializeField] private string interactibleTag = "Interactible";
 
     private float maxWalkingSpeed = 5f;
     private float speed = 1;
@@ -46,8 +47,11 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private bool canJumpBuffer = false;
 
+    private Rigidbody rb;
+
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         input = new PlayerInput();
 
         maxWalkingSpeed = walkingSpeed / maxSpeedDivider;
@@ -65,8 +69,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-
-        //print(velocity);
     }
 
     void FixedUpdate()
@@ -112,7 +114,9 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime; //adds the velocity to the player every frame
+        //transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime; //adds the velocity to the player every frame
+
+        rb.velocity = new Vector3(velocity.x, velocity.y, 0);
 
         if (inputMove.x > 0)
         {
@@ -205,7 +209,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, downRayDistance))
         {
-            if (hit.transform.gameObject.CompareTag(groundTag))
+            if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(interactibleTag))
             {
                 return true;
             }
@@ -222,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, sideRayDistance))
         {
-            if (hit.transform.gameObject.CompareTag(groundTag))
+            if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(interactibleTag))
             {
                 velocity.x = 0;
                 transform.position = new Vector3(transform.position.x - distToReplacePlayer, transform.position.y, transform.position.z);
@@ -230,7 +234,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, sideRayDistance))
         {
-            if (hit.transform.gameObject.CompareTag(groundTag))
+            if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(interactibleTag))
             {
                 velocity.x = 0;
                 transform.position = new Vector3(transform.position.x + distToReplacePlayer, transform.position.y, transform.position.z);
