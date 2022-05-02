@@ -31,7 +31,7 @@ public class RewindableObject : InteractableObject
         StateMachine();
     }
 
-    protected void StateMachine()
+    private void StateMachine()
     {
         switch (state)
         {

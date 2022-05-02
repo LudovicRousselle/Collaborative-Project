@@ -22,8 +22,6 @@ public class FallingBlock : RewindableObject
         {
             rb.velocity = Vector3.up * -fallingSpeed;
         }
-
-        StateMachine();
     }
 
     private void OnTriggerEnter(Collider other)

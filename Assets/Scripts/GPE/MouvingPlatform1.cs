@@ -14,8 +14,6 @@ public class MouvingPlatform1 : RewindableObject
 
     void Update()
     {
-        StateMachine();
-
         if (Vector3.Distance(transform.position,waypoints[currentWaypointIndex].transform.position)<.1f)
         {
             
@@ -34,7 +32,7 @@ public class MouvingPlatform1 : RewindableObject
             }
             
         }
-        else if (isRewind = true)
+        else if (isRewind)
         {
             if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
             {

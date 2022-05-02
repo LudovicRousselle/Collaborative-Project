@@ -15,7 +15,7 @@ public class Convoyeur : RewindableObject
 
     private void Update()
     {
-        StateMachine();
+
     }
 
     private void OnTriggerStay(Collider other)
