@@ -3692,11 +3692,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 67.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13252,15 +13252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4924131483265423607, guid: e5d7fd23dcc97fc439e4c5bf3efd0a06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924131483265423607, guid: e5d7fd23dcc97fc439e4c5bf3efd0a06, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924131483265423607, guid: e5d7fd23dcc97fc439e4c5bf3efd0a06, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924131483265423607, guid: e5d7fd23dcc97fc439e4c5bf3efd0a06, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15528,7 +15528,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6166727764269706420, guid: 615f13487502ee2449b7ae0853e4d0e3, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6166727764269706420, guid: 615f13487502ee2449b7ae0853e4d0e3, type: 3}
       propertyPath: m_LocalScale.x
@@ -17312,6 +17312,7 @@ MonoBehaviour:
   sideRayDistance: 0.5
   distToReplacePlayer: 0.01
   groundTag: Ground
+  interactibleTag: Interactible
 --- !u!33 &5261293619302279039
 MeshFilter:
   m_ObjectHideFlags: 0
