@@ -101,7 +101,7 @@ public class NewPlayerController : MonoBehaviour
     #region Triggers&Collisions
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (!isGrounded && collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
             wallHit = false;
