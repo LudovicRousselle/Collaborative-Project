@@ -22,6 +22,7 @@ public class NewPlayerController : MonoBehaviour
     private Vector2 inputMove = Vector2.zero;
 
     private bool isGrounded = false;
+    private bool wallHit = false;
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
@@ -59,7 +60,7 @@ public class NewPlayerController : MonoBehaviour
     {
         Move();
 
-        if (!isGrounded) rb.AddForce(new Vector3(0, -gravityIntensifier*100, 0));
+        if (!isGrounded || wallHit) rb.AddForce(new Vector3(0, -gravityIntensifier * 100, 0));
     }
 
     private void Run() 
@@ -81,7 +82,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (inputMove.x > 0 || inputMove.x < 0)
         {
-            rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+            if (!wallHit) rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
         }
     }
 
@@ -97,12 +98,13 @@ public class NewPlayerController : MonoBehaviour
     }
     #endregion
 
-    #region triggers
+    #region Triggers&Collisions
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            wallHit = false;
             print("grounded");
         }
     }
@@ -113,6 +115,15 @@ public class NewPlayerController : MonoBehaviour
         {
             isGrounded = false;
             print("not grounded");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!isGrounded && (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable")))
+        {
+            wallHit = true;
+            print("wallHit");
         }
     }
     #endregion
