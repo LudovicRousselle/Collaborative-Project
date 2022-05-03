@@ -13,7 +13,10 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField] private float jumpImpulse = 5f;
 
     [Header("Physics")]
-    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f; 
+    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f;
+
+    [Header("Raycast")]
+    [SerializeField] private float downRayLength = 0.5f;
 
     public PlayerInput input;
 
@@ -21,11 +24,13 @@ public class NewPlayerController : MonoBehaviour
 
     private Vector2 inputMove = Vector2.zero;
 
-    [SerializeReference] private bool isGrounded = false;
-    [SerializeReference] private bool wallHit = false;
+    private bool isGrounded = false;
+    private bool wallHit = false;
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
+
+    private RaycastHit hit;
 
     private void Awake()
     {
@@ -54,6 +59,9 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
+
+        RayCastGround();
+        
     }
 
     private void FixedUpdate()
@@ -83,6 +91,15 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             if (!wallHit) rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+        }
+    }
+
+    private void RayCastGround()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, downRayLength))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.blue, downRayLength);
+            if (hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("Interactable")) isGrounded = true;
         }
     }
 
