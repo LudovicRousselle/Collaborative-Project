@@ -36,11 +36,6 @@ public class NewPlayerController : MonoBehaviour
 
     private void Start()
     {
-        walkSpeed *= 100;
-        runSpeed *= 100;
-        airSpeed *= 100;
-        jumpImpulse *= 1000;
-
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
     }
@@ -78,7 +73,7 @@ public class NewPlayerController : MonoBehaviour
         if (isGrounded)
         {
             currentSpeed = airSpeed;
-            rb.AddForce(new Vector3(0, jumpImpulse, 0));
+            rb.AddForce(new Vector3(0, jumpImpulse * 1000, 0));
         }
     }
 
@@ -86,7 +81,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (inputMove.x > 0 || inputMove.x < 0)
         {
-            rb.AddForce(new Vector3(inputMove.x * currentSpeed, 0, 0));
+            rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
         }
     }
 
