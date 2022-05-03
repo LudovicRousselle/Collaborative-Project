@@ -15,11 +15,13 @@ public class Alan : MonoBehaviour
     private IEnumerator coroutine;
 
     private Turret m_turret;
+    private Animator m_animator;
 
     // Start is called before the first frame update
     void Start()
     {
         m_turret = GetComponentInChildren<Turret>();
+        m_animator = GetComponent<Animator>();
         m_direction = Direction.SecondPos;
         m_targetPosition = patrolSecondPos.position;
     }
@@ -27,14 +29,12 @@ public class Alan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_targetRotation = m_targetPosition - transform.position;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_targetRotation), m_speedRotation * Time.deltaTime);
-
         if (!m_turret.targetingPlayer)
         {
             // Check if the position of the cube and sphere are approximately equal.
             if (Vector3.Distance(transform.position, m_targetPosition) > 0.01f)
             {
+                m_animator.Play("Anim_Walk", 0);
                 transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, m_speed * Time.deltaTime);
             }
             else
@@ -46,12 +46,32 @@ public class Alan : MonoBehaviour
                     StartCoroutine(coroutine);
                 }
             }
+        }else
+        {
+            m_animator.Play("Anim_Spotted", 0);
         }
     }
 
     private IEnumerator WaitHere()
     {
-        yield return new WaitForSeconds(5f);
+        int random = Random.Range(1, 3);
+        switch (random)
+        {
+            case 1:
+                m_animator.Play("Anim_Idle1", 0);
+                break;
+            case 2:
+                m_animator.Play("Anim_Idle2", 0);
+                break;
+            case 3:
+                m_animator.Play("Anim_Idle3", 0);
+                break;
+        }
+        Debug.Log(random);
+        yield return new WaitForSeconds(3f);
+        m_animator.Play("Anim_TurnBack", 0);
+        transform.Rotate(0, 180, 0);
+        yield return new WaitForSeconds(2f);
         NextDirection(m_direction);
         coroutine = null;
     }
