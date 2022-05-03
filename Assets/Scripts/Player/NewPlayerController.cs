@@ -54,6 +54,8 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
+
+        if (isGrounded) wallHit = false;
     }
 
     private void FixedUpdate()
