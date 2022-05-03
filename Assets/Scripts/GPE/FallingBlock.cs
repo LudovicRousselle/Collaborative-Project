@@ -32,7 +32,7 @@ public class FallingBlock : RewindableObject
         {
             isFalling = true;
             Destroy(triggerCollider.gameObject);
-        }else if (other.gameObject.tag == "Player" || other.gameObject.tag == "Interactable")
+        }else if (other.gameObject.tag == "Player" )
         {
             //Kill the player if under the box
             Destroy(other.gameObject);
