@@ -21,8 +21,8 @@ public class NewPlayerController : MonoBehaviour
 
     private Vector2 inputMove = Vector2.zero;
 
-    private bool isGrounded = false;
-    private bool wallHit = false;
+    [SerializeReference] private bool isGrounded = false;
+    [SerializeReference] private bool wallHit = false;
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
@@ -54,8 +54,6 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
-
-        if (isGrounded) wallHit = false;
     }
 
     private void FixedUpdate()
@@ -103,7 +101,7 @@ public class NewPlayerController : MonoBehaviour
     #region Triggers&Collisions
     private void OnTriggerEnter(Collider collision)
     {
-        if (!isGrounded && collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
         {
             isGrounded = true;
             wallHit = false;
@@ -113,7 +111,7 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
         {
             isGrounded = false;
             print("not grounded");
