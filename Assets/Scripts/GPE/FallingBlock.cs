@@ -25,7 +25,9 @@ public class FallingBlock : RewindableObject
     }
 
     private void OnTriggerEnter(Collider other)
+
     {
+        Debug.Log("enter");
         if (other.gameObject.tag == "Player" && triggerCollider != null)
         {
             isFalling = true;
