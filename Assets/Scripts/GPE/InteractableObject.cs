@@ -12,5 +12,8 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
-    public virtual void OnInteract(){}
+    public virtual void OnInteract()
+    {
+        Debug.Log("Inside Interact");
+    }
 }

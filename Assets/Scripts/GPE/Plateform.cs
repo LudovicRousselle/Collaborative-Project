@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Plateform : MonoBehaviour
 {
-    private Button b = new Button();
 
     private void OnTriggerEnter(Collider other)
     {

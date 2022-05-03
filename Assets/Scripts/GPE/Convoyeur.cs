@@ -12,7 +12,12 @@ public class Convoyeur : RewindableObject
     {
         
     }
-    
+
+    private void Update()
+    {
+
+    }
+
     private void OnTriggerStay(Collider other)
     {       
             if (isOn)
