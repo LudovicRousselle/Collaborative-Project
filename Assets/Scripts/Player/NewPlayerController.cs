@@ -54,6 +54,8 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
+
+        if (isGrounded) wallHit = false;
     }
 
     private void FixedUpdate()
@@ -101,7 +103,7 @@ public class NewPlayerController : MonoBehaviour
     #region Triggers&Collisions
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (!isGrounded && collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
             wallHit = false;
