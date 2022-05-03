@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.42, y: 13.6, z: 0}
+  m_LocalPosition: {x: 12.34, y: 13.6, z: 0}
   m_LocalScale: {x: 33.77, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -496,21 +496,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingCube_Prefab_(GoodOne)
       objectReference: {fileID: 0}
-    - target: {fileID: 7375275745379960521, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
-      propertyPath: m_TagString
-      value: Interactable
-      objectReference: {fileID: 0}
     - target: {fileID: 7375275745379960560, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7375275745379960560, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.46
+      value: -7.11
       objectReference: {fileID: 0}
     - target: {fileID: 7375275745379960560, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.66
+      value: 5.92
       objectReference: {fileID: 0}
     - target: {fileID: 7375275745379960560, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -721,7 +717,7 @@ MonoBehaviour:
   walkSpeed: 6
   runSpeed: 17
   airSpeed: 3.5
-  jumpImpulse: 10
+  jumpImpulse: 20
   gravityIntensifier: 3.3
 --- !u!23 &1342300795
 MeshRenderer:
@@ -781,7 +777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342300790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.32, y: 3.97, z: 0}
+  m_LocalPosition: {x: -13.12, y: 3.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1125,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836269165748549134, guid: 615f13487502ee2449b7ae0853e4d0e3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8109021387666224012, guid: 615f13487502ee2449b7ae0853e4d0e3, type: 3}
       propertyPath: m_Enabled

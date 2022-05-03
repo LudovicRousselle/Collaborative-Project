@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FallingBlock : RewindableObject
 {
-    [SerializeField] float fallingSpeed;
-    [SerializeField] bool isFalling;
-    [SerializeField] Collider triggerCollider;
+    [SerializeField] private float fallingSpeed;
+    [SerializeField] private bool isFalling;
+    [SerializeField] private Collider triggerCollider;
+
     private Rigidbody rb;
 
     void Start()
@@ -14,7 +15,6 @@ public class FallingBlock : RewindableObject
         rb = GetComponent<Rigidbody>();
         rb.useGravity = isFalling = false;
     }
-
 
     private void Update()
     {
@@ -25,18 +25,15 @@ public class FallingBlock : RewindableObject
     }
 
     private void OnTriggerEnter(Collider other)
-
     {
         Debug.Log("enter");
-        if (other.gameObject.tag == "Player" && triggerCollider != null)
+
+        if (other.gameObject.tag == "Player" && !isFalling)
         {
             isFalling = true;
             Destroy(triggerCollider.gameObject);
-        }else if (other.gameObject.tag == "Player" )
-        {
-            //Kill the player if under the box
-            Destroy(other.gameObject);
         }
+        
     }
 
     override protected void OnRewind()
