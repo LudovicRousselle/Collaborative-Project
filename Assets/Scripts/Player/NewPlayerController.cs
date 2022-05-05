@@ -129,16 +129,16 @@ public class NewPlayerController : MonoBehaviour
                     // Only on the frame we land on the ground 
                     if (!isGrounded)
                     {
-                            isGrounded = true;
+                        isGrounded = true;
 
-                            // Jump immediately is buffering activated
-                            if (currentJumpbuffering > 0)
-                            { 
-                                Jump(); 
-                            }
+                        // Jump immediately is buffering activated
+                        if (currentJumpbuffering > 0)
+                        { 
+                            Jump(); 
+                        }
                     }
-
                     
+                    wallHit = false;
                 
                 }
                 return;
@@ -169,15 +169,15 @@ public class NewPlayerController : MonoBehaviour
     #endregion
 
     #region Triggers&Collisions
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
-        {
-            isGrounded = true;
-            wallHit = false;
-            print("grounded");
-        }
-    }
+    // private void OnTriggerEnter(Collider collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
+    //     {
+    //         isGrounded = true;
+    //         wallHit = false;
+    //         print("grounded");
+    //     }
+    // }
 
     private void OnTriggerExit(Collider collision)
     {

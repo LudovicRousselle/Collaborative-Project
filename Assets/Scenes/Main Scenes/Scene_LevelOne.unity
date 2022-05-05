@@ -21834,20 +21834,8 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: boxCastSize.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: boxCastSize.y
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: downRayLength
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_RootOrder
@@ -21855,11 +21843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.68
+      value: 1.96
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.36
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21933,8 +21921,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 6.42
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3388981899545183965, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
 --- !u!4 &1708831768 stripped
 Transform:

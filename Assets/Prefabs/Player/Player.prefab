@@ -190,7 +190,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8329964, y: 1.7844694, z: 1}
+  m_Size: {x: 4, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8515945595340453950
 MonoBehaviour:
@@ -238,7 +238,6 @@ GameObject:
   - component: {fileID: 8515945595658106932}
   - component: {fileID: 8515945595658106921}
   - component: {fileID: 8515945595658106926}
-  - component: {fileID: 3388981899545183965}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -329,9 +328,13 @@ MonoBehaviour:
   runSpeed: 17.04
   airSpeed: 3
   jumpImpulse: 9.51
+  jumpBuffering: 0.08
   gravityIntensifier: 2.96
-  boxCastSize: {x: 0.82615364, y: 0.25005984, z: 0.42324486}
+  boxCastSize: {x: 0.25, y: 0.03, z: 0.2}
   boxCastStartingPos: {fileID: 248587513051796473}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &8515945595658106932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,16 +378,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!65 &3388981899545183965
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515945595658106927}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.82615364, y: 0.25005984, z: 0.42324486}
-  m_Center: {x: 0, y: -0.9503237, z: 0}
