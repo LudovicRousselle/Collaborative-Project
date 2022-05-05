@@ -321,6 +321,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1470549794, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
+      propertyPath: m_Radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036194801578454932, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
+      propertyPath: m_sightRange
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7495925045695114245, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_Name
       value: Robot
@@ -331,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7495925045695114247, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.44
+      value: 10.72
       objectReference: {fileID: 0}
     - target: {fileID: 7495925045695114247, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_LocalPosition.y
