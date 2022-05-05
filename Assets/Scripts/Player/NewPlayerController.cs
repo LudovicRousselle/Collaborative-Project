@@ -137,7 +137,7 @@ public class NewPlayerController : MonoBehaviour
                             Jump(); 
                         }
                     }
-                    
+
                     wallHit = false;
                 
                 }
@@ -201,6 +201,6 @@ public class NewPlayerController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCastStartingPos.position, boxCastSize);
+        Gizmos.DrawWireCube(boxCastStartingPos.position, boxCastSize * 2);
     }
 }

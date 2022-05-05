@@ -708,8 +708,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5569038, y: 0.0772022, z: 1.1950599}
-  m_Center: {x: 0.0013055801, y: 0.85702163, z: -0.39982557}
+  m_Size: {x: 1.5569038, y: 0.19750059, z: 1.1950599}
+  m_Center: {x: 0.0013055801, y: 0.9171708, z: -0.39982557}
 --- !u!1001 &186621493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3366,11 +3366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.98
+      value: 12.14
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3407,34 +3407,6 @@ PrefabInstance:
     - target: {fileID: 8515945595658106927, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_Name
       value: Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 15.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -23.493275
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99753946
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.06538221
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.02525043
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0016550012
       objectReference: {fileID: 0}
     - target: {fileID: 8953709868096733080, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4375,10 +4347,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingCube_Prefab_(GoodOne) (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7375275745379960526, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
-      propertyPath: fallingSpeed
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 7375275745379960560, guid: 812435ef0854d9940827d9167ef5a1e2, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5009,7 +4977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108520784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 87.25066, y: 8.599876, z: 3.0526998}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5420,6 +5388,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164890471}
   m_Mesh: {fileID: 1149973307703454695, guid: 8b0bfd62c6ff3654584956922f5ef2ec, type: 3}
+--- !u!1 &1169704283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1169704284}
+  m_Layer: 0
+  m_Name: "// autre truc j'ai oubli\xE9"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1169704284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169704283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184345421
 GameObject:
   m_ObjectHideFlags: 0
@@ -6133,6 +6131,36 @@ Transform:
   m_Father: {fileID: 997587007}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1331025161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1331025162}
+  m_Layer: 0
+  m_Name: // Discussion camera position / Transitions? / Cuts? / Smooth?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1331025162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331025161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1348454369
 GameObject:
   m_ObjectHideFlags: 0
@@ -6345,23 +6373,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 124.94634
+      value: 84.203835
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 124.946335
+      value: 84.203835
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 124.946335
+      value: 84.203835
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.65
+      value: 19.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2cd0535f7336cf4782b60ce6587c08d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9413,6 +9441,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879603760}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1894758254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1894758255}
+  m_Layer: 0
+  m_Name: // Should rewind have a duration or just cancel when another one rewinds?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1894758255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894758254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911984708
 GameObject:
   m_ObjectHideFlags: 0
@@ -9499,8 +9557,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.015600001, y: 0.011999999, z: 0.0036899615}
-  m_Center: {x: 9.81225e-18, y: -0.0039999993, z: 0.006357546}
+  m_Size: {x: 0.015600001, y: 0.011999999, z: 0.0012428113}
+  m_Center: {x: -3.5170462e-17, y: -0.0039999993, z: 0.0075811353}
 --- !u!23 &1956837308
 MeshRenderer:
   m_ObjectHideFlags: 0
