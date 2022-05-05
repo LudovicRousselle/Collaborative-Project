@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void OnInteract()
     {
         if (!interactHitBox.canInteract) return;

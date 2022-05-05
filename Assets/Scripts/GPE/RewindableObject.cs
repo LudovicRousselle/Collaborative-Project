@@ -11,19 +11,19 @@ enum State
 
 public class RewindableObject : InteractableObject
 {
-    private bool isRewinded = false;
+    protected bool isRewinded = false;
     private State state = State.Void;
 
-    override public void OnInteract()
+    override public void OnInteract()//lancé qund le joueur press E à côté
     {
         print(gameObject.name + " is being interacted with");
-        if (state != State.Void) return;
+        if (state != State.Void) return; //si l'objet n'est pas en state void la fonction s'arrête ici
 
         print("yeah");
         if (!isRewinded)
-            state = State.Rewind;
+            state = State.Rewind; //si il est pas rewinded, il rewind
         else 
-            state = State.Proceed;
+            state = State.Proceed;//sinon il proceed
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class RewindableObject : InteractableObject
         StateMachine();
     }
 
-    private void StateMachine()
+    private void StateMachine() // appelle les fonctions de states en fonction du state actif
     {
         switch (state)
         {
@@ -49,24 +49,34 @@ public class RewindableObject : InteractableObject
         }
     }
 
-    protected virtual void OnRewind()
+    protected virtual void OnRewind()// se joue quand le state est rewind
     {
         Debug.Log("Rewinded");
         isRewinded = true;
         SetStateVoid();
     }
 
-    protected virtual void OnProceed()
+    protected virtual void OnProceed()// se joue quand le state est proceed
     {
         Debug.Log("Proceeded");
         isRewinded = false;
         SetStateVoid();
     }
 
-    protected virtual void OnVoid() { }
+    protected virtual void OnVoid() { } // se joue quand le state est void
 
     protected void SetStateVoid()
     {
         state = State.Void;
+    }
+
+    protected void SetStateRewind()
+    {
+        state = State.Rewind;
+    }
+
+    protected void SetStateProceed()
+    {
+        state = State.Proceed;
     }
 }
