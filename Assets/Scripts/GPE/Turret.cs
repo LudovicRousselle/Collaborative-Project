@@ -7,7 +7,8 @@ public class Turret : MonoBehaviour
 {
     //Reference
     [SerializeField] private Animation m_Idle;
-    private GameObject m_player;
+    public GameObject m_player { get; private set; }
+
     [SerializeField] private GameObject m_parentFolder;
 
     //Attack
@@ -61,9 +62,6 @@ public class Turret : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
                 {
-                    //&& Physics.Raycast(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized, out hitTop, m_sightRange)
-                    //&& Physics.Raycast(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized, out hitBot, m_sightRange)
-                    // || hitTop.transform.gameObject.CompareTag("Player") || hitBot.transform.gameObject.CompareTag("Player")
                     if (hitMiddle.transform.gameObject.CompareTag("Player"))
                     {
                         middleRayTouching = true;
@@ -100,7 +98,6 @@ public class Turret : MonoBehaviour
                     //FeedBack targetPLayer
                     targetingPlayer = true;
                     transform.LookAt(m_player.transform);
-
                     m_loadingAttack += Time.deltaTime;
                     return true;
                 }else
