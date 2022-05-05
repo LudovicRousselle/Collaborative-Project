@@ -98,6 +98,7 @@ public class Turret : MonoBehaviour
                     //FeedBack targetPLayer
                     targetingPlayer = true;
                     transform.LookAt(m_player.transform);
+
                     m_loadingAttack += Time.deltaTime;
                     return true;
                 }else
