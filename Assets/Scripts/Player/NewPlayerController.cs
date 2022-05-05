@@ -12,11 +12,19 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField] private float airSpeed = 3f;
     [SerializeField] private float jumpImpulse = 5f;
 
+    // The timer that we can set in the inspector
+    [SerializeField] float jumpBuffering = 0.08f;
+
+    // The current timer for jump buffering
+    float currentJumpbuffering;
+
     [Header("Physics")]
     [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f;
 
-    [Header("Raycast")]
-    [SerializeField] private float downRayLength = 0.5f;
+    [Header("Boxcast")]
+    [SerializeField] private Vector3 boxCastSize;
+    [SerializeField] Transform boxCastStartingPos;
+    [SerializeField] LayerMask groundLayer;
 
     public PlayerInput input;
 
@@ -30,7 +38,7 @@ public class NewPlayerController : MonoBehaviour
     private float currentSpeed = 0;
     private float groundSpeed = 0;
 
-    private RaycastHit hit;
+    // private RaycastHit hit;
 
     private void Awake()
     {
@@ -60,15 +68,20 @@ public class NewPlayerController : MonoBehaviour
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
 
-        RayCastGround();
         
+        // === [Jump Buffering] ===
+        if (currentJumpbuffering > 0)
+        {currentJumpbuffering -= Time.deltaTime;}
     }
 
     private void FixedUpdate()
     {
+        RayCastGround();
+        
         Move();
 
         if (!isGrounded || wallHit) rb.AddForce(new Vector3(0, -gravityIntensifier * 100, 0));
+
     }
 
     private void Run() 
@@ -84,6 +97,10 @@ public class NewPlayerController : MonoBehaviour
             currentSpeed = airSpeed;
             rb.AddForce(new Vector3(0, jumpImpulse * 1000, 0));
         }
+        else
+        {
+            currentJumpbuffering = jumpBuffering;
+        }
     }
 
     private void Move()
@@ -96,11 +113,47 @@ public class NewPlayerController : MonoBehaviour
 
     private void RayCastGround()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, downRayLength))
+        // Check if there is a ground under the player :    Box Center              Dimensions    Direction       angle             Distance            Layer
+        RaycastHit[] raycastHits = Physics.BoxCastAll(boxCastStartingPos.position, boxCastSize, Vector3.one, Quaternion.identity, 0, groundLayer);
+
+        if (raycastHits.Length != 0)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.blue, downRayLength);
-            if (hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("Interactable")) isGrounded = true;
+            //Debug.Log("Touched something");
+            
+            foreach (RaycastHit _h in raycastHits)
+            {
+                //Debug.Log(_h.transform.gameObject.name);
+
+                if (_h.transform.gameObject.CompareTag("Ground") || _h.transform.gameObject.CompareTag("Interactable")) 
+                {
+                    // Only on the frame we land on the ground 
+                    if (!isGrounded)
+                    {
+                            isGrounded = true;
+
+                            // Jump immediately is buffering activated
+                            if (currentJumpbuffering > 0)
+                            { 
+                                Jump(); 
+                            }
+                    }
+
+                    
+                
+                }
+                return;
+            }   
+
+            
         }
+        if (isGrounded)
+        {
+            // Only on the frame we leave the ground
+            {
+                currentJumpbuffering = 0;
+            }
+        }
+        isGrounded = false;
     }
 
     #region Enable/Disable
@@ -144,4 +197,10 @@ public class NewPlayerController : MonoBehaviour
         }
     }
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(boxCastStartingPos.position, boxCastSize);
+    }
 }
