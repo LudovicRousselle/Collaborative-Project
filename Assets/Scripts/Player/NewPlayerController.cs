@@ -13,7 +13,10 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField] private float jumpImpulse = 5f;
 
     [Header("Physics")]
-    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f; 
+    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f;
+
+    [Header("Raycast")]
+    [SerializeField] private float downRayLength = 0.5f;
 
     public PlayerInput input;
 
@@ -26,6 +29,8 @@ public class NewPlayerController : MonoBehaviour
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
+
+    private RaycastHit hit;
 
     private void Awake()
     {
@@ -55,7 +60,8 @@ public class NewPlayerController : MonoBehaviour
         if (!isGrounded) currentSpeed = airSpeed;
         else if (isGrounded) currentSpeed = groundSpeed;
 
-        if (isGrounded) wallHit = false;
+        RayCastGround();
+        
     }
 
     private void FixedUpdate()
@@ -88,6 +94,15 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    private void RayCastGround()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, downRayLength))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.blue, downRayLength);
+            if (hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("Interactable")) isGrounded = true;
+        }
+    }
+
     #region Enable/Disable
     private void OnEnable()
     {
@@ -103,7 +118,7 @@ public class NewPlayerController : MonoBehaviour
     #region Triggers&Collisions
     private void OnTriggerEnter(Collider collision)
     {
-        if (!isGrounded && collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
         {
             isGrounded = true;
             wallHit = false;
@@ -113,7 +128,7 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
         {
             isGrounded = false;
             print("not grounded");
