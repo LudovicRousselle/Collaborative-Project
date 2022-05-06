@@ -185,6 +185,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d8a85976-11b9-432f-b713-10c244353748"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MarkObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2d39cec1-86ef-4eb6-a1fc-7b2ecbe259d8"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",

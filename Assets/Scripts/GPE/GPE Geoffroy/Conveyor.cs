@@ -7,62 +7,45 @@ public class Conveyor : RewindableObject
     [SerializeField] private bool startDirectionRight = true;
     [SerializeField] private float speed = 5f;
 
-    private bool goingRight = true;
     private List<GameObject> targetList;
 
     private void Start()
     {
-        goingRight = startDirectionRight;
-        isRewinded = !startDirectionRight;
-
         targetList = new List<GameObject>();
+        if (!startDirectionRight) speed *= -1;
 
-        SetStateVoid();
+        SetStateAction();
     }
 
-    private void Behavior()
+    protected override void DoAction()
     {
         if (targetList.Count == 0) return;
 
         foreach (GameObject currentGameObject in targetList)
         {
-            if (goingRight)
-            {
-                if (currentGameObject.CompareTag("Player") || currentGameObject.CompareTag("SBlock"))
-                    currentGameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * speed);
-            }
-            else
-            {
-                if (currentGameObject.CompareTag("Player") || currentGameObject.CompareTag("SBlock"))
-                    currentGameObject.GetComponent<Rigidbody>().AddForce(-Vector3.right * speed);
-            }
+            currentGameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * speed);
         }
     }
 
-    protected override void OnProceed()
+    protected override void DuringRewind()
     {
-        goingRight = true;
-        base.OnProceed();
-    }
+        if (targetList.Count == 0) return;
 
-    protected override void OnRewind()
-    {
-        goingRight = false;
-        base.OnRewind();
-    }
-
-    protected override void OnVoid()
-    {
-        Behavior();
+        foreach (GameObject currentGameObject in targetList)
+        {
+            currentGameObject.GetComponent<Rigidbody>().AddForce(-Vector3.right * speed);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        targetList.Add(collision.gameObject);
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("SBlock")) 
+            targetList.Add(collision.gameObject);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        targetList.Remove(collision.gameObject);
+        if(targetList.Contains(collision.gameObject)) 
+            targetList.Remove(collision.gameObject);
     }
 }

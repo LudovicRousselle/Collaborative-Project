@@ -27,14 +27,14 @@ public class FallingBlock : RewindableObject
         }
     }
 
-    override protected void OnRewind()
-    {
-        Debug.Log("Rewind");
-        fallingSpeed = -Mathf.Abs(fallingSpeed);
-        SetStateVoid();
-    }
+    //override protected void OnRewind()
+    //{
+    //    Debug.Log("Rewind");
+    //    fallingSpeed = -Mathf.Abs(fallingSpeed);
+    //    SetStateVoid();
+    //}
 
-    protected override void OnProceed()
+    protected override void DoAction()
     {
         fallingSpeed = Mathf.Abs(fallingSpeed);
         SetStateVoid();

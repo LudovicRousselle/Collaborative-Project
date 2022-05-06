@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class FallingBlockTriggerZone : MonoBehaviour
 {
-    [SerializeField] private string targetTag = "Player";
-
+    private NewFallingBlock fallingBlock;
     public bool triggered = false;
+
+    private void Start()
+    {
+        fallingBlock = GetComponentInParent<NewFallingBlock>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(targetTag))
+        if (other.gameObject.CompareTag(fallingBlock.targetTag))
         {
             triggered = true;
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInteractHitBox : MonoBehaviour
 {
     [SerializeField] private string tagInteractable = "Interactable";
+    [SerializeField] private string tagRewindable = "Rewindable";
     public bool canInteract = false;
     public InteractableObject interactableObject;
 
@@ -15,6 +16,7 @@ public class PlayerInteractHitBox : MonoBehaviour
             canInteract = true;
             interactableObject = other.gameObject.GetComponent<InteractableObject>();
         }
+
     }
 
     private void OnTriggerExit(Collider other)

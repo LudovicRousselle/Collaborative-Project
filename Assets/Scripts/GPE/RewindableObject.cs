@@ -6,24 +6,30 @@ enum State
 {
     Void,
     Rewind,
-    Proceed
+    Action
 }
 
 public class RewindableObject : InteractableObject
 {
-    protected bool isRewinded = false;
+    [SerializeField] protected float rewindedStateDuration;
+
+    private bool isRewinding = false;
+
     private State state = State.Void;
+    private float counter = 0;
 
     override public void OnInteract()//lancé qund le joueur press E à côté
     {
         print(gameObject.name + " is being interacted with");
-        if (state != State.Void) return; //si l'objet n'est pas en state void la fonction s'arrête ici
 
-        print("yeah");
-        if (!isRewinded)
-            state = State.Rewind; //si il est pas rewinded, il rewind
-        else 
-            state = State.Proceed;//sinon il proceed
+        if (!isRewinding)
+        {
+            SetStateRewind(); //si il est pas entrain de rewind, il rewind
+        }
+        else
+        {
+            SetStateAction(); //sinon il proceed
+        }
     }
 
     private void Update()
@@ -39,44 +45,67 @@ public class RewindableObject : InteractableObject
                 OnVoid();
                 break;
             case State.Rewind:
-                OnRewind();
+                DoRewind();
                 break;
-            case State.Proceed:
-                OnProceed();
+            case State.Action:
+                DoAction();
                 break;
             default:
                 break;
         }
     }
 
-    protected virtual void OnRewind()// se joue quand le state est rewind
+    private void DoRewind() // se joue quand le state est rewind
     {
-        Debug.Log("Rewinded");
-        isRewinded = true;
-        SetStateVoid();
+        /* Un compteur (counter) s'incrémente de Time.deltatime par frame
+         * pendant qu'il monte, DuringRewind() se joue
+         * lorsqu'il dépasse rewindedStateDuration il reset le counter
+         * le booléen isRewinding se met a false
+         * la fonction EndRewind se joue
+         * le state passe de rewind à action
+         */
+
+        if ((counter += Time.deltaTime) > rewindedStateDuration)
+        {
+            counter = 0;
+            isRewinding = false;
+            EndRewind();
+            SetStateAction();
+        }
+
+        DuringRewind();
     }
 
-    protected virtual void OnProceed()// se joue quand le state est proceed
-    {
-        Debug.Log("Proceeded");
-        isRewinded = false;
-        SetStateVoid();
-    }
+    protected virtual void DoAction() { } // se joue quand le state est action
 
     protected virtual void OnVoid() { } // se joue quand le state est void
 
-    protected void SetStateVoid()
+    protected virtual void DuringRewind() { } // se joue quand le rewind est en cours
+    protected virtual void EndRewind() { } // se joue quand le rewind se termine
+
+    public virtual void InterruptRewind() 
+    {
+        SetStateAction();
+    }
+
+    #region SetState
+    protected virtual void SetStateVoid()
     {
         state = State.Void;
     }
 
-    protected void SetStateRewind()
+    protected virtual void SetStateRewind()
     {
         state = State.Rewind;
+        isRewinding = true;
+        counter = 0;
     }
 
-    protected void SetStateProceed()
+    protected virtual void SetStateAction()
     {
-        state = State.Proceed;
+        state = State.Action;
+        isRewinding = false;
+        counter = 0;
     }
+    #endregion
 }

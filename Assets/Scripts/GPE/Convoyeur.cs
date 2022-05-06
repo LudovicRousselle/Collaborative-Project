@@ -42,9 +42,9 @@ public class Convoyeur : RewindableObject
          } 
     }
     
-    override protected void OnRewind()
-    {
-        isRewind = true;
-    }
+    //override protected void OnRewind()
+    //{
+    //    isRewind = true;
+    //}
 
 }
