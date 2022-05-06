@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private bool isCollindingPlateform;
 
     private List<RewindableObject> rewindableObjectList = new List<RewindableObject>();
+    private RewindableObject[] prevRewindedObjectList = new RewindableObject[0];
 
     private void Start()
     {
@@ -27,17 +28,38 @@ public class Player : MonoBehaviour
 
     private void OnMarkObject()
     {
-        if (!interactHitBox.canInteract) return;
-        InteractableObject obj = interactHitBox.interactableObject;
+        if (!interactHitBox.canMark) return;
+        RewindableObject obj = interactHitBox.rewindableObject;
+        
+        if (!rewindableObjectList.Contains(obj))
+        {
+            Debug.Log("Player => " + obj.name + " is marked");
+            rewindableObjectList.Add(obj);
+        }
 
-
-        Debug.Log("Interact with an interactable object");
-        interactHitBox.interactableObject.OnInteract();
+        foreach (var element in prevRewindedObjectList)
+        {
+            if (element.IsRewinding) element.InterruptRewind();
+        }
     }
 
     private void OnRewindAction()
     {
-        throw new NotImplementedException();
+        if (rewindableObjectList.Count == 0)
+        {
+            print("Player => You didn't mark any object");
+            return;
+        }
+
+        prevRewindedObjectList = new RewindableObject[rewindableObjectList.Count];
+        rewindableObjectList.CopyTo(prevRewindedObjectList, 0);
+
+        foreach (var obj in rewindableObjectList)
+        {
+            obj.OnInteract();
+        }
+
+        rewindableObjectList.Clear();
     }
 
     private void Update()
@@ -54,10 +76,10 @@ public class Player : MonoBehaviour
 
     private void OnInteract()
     {
-        if (!interactHitBox.canInteract) return;
+        //if (!interactHitBox.canInteract) return;
 
-        Debug.Log("Interact with an interactable object");
-        interactHitBox.interactableObject.OnInteract();
+        //Debug.Log("Interact with an interactable object");
+        //interactHitBox.interactableObject.OnInteract();
 
     }
 

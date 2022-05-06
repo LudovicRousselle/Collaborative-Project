@@ -14,6 +14,15 @@ public class RewindableObject : InteractableObject
     [SerializeField] protected float rewindedStateDuration;
 
     private bool isRewinding = false;
+    public bool IsRewinding
+    {
+        get { return isRewinding; }
+    }
+
+    private void Awake()
+    {
+        gameObject.tag = "Rewindable";
+    }
 
     private State state = State.Void;
     private float counter = 0;
