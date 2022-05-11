@@ -9,6 +9,7 @@ public class NewFallingBlock : RewindableObject
     [SerializeField] public string groundTag = "Ground";
 
     private FallingBlockTriggerZone triggerZone;
+    private Killzone killzone;
     private Rigidbody rb;
     private bool triggered = false;
 
@@ -19,13 +20,17 @@ public class NewFallingBlock : RewindableObject
 
         if (triggerZone == null)
         {
-            Debug.LogError("The falling block object needs a trigger hitbox (place it as a child with a trigger hitbox with the FallingBoxTriggerZone.cs)");
+            Debug.LogError("The falling block object needs a trigger hitbox (place it as a child with a trigger hitbox and the FallingBoxTriggerZone.cs)");
         }
+
+        killzone = GetComponentInChildren<Killzone>();
     }
 
     protected override void DoAction()
     {
         rb.AddForce(-Vector3.up * fallingSpeed);
+
+        if(!killzone.gameObject.activeSelf) killzone.gameObject.SetActive(true);
     }
 
     protected override void OnVoid()
@@ -51,9 +56,9 @@ public class NewFallingBlock : RewindableObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(targetTag)) print("le joueur est ded");
-        else if (collision.gameObject.CompareTag(groundTag))
+        if (collision.gameObject.CompareTag(groundTag))
         {
+            killzone.gameObject.SetActive(false);
             print("le sol je le touche en tant que block qui fall");
             SetStateVoid();
         }

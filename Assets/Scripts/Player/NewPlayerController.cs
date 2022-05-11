@@ -26,6 +26,9 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField] Transform boxCastStartingPos;
     [SerializeField] LayerMask groundLayer;
 
+    [Header("Jump")]
+    [SerializeField] private string[] jumpableTags;
+
     public PlayerInput input;
 
     private Rigidbody rb;
@@ -124,7 +127,7 @@ public class NewPlayerController : MonoBehaviour
             {
                 //Debug.Log(_h.transform.gameObject.name);
 
-                if (_h.transform.gameObject.CompareTag("Ground") || _h.transform.gameObject.CompareTag("Interactable")) 
+                if (_h.transform.gameObject.CompareTag("Ground") || _h.transform.gameObject.CompareTag("Interactable") || _h.transform.gameObject.CompareTag("Rewindable")) 
                 {
                     // Only on the frame we land on the ground 
                     if (!isGrounded)
@@ -181,19 +184,28 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
+        foreach (var item in jumpableTags)
         {
-            isGrounded = false;
-            print("not grounded");
+            if (collision.gameObject.CompareTag(item))
+            {
+                isGrounded = false;
+                print("not grounded");
+                return;
+            }
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!isGrounded && (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable")))
+        foreach (var item in jumpableTags)
         {
-            wallHit = true;
-            print("wallHit");
+            if (collision.gameObject.CompareTag(item))
+            {
+                wallHit = true;
+                print("wallHit");
+                return;
+            }
         }
     }
     #endregion

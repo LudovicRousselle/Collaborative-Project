@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerInteractHitBox interactHitBox = default;
 
+    [SerializeField] private float rewindDistance = 5;
+
     private PlayerInput input;
 
     //Check if the player is crushed
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
 
     private List<RewindableObject> rewindableObjectList = new List<RewindableObject>();
     private RewindableObject[] prevRewindedObjectList = new RewindableObject[0];
+    private RewindableObject lastMarkedObject = default;
 
     private void Start()
     {
@@ -24,6 +27,18 @@ public class Player : MonoBehaviour
         input.Default.Interact.performed += ctx => OnInteract();
         input.Default.MarkObject.performed += ctx => OnMarkObject();
         input.Default.Rewind.performed += ctx => OnRewindAction();
+    }
+
+    private void Update()
+    {
+        CheckForRewindDist();
+        //If the player is colliding with the roof and the plateform
+        //The player die
+        if (isCollindingRoof && isCollindingPlateform)
+        {
+            //Kill the player
+            Destroy(gameObject);
+        }
     }
 
     private void OnMarkObject()
@@ -41,6 +56,8 @@ public class Player : MonoBehaviour
         {
             if (element.IsRewinding) element.InterruptRewind();
         }
+
+        lastMarkedObject = obj;
     }
 
     private void OnRewindAction()
@@ -62,16 +79,25 @@ public class Player : MonoBehaviour
         rewindableObjectList.Clear();
     }
 
-    private void Update()
+    private void CheckForRewindDist()
     {
+        if (lastMarkedObject == null) return;
 
-        //If the player is colliding with the roof and the plateform
-        //The player die
-        if (isCollindingRoof && isCollindingPlateform)
-        {
-            //Kill the player
-            Destroy(gameObject);
-        }
+        if (!InRangeRewind()) CancelRewind();
+    }
+
+    private void CancelRewind()
+    {
+        if (rewindableObjectList.Count <= 0) return;
+
+        rewindableObjectList.Clear();
+        lastMarkedObject = null;
+        print("Player : out of range of rewind, all marking of objects canceled");
+    }
+
+    private bool InRangeRewind()
+    {
+        return Vector3.Distance(transform.position, lastMarkedObject.gameObject.transform.position) < rewindDistance; 
     }
 
     private void OnInteract()
