@@ -5,35 +5,47 @@ using UnityEngine;
 public class Conveyor : RewindableObject
 {
     [SerializeField] private bool startDirectionRight = true;
+    [SerializeField] private float speed = 5f;
 
-    private bool goingRight = true;
+    private List<GameObject> targetList;
 
     private void Start()
     {
-        goingRight = startDirectionRight;
-        SetStateVoid();
+        targetList = new List<GameObject>();
+        if (!startDirectionRight) speed *= -1;
+
+        SetStateAction();
     }
 
-    private void Behavior()
+    protected override void DoAction()
     {
-        //if (goingRight) print("goes right");
-        //else print("goes left");
+        if (targetList.Count == 0) return;
+
+        foreach (GameObject currentGameObject in targetList)
+        {
+            currentGameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * speed);
+        }
     }
 
-    protected override void OnProceed()
+    protected override void DuringRewind()
     {
-        goingRight = true;
-        base.OnProceed();
-    }
-    
-    protected override void OnRewind()
-    {
-        goingRight = false;
-        base.OnRewind();
+        if (targetList.Count == 0) return;
+
+        foreach (GameObject currentGameObject in targetList)
+        {
+            currentGameObject.GetComponent<Rigidbody>().AddForce(-Vector3.right * speed);
+        }
     }
 
-    protected override void OnVoid()
+    private void OnCollisionEnter(Collision collision)
     {
-        Behavior();
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("SBlock")) 
+            targetList.Add(collision.gameObject);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(targetList.Contains(collision.gameObject)) 
+            targetList.Remove(collision.gameObject);
     }
 }

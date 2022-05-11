@@ -56,8 +56,8 @@ public class MouvingPlatform1 : RewindableObject
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
         isRewind = false;
     }
-    override protected void OnRewind()
-    {
-        isRewind = true;
-    }
+    //override protected void OnRewind()
+    //{
+    //    isRewind = true;
+    //}
 }

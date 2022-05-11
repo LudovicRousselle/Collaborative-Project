@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1170197025202852084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248587513051796473}
+  m_Layer: 0
+  m_Name: BoxCastStartingPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &248587513051796473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170197025202852084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.066, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8515945595658106922}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7300320707251869009
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,13 +56,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7300320707251869009}
-  m_LocalRotation: {x: -0, y: -0, z: -0.00000031292436, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8750001, z: -9.6}
+  m_LocalRotation: {x: 0.092225686, y: 0.05575633, z: -0.0051723598, w: 0.99416244}
+  m_LocalPosition: {x: -2.68, y: 7.7, z: -34.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8515945595658106922}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.6, y: 6.42, z: 0}
 --- !u!20 &4007507507736255207
 Camera:
   m_ObjectHideFlags: 0
@@ -44,12 +74,12 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 54.12, y: 25.59}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 80
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -58,7 +88,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 18.17357
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -160,7 +190,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8329964, y: 1.7844694, z: 1}
+  m_Size: {x: 4, y: 2.1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8515945595340453950
 MonoBehaviour:
@@ -209,7 +239,6 @@ GameObject:
   - component: {fileID: 8603114611497390374}
   - component: {fileID: 8515945595658106921}
   - component: {fileID: 8515945595658106926}
-  - component: {fileID: 3388981899545183965}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -230,6 +259,7 @@ Transform:
   m_Children:
   - {fileID: 8515945595340453948}
   - {fileID: 8953709868096733080}
+  - {fileID: 248587513051796473}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -299,8 +329,17 @@ MonoBehaviour:
   runSpeed: 17.04
   airSpeed: 3
   jumpImpulse: 9.51
+  jumpBuffering: 0.08
   gravityIntensifier: 2.96
+<<<<<<< HEAD
   downRayLength: 0.5
+=======
+  boxCastSize: {x: 0.25, y: 0.02, z: 0.2}
+  boxCastStartingPos: {fileID: 248587513051796473}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+>>>>>>> origin/GD
 --- !u!114 &8515945595658106932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,16 +395,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!65 &3388981899545183965
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515945595658106927}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.82615364, y: 0.25005984, z: 0.42324486}
-  m_Center: {x: 0, y: -0.9503237, z: 0}

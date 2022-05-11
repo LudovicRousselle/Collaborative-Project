@@ -16,14 +16,6 @@ public class FallingBlock : RewindableObject
         rb.useGravity = isFalling = false;
     }
 
-    private void Update()
-    {
-        if (isFalling)
-        {
-            rb.velocity = Vector3.up * -fallingSpeed;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("enter");
@@ -33,20 +25,27 @@ public class FallingBlock : RewindableObject
             isFalling = true;
             Destroy(triggerCollider.gameObject);
         }
-        
     }
 
-    override protected void OnRewind()
-    {
-        Debug.Log("Rewind");
-        fallingSpeed = -Mathf.Abs(fallingSpeed);
-        SetStateVoid();
-    }
+    //override protected void OnRewind()
+    //{
+    //    Debug.Log("Rewind");
+    //    fallingSpeed = -Mathf.Abs(fallingSpeed);
+    //    SetStateVoid();
+    //}
 
-    protected override void OnProceed()
+    protected override void DoAction()
     {
         fallingSpeed = Mathf.Abs(fallingSpeed);
         SetStateVoid();
+    }
+
+    protected override void OnVoid()
+    {
+        if (isFalling)
+        {
+            rb.velocity = Vector3.up * -fallingSpeed;
+        }
     }
 
 }

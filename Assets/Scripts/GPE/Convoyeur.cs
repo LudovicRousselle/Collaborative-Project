@@ -20,30 +20,31 @@ public class Convoyeur : RewindableObject
 
     private void OnTriggerStay(Collider other)
     {       
-            if (isOn)
+        if (isOn)
+        {
+            if (isRewind )
             {
-                if (isRewind )
-                {
-                    Debug.Log("touch");
+                Debug.Log("touch");
 
                 // Move the object on top of the Conveyor Belt
-                if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
-                }
-                else
-                {
-                    Debug.Log("touch");
+                if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("SBlock")) 
+                    other.gameObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
+            else
+            {
+                Debug.Log("touch");
 
                 // Move the object on top of the Conveyor Belt
-                if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("SBlock")) other.gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
+                if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("SBlock")) 
+                    other.gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
                
-            }    
-
-            
+         } 
     }
-    override protected void OnRewind()
-    {
-        isRewind = true;
-    }
+    
+    //override protected void OnRewind()
+    //{
+    //    isRewind = true;
+    //}
 
 }
