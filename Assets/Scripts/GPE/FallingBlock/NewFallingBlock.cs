@@ -8,7 +8,7 @@ public class NewFallingBlock : RewindableObject
     [SerializeField] public string targetTag = "Player";
     [SerializeField] public string groundTag = "Ground";
 
-    public GameObject player;
+    //public GameObject player;
 
     private FallingBlockTriggerZone triggerZone;
     private Killzone killzone;
@@ -50,10 +50,10 @@ public class NewFallingBlock : RewindableObject
     {
         rb.AddForce(Vector3.up * fallingSpeed);
 
-        if (player != null)
-        {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * (fallingSpeed + (player.GetComponent<NewPlayerController>().gravityIntensifier * 100)));
-        }
+        //if (player != null)
+        //{
+        //    player.GetComponent<Rigidbody>().AddForce(Vector3.up * (fallingSpeed + (player.GetComponent<NewPlayerController>().gravityIntensifier * 100)));
+        //}
     }
 
     protected override void EndRewind()
@@ -63,12 +63,13 @@ public class NewFallingBlock : RewindableObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.transform.parent = transform;
-            player = collision.gameObject;
-        }
-        else if (collision.gameObject.CompareTag(groundTag))
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    collision.gameObject.transform.parent = transform;
+        //    player = collision.gameObject;
+        //}
+        
+        if (collision.gameObject.CompareTag(groundTag))
         {
             killzone.gameObject.SetActive(false);
             print("le sol je le touche en tant que block qui fall");
@@ -81,7 +82,7 @@ public class NewFallingBlock : RewindableObject
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.parent = null;
-            player = null;
+            //player = null;
         }
     }
 }
