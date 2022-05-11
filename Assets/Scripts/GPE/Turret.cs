@@ -8,7 +8,7 @@ public class Turret : MonoBehaviour
     //Reference
     [SerializeField] private Animation m_Idle;
     public GameObject m_player { get; private set; }
-
+    public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
 
     //Attack
@@ -131,10 +131,12 @@ public class Turret : MonoBehaviour
         {
             if (!oneTime)
             {
+                //Attack
+                spawnProjectile.SpawnVFX();
+
+
                 m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
                 Debug.Log("Player died");
-                Debug.Log(m_loadingAttack);
-                Debug.Log(m_timeBeforeAttack);
 
                 oneTime = true;
             }
