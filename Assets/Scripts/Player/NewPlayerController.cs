@@ -19,7 +19,7 @@ public class NewPlayerController : MonoBehaviour
     float currentJumpbuffering;
 
     [Header("Physics")]
-    [SerializeField,Range(1,5)] private float gravityIntensifier = 1.3f;
+    [SerializeField,Range(1,5)] public float gravityIntensifier = 1.3f;
 
     [Header("Boxcast")]
     [SerializeField] private Vector3 boxCastSize;
@@ -129,6 +129,7 @@ public class NewPlayerController : MonoBehaviour
 
                 if (_h.transform.gameObject.CompareTag("Ground") || _h.transform.gameObject.CompareTag("Interactable") || _h.transform.gameObject.CompareTag("Rewindable")) 
                 {
+
                     // Only on the frame we land on the ground 
                     if (!isGrounded)
                     {
@@ -146,9 +147,8 @@ public class NewPlayerController : MonoBehaviour
                 }
                 return;
             }   
-
-            
         }
+
         if (isGrounded)
         {
             // Only on the frame we leave the ground
@@ -156,6 +156,7 @@ public class NewPlayerController : MonoBehaviour
                 currentJumpbuffering = 0;
             }
         }
+
         isGrounded = false;
     }
 
@@ -189,11 +190,10 @@ public class NewPlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag(item))
             {
                 isGrounded = false;
-                print("not grounded");
                 return;
             }
         }
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -203,7 +203,6 @@ public class NewPlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag(item))
             {
                 wallHit = true;
-                print("wallHit");
                 return;
             }
         }
