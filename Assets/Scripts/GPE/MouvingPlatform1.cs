@@ -18,8 +18,8 @@ public class MouvingPlatform1 : RewindableObject
 
         
 
-        if (GroundButton.onPlatform==false)
-        {
+       // if (GroundButton.onPlatform==false)
+       // {
             Debug.Log(GroundButton.onPlatform);
             
             if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
@@ -63,7 +63,7 @@ public class MouvingPlatform1 : RewindableObject
             }
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
             isRewind = false;
-        }
+       // }
         
        
     }
