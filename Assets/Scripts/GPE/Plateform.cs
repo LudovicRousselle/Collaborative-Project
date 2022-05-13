@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Plateform : MonoBehaviour
 {
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.tag == "Player")|| (other.gameObject.tag == "Interactable"))
+        if ((other.gameObject.tag == "Player")|| (other.gameObject.tag == "Rewindable"))
         {
             other.gameObject.transform.SetParent(transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if ((other.gameObject.tag == "Player") || (other.gameObject.tag == "Interactable"))
+        if ((other.gameObject.tag == "Player") || (other.gameObject.tag == "Rewindable"))
         {
             other.gameObject.transform.SetParent(null);
         }
