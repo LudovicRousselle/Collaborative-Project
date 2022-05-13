@@ -7,68 +7,72 @@ public class MouvingPlatform1 : RewindableObject
     [SerializeField] GameObject[] waypoints;
     int currentWaypointIndex = 0;
     [SerializeField] private float speed = 1f;
-    [SerializeField] private float timer;
-    [SerializeField] private float timeReset;
+    private float currentTimerValue;
+    [SerializeField] private float watingTimeAtWaypoints;
+    public bool isOn;
     
     public bool isRewind;
-   
+
 
     void Update()
     {
-
-        
-
-       // if (GroundButton.onPlatform==false)
-       // {
-            Debug.Log(GroundButton.onPlatform);
-            
+        // Seulement si la plateforme est activée
+        if (isOn)
+        {
+            // Attente quand on touche un waypoint
             if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
             {
+                // Timer
+                currentTimerValue -= Time.deltaTime;
 
-                timer -= Time.deltaTime;
-                if (timer <= 0)
+                // Sélectionner le prochain waypoint
+                if (currentTimerValue <= 0)
                 {
+
                     currentWaypointIndex = currentWaypointIndex + 1;
-                    timer = timeReset;
+
+                    // Reset le timer
+                    currentTimerValue = watingTimeAtWaypoints;
                     if (currentWaypointIndex >= waypoints.Length)
                     {
                         currentWaypointIndex = 0;
-
-
                     }
 
                 }
 
             }
-            else if (isRewind)
-            {
-                if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
-                {
 
-                    timer -= Time.deltaTime;
-                    if (timer <= 0)
-                    {
-                        currentWaypointIndex = currentWaypointIndex - 1;
-                        timer = timeReset;
-                        if (currentWaypointIndex <= waypoints.Length)
-                        {
-                            currentWaypointIndex = 2;
-                            isRewind = false;
-
-                        }
-
-                    }
-
-                }
-            }
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
-            isRewind = false;
-       // }
-        
-       
+        }
     }
-    //override protected void OnRewind()
-    //{
-    //    isRewind = true;
-    //}
+    override protected void DuringRewind()
+    {
+        // Activé uniquement à la frame où le Rewind commence
+        if (!isRewind)
+        {
+            isRewind = true;
+            speed = - Mathf.Abs(speed);
+
+            // Réarange l'ordre des waypoint pour que ça aille dans l'autre sens
+            GameObject[] tempWaypoints = waypoints;
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                waypoints[i] = tempWaypoints[waypoints.Length - i];
+            }
+        }
+    }
+
+    // Reset la vitesse à sa valeur positive & cie
+    protected override void EndRewind()
+    {
+        speed = Mathf.Abs(speed);
+        isRewind = false;
+
+        // Re-réarange l'ordre des waypoint pour que ça aille dans le vrai bon sens (c'est la même méthode qu'au dessus)
+        GameObject[] tempWaypoints = waypoints;
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypoints[i] = tempWaypoints[waypoints.Length - i];
+        }
+    }
 }
