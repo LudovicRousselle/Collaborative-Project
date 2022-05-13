@@ -8,8 +8,6 @@ public class NewFallingBlock : RewindableObject
     [SerializeField] public string targetTag = "Player";
     [SerializeField] public string groundTag = "Ground";
 
-    //public GameObject player;
-
     private FallingBlockTriggerZone triggerZone;
     private Killzone killzone;
     private Rigidbody rb;
@@ -31,8 +29,6 @@ public class NewFallingBlock : RewindableObject
     protected override void DoAction()
     {
         rb.AddForce(-Vector3.up * fallingSpeed);
-
-        if(!killzone.gameObject.activeSelf) killzone.gameObject.SetActive(true);
     }
 
     protected override void OnVoid()
@@ -49,32 +45,28 @@ public class NewFallingBlock : RewindableObject
     protected override void DuringRewind()
     {
         rb.AddForce(Vector3.up * fallingSpeed);
-
-        //if (player != null)
-        //{
-        //    player.GetComponent<Rigidbody>().AddForce(Vector3.up * (fallingSpeed + (player.GetComponent<NewPlayerController>().gravityIntensifier * 100)));
-        //}
     }
 
     protected override void EndRewind()
     {
         rb.velocity = Vector3.zero;
+        if (!killzone.gameObject.activeSelf) killzone.gameObject.SetActive(true);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    collision.gameObject.transform.parent = transform;
-        //    player = collision.gameObject;
-        //}
-        
         if (collision.gameObject.CompareTag(groundTag))
         {
-            killzone.gameObject.SetActive(false);
+            if (killzone.gameObject.activeSelf) killzone.gameObject.SetActive(false);
             print("le sol je le touche en tant que block qui fall");
             SetStateVoid();
         }
+    }
+
+    protected override void SetStateRewind()
+    {
+        base.SetStateRewind();
+        if (killzone.gameObject.activeSelf) killzone.gameObject.SetActive(false);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -82,7 +74,6 @@ public class NewFallingBlock : RewindableObject
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.parent = null;
-            //player = null;
         }
     }
 }
