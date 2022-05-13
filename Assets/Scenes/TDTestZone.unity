@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1133984709}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,10 +321,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1366759823, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 1966770948, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1735923445}
     - target: {fileID: 7495925045695114245, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_Name
       value: Robot
@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7495925045695114247, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.44
+      value: 10.72
       objectReference: {fileID: 0}
     - target: {fileID: 7495925045695114247, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -384,6 +384,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7300320707251869009, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595340453949, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
@@ -444,6 +448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
+--- !u!4 &1735923445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
+  m_PrefabInstance: {fileID: 1735923444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3445814744986627850
 PrefabInstance:
   m_ObjectHideFlags: 0
