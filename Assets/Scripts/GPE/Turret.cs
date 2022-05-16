@@ -29,10 +29,6 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            RobotDeath();
-        }
 
         if (!targetingPlayer)
         {
