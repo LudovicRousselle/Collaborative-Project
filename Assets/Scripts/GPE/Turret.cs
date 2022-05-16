@@ -5,8 +5,6 @@ using UnityEngine;
 //Corentin
 public class Turret : MonoBehaviour
 {
-    //Reference
-    [SerializeField] private Animation m_Idle;
     public GameObject m_player { get; private set; }
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
@@ -22,6 +20,7 @@ public class Turret : MonoBehaviour
     private bool botRayTouching = false;
 
     bool oneTime = false;
+    bool isDead = false;
 
     private void Start()
     {
@@ -38,6 +37,11 @@ public class Turret : MonoBehaviour
         if (!targetingPlayer)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+
+        if (isDead)
+        {
+            targetingPlayer = false;
         }
     }
 
@@ -127,7 +131,7 @@ public class Turret : MonoBehaviour
     //Attack the Player
     private void Attack()
     {
-        if (m_loadingAttack >= m_timeBeforeAttack)
+        if (m_loadingAttack >= m_timeBeforeAttack && m_loadingAttack >= 1.2f)
         {
             if (!oneTime)
             {
@@ -138,6 +142,7 @@ public class Turret : MonoBehaviour
                 m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
                 Debug.Log("Player died");
 
+                isDead = true;
                 oneTime = true;
             }
         }
@@ -164,7 +169,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !isDead)
         {
             if (OnSight())
             {
