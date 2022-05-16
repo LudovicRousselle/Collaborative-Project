@@ -5,6 +5,8 @@ using UnityEngine;
 public class Lever : InteractableObject
 {
     [SerializeField] private bool leverOnOff;
+    [Header("Only put the objects containing their script, not the parent")]
+    [SerializeField] GameObject[] linkedObjects;
     public void Start()
     {
         leverOnOff = false;
@@ -14,7 +16,7 @@ public class Lever : InteractableObject
     {
         if (other.gameObject.tag == "Player")
         {
-         
+            
         }
     }
     public override void OnInteract()
@@ -22,6 +24,22 @@ public class Lever : InteractableObject
         base.OnInteract();
         leverOnOff = true;
         Debug.Log("on");
+
+        foreach (GameObject _go in linkedObjects)
+        {
+
+            if (_go.name.Contains("Moving")) // Moving Platform
+            {
+                _go.GetComponent<MouvingPlatform1>().isOn = !_go.GetComponent<MouvingPlatform1>().isOn;
+
+                Debug.Log("Changed moving platform");
+            }
+            else if (_go.name.Contains("Conveyor")) // Conveyor Belt
+            {
+                _go.GetComponent<Conveyor>().isOn = !_go.GetComponent<Conveyor>().isOn;
+            }
+        }
+        
         
     }
 }

@@ -104,8 +104,8 @@ public class Player : MonoBehaviour
     {
         //if (!interactHitBox.canInteract) return;
 
-        //Debug.Log("Interact with an interactable object");
-        //interactHitBox.interactableObject.OnInteract();
+        Debug.Log("Interact with an interactable object");
+        interactHitBox.interactableObject.OnInteract();
 
     }
 
