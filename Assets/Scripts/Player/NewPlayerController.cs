@@ -193,7 +193,6 @@ public class NewPlayerController : MonoBehaviour
                 return;
             }
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
