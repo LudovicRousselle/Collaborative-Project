@@ -58,7 +58,7 @@ public class GroundButton : MonoBehaviour
             }
             else if ( _go.name.Contains("Conveyor")) // Conveyor Belt
             {
-                _go.GetComponent<Convoyeur>().isOn = !_go.GetComponent<Convoyeur>().isOn;
+                _go.GetComponent<Conveyor>().isOn = !_go.GetComponent<Conveyor>().isOn;
             }
         }
     }
