@@ -8,12 +8,12 @@ public class Turret : MonoBehaviour
     //Reference
     [SerializeField] private Animation m_Idle;
     public GameObject m_player { get; private set; }
-
+    public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
 
     //Attack
     [SerializeField] private float m_sightRange;
-    [SerializeField] private float m_timeBeforeAttack;
+    private float m_timeBeforeAttack = 5.0f;
     public bool targetingPlayer = false;
     private float m_loadingAttack = 0;
 
@@ -49,6 +49,7 @@ public class Turret : MonoBehaviour
 
         if (direction.magnitude <= m_sightRange)
         {
+            m_timeBeforeAttack = 5 * ((direction.magnitude - 1 )/ m_sightRange);
 
             if (angle < 30)
             {
@@ -130,6 +131,10 @@ public class Turret : MonoBehaviour
         {
             if (!oneTime)
             {
+                //Attack
+                spawnProjectile.SpawnVFX();
+
+
                 m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
                 Debug.Log("Player died");
 

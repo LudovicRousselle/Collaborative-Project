@@ -3,7 +3,17 @@ guid: a468f4ed7166208449f84c6f4d2061e3
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_CogWheel
+    second: {fileID: 2100000, guid: 87c8912a7620b7547bba81b80d9c3b84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_CogWheelCenter
+    second: {fileID: 2100000, guid: 4c6c06a2bc63c9a439c22ae5a6d3a0f5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
