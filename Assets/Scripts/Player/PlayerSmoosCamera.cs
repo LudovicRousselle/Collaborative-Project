@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSmoosCamera : MonoBehaviour
 {
-    public static Vector3 offset = new Vector3(0f, 0f, -17f);
+    [SerializeField] public static Vector3 offset = new Vector3(0f, 0f, -17f);
     [SerializeField] private Vector3 velocity = Vector3.zero;
     [SerializeField] private float smoothTime = 0.25f;
     [SerializeField] private Transform target;
