@@ -19,7 +19,7 @@ public class PlayerSave : MonoBehaviour
     void Update()
     {
         //Debuging
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
