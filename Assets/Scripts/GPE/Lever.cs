@@ -5,6 +5,7 @@ using UnityEngine;
 public class Lever : InteractableObject
 {
     [SerializeField] private bool leverOnOff;
+    [SerializeField] private bool conveyorDirectionOnly;
     [Header("Only put the objects containing their script, not the parent")]
     [SerializeField] GameObject[] linkedObjects;
     public void Start()
@@ -24,23 +25,37 @@ public class Lever : InteractableObject
         base.OnInteract();
         leverOnOff = true;
         Debug.Log("on");
-
-        foreach (GameObject _go in linkedObjects)
+        if (conveyorDirectionOnly)
         {
-
-            if (_go.name.Contains("Moving")) // Moving Platform
+            foreach (GameObject _go in linkedObjects)
             {
-                _go.GetComponent<MouvingPlatform1>().isOn = !_go.GetComponent<MouvingPlatform1>().isOn;
-
-                Debug.Log("Changed moving platform");
-            }
-            else if (_go.name.Contains("Conveyor")) // Conveyor Belt
-            {
-                _go.GetComponent<Conveyor>().isOn = !_go.GetComponent<Conveyor>().isOn;
+                if (_go.name.Contains("Conveyor")) // Conveyor Belt
+                {
+                    _go.GetComponent<Conveyor>().speed = -_go.GetComponent<Conveyor>().speed;
+                }
+               
             }
         }
-        
-        
+        else
+        {
+            foreach (GameObject _go in linkedObjects)
+            {
+
+                if (_go.name.Contains("Moving")) // Moving Platform
+                {
+                    _go.GetComponent<MouvingPlatform1>().isOn = !_go.GetComponent<MouvingPlatform1>().isOn;
+
+                    Debug.Log("Changed moving platform");
+                }
+                else if (_go.name.Contains("Conveyor")) // Conveyor Belt
+                {
+                    _go.GetComponent<Conveyor>().isOn = !_go.GetComponent<Conveyor>().isOn;
+                }
+            }
+        }
+
+
+
     }
 }
 
