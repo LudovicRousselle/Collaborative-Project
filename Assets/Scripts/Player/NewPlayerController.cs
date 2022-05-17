@@ -126,25 +126,19 @@ public class NewPlayerController : MonoBehaviour
             foreach (RaycastHit _h in raycastHits)
             {
                 //Debug.Log(_h.transform.gameObject.name);
-
-                if (_h.transform.gameObject.CompareTag("Ground") || _h.transform.gameObject.CompareTag("Interactable") || _h.transform.gameObject.CompareTag("Rewindable")) 
+                // Only on the frame we land on the ground 
+                if (!isGrounded)
                 {
+                    isGrounded = true;
 
-                    // Only on the frame we land on the ground 
-                    if (!isGrounded)
-                    {
-                        isGrounded = true;
-
-                        // Jump immediately is buffering activated
-                        if (currentJumpbuffering > 0)
-                        { 
-                            Jump(); 
-                        }
+                    // Jump immediately is buffering activated
+                    if (currentJumpbuffering > 0)
+                    { 
+                        Jump(); 
                     }
-
-                    wallHit = false;
-                
                 }
+
+                wallHit = false;
                 return;
             }   
         }
