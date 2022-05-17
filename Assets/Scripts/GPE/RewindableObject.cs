@@ -25,7 +25,7 @@ public class RewindableObject : InteractableObject
     }
 
     private State state = State.Void;
-    private float counter = 0;
+    protected float counter = 0;
 
     override public void OnInteract()//lancé qund le joueur press E à côté
     {
