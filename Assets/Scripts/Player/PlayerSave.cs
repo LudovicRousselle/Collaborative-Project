@@ -19,9 +19,9 @@ public class PlayerSave : MonoBehaviour
     void Update()
     {
         //Debuging
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
