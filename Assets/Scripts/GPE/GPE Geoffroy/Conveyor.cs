@@ -5,7 +5,7 @@ using UnityEngine;
 public class Conveyor : RewindableObject
 {
     [SerializeField] private bool startDirectionRight = true;
-    [SerializeField] private float speed = 5f;
+    public float speed = 5f;
     public bool isOn;
 
     private List<GameObject> targetList;
