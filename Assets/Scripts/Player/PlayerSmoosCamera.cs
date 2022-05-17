@@ -9,8 +9,11 @@ public class PlayerSmoosCamera : MonoBehaviour
     [SerializeField] private float smoothTime = 0.25f;
     [SerializeField] private Transform target;
     [SerializeField] private Transform target2;
-    public static bool targeting;
-
+    [SerializeField] public static bool targeting;
+    void Start()
+    {
+        targeting = true;
+    }
     void Update()
     {
         if (targeting)

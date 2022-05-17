@@ -8,9 +8,10 @@ public class cameraTriggerZone : MonoBehaviour
     [SerializeField] private float baseZoom;
     [SerializeField] private static bool targetting;
     [SerializeField] private bool changeTarget;
-    public void Start()
+    public void Start() 
     {
         baseZoom = PlayerSmoosCamera.offset.z;
+        targetting = true;
     }
     public void Update()
     {
@@ -28,7 +29,7 @@ public class cameraTriggerZone : MonoBehaviour
             else if (! changeTarget)
             {
                 PlayerSmoosCamera.offset = new Vector3(PlayerSmoosCamera.offset.x, PlayerSmoosCamera.offset.y, deZoom);
-                targetting = true;
+                
             }
             
         }
@@ -38,7 +39,7 @@ public class cameraTriggerZone : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerSmoosCamera.offset = new Vector3(PlayerSmoosCamera.offset.x, PlayerSmoosCamera.offset.y, baseZoom);
-            
+            targetting = true;
         }
     }
 }
