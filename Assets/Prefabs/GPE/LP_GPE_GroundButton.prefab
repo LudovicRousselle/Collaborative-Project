@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7853692161633194415}
   - component: {fileID: 5917210148702374919}
   - component: {fileID: 1570335573617723299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LP_GPE_GroundButton
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,9 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208b24a7794f36e4f97c88ae46d098b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPress: 0
+  isPressed: 0
   buttonDown: 4
   buttonUp: 1
+  linkedObjects: []
 --- !u!1 &6836269165748549134
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,9 +157,9 @@ GameObject:
   - component: {fileID: 1033085882682681907}
   - component: {fileID: 9128320923722849693}
   - component: {fileID: 8109021387666224012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LP_GPE_GroundButtonBase
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
