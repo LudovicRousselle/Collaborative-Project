@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5025735720065957}
   - component: {fileID: 2879257739073466223}
   m_Layer: 6
-  m_Name: LP_P_FancyDesk
+  m_Name: FancyDesk
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4392647739711360698}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 1.41, y: -1.5, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 245388178621086560}
   - {fileID: 4240283871600578065}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 364b4a650272ddc45b80fd93eaed00fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
