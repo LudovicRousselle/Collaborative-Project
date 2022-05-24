@@ -104,10 +104,17 @@ public class Piston : RewindableObject
         else
         {
             if (isClosedByDefault) SetStateVoid();
+            else if (isInterrupted)
+            {
+                SetStateAction();
+                counter = 0;
+            }
         }
 
         print("Je me plie sans être du papier puisqu'en effet je me trouve être un piston");
     }
+
+    private bool isInterrupted = false;
 
     private void UnFold(Vector3 target)
     {
@@ -130,6 +137,11 @@ public class Piston : RewindableObject
         else
         {
             if (!isClosedByDefault) SetStateVoid();
+            else if (isInterrupted)
+            {
+                SetStateAction();
+                counter = 0;
+            }
         }
 
         print("J'me déplie wola.  -Le Piston");
@@ -147,5 +159,10 @@ public class Piston : RewindableObject
         base.SetStateRewind();
         hasReachedMiddle = false;
         customCounter = 0;
+    }
+
+    public override void InterruptRewind()
+    {
+        isInterrupted = true;
     }
 }
