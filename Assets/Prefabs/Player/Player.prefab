@@ -1497,7 +1497,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8515945595658106922}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.5, y: 2.9, z: 0}
 --- !u!20 &4007507507736255207
 Camera:
   m_ObjectHideFlags: 0
@@ -1921,7 +1921,7 @@ GameObject:
   - component: {fileID: 8515945595340453951}
   - component: {fileID: 8515945595340453950}
   - component: {fileID: 8515945595340453945}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: InteractHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1953,7 +1953,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5, y: 2.2, z: 1}
+  m_Size: {x: 3.5, y: 2.4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8515945595340453950
 MonoBehaviour:
@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 2.5
-  runSpeed: 17.04
+  runSpeed: 4.5
   airSpeed: 3
   jumpImpulse: 9.51
   jumpBuffering: 0.08
@@ -2103,6 +2103,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpableTags: []
 --- !u!114 &8515945595658106932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,6 +2117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactHitBox: {fileID: 8515945595340453950}
+  rewindDistance: 5
 --- !u!114 &8603114611497390374
 MonoBehaviour:
   m_ObjectHideFlags: 0
