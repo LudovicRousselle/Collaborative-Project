@@ -26,7 +26,7 @@ public class Conveyor : RewindableObject
 
             foreach (GameObject currentGameObject in targetList)
             {
-                currentGameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * speed);
+                currentGameObject.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
             }
         }
         
@@ -40,7 +40,7 @@ public class Conveyor : RewindableObject
 
             foreach (GameObject currentGameObject in targetList)
             {
-                currentGameObject.GetComponent<Rigidbody>().AddForce(-Vector3.right * speed);
+                currentGameObject.transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
             }
         }
         
