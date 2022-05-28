@@ -6009,7 +6009,6 @@ Transform:
   - {fileID: 77468411}
   - {fileID: 661814857}
   - {fileID: 997587007}
-  - {fileID: 836097667}
   - {fileID: 1209475268}
   - {fileID: 1893871235}
   - {fileID: 1821281527}
@@ -6481,11 +6480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6092678254146884001, guid: 287dac66098346c49873ca133eab4113, type: 3}
       propertyPath: speed
-      value: 50
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6092678254146884001, guid: 287dac66098346c49873ca133eab4113, type: 3}
       propertyPath: startDirectionRight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6092678254146884002, guid: 287dac66098346c49873ca133eab4113, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10929,36 +10928,6 @@ Transform:
   - {fileID: 969615013}
   m_Father: {fileID: 0}
   m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &836097666
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 836097667}
-  m_Layer: 0
-  m_Name: ======= ROOM 2 ====== - Piston Rise Up
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &836097667
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836097666}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 516410933}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &836651250
 PrefabInstance:
@@ -16543,7 +16512,7 @@ Transform:
   - {fileID: 8280564103857856622}
   - {fileID: 310168595}
   m_Father: {fileID: 516410933}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1210834561
 GameObject:
@@ -20127,11 +20096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3445814742984837813, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8499985
+      value: 71.75
       objectReference: {fileID: 0}
     - target: {fileID: 3445814742984837813, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.25
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 3445814742984837813, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27329,7 +27298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 516410933}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1822359772
 PrefabInstance:
@@ -28275,7 +28244,7 @@ Transform:
   - {fileID: 608433229}
   - {fileID: 1230487216}
   m_Father: {fileID: 516410933}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1894561420
 PrefabInstance:
@@ -28761,7 +28730,7 @@ PrefabInstance:
       objectReference: {fileID: 783010557}
     - target: {fileID: 5595147306173729512, guid: 87ec91a12385cc043aab2abb34a53283, type: 3}
       propertyPath: smoothTime
-      value: 0.45
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ec91a12385cc043aab2abb34a53283, type: 3}
