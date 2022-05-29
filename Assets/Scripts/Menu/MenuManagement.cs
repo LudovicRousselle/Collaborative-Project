@@ -22,4 +22,8 @@ public class MenuManagement : MonoBehaviour
         Debug.Log("Quit");
     }
 
+    public void GobackButton()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
