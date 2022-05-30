@@ -154,7 +154,6 @@ public class Turret : MonoBehaviour
 
 
                 m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
-                Debug.Log("Player died");
 
                 isDead = true;
                 oneTime = true;
