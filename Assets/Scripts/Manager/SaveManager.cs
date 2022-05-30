@@ -52,23 +52,24 @@ public class SaveManager : MonoBehaviour
             }
         }
 
+
         //If the toggle returns true, fade in the Image
         if (m_Fading == true)
         {
             //Fully fade in Image (1) with the duration of 2
-            m_transition.CrossFadeAlpha(1, .5f, false);
+            m_transition.CrossFadeAlpha(1, .25f, false);
         }
         //If the toggle is false, fade out to nothing (0) the Image with a duration of 2
         if (m_Fading == false)
         {
-            m_transition.CrossFadeAlpha(0, .5f, false);
+            m_transition.CrossFadeAlpha(0, .25f, false);
         }
     }
 
     IEnumerator ReloadScene()
     {
         m_Fading = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         m_Fading = false;
         m_coroutine = null;
