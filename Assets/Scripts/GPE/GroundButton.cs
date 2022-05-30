@@ -24,7 +24,7 @@ public class GroundButton : MonoBehaviour
             ActivateObjects();
         }            
             
-        transform.position += new Vector3(0, -buttonDown, 0) * Time.deltaTime;
+        //transform.position += new Vector3(0, -buttonDown, 0) * Time.deltaTime;
     }
 
     private void OnTriggerExit(Collider other)
@@ -34,7 +34,7 @@ public class GroundButton : MonoBehaviour
         isPressed = false;
         Debug.Log("Button gets deactivated");
         ActivateObjects();
-        transform.position -= new Vector3(0, -buttonDown, 0) * Time.deltaTime;
+        //transform.position -= new Vector3(0, -buttonDown, 0) * Time.deltaTime;
     }
 
     // Méthode shlag pour on/off des objets quand le bouton est activé

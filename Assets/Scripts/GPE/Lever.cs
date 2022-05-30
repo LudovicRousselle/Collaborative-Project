@@ -51,6 +51,11 @@ public class Lever : InteractableObject
                 {
                     _go.GetComponent<Conveyor>().isOn = !_go.GetComponent<Conveyor>().isOn;
                 }
+                else if (_go.name.Contains("TrapDoor")) // Trap Door
+                {
+                    //Debug.Log("yo");
+                    _go.GetComponent<TrapDoor>().OnInteract();
+                }
             }
         }
 
