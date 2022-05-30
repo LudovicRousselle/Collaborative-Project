@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerInteractHitBox interactHitBox = default;
+    public static Player Instance { get; private set; }
 
+    [SerializeField] private PlayerInteractHitBox interactHitBox = default;
+    [SerializeField] private GameObject rewindSphere = default;
     [SerializeField] private float rewindDistance = 5;
 
     private PlayerInput input;
+    private GameObject instantiatedSphere = default;
 
-    //Check if the player is crushed
-    private bool isCollindingRoof;
-    private bool isCollindingPlateform;
+    private Vector3 markedPos = Vector3.zero;
+
+    private bool marked = false;
 
     private List<RewindableObject> rewindableObjectList = new List<RewindableObject>();
     private RewindableObject[] prevRewindedObjectList = new RewindableObject[0];
-    private RewindableObject lastMarkedObject = default;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     private void Start()
     {
@@ -32,20 +39,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CheckForRewindDist();
-        //If the player is colliding with the roof and the plateform
-        //The player die
-        if (isCollindingRoof && isCollindingPlateform)
-        {
-            //Kill the player
-            Destroy(gameObject);
-        }
     }
 
     private void OnMarkObject()
     {
         if (!interactHitBox.canMark) return;
         RewindableObject obj = interactHitBox.rewindableObject;
-        
+
         if (!rewindableObjectList.Contains(obj))
         {
             Debug.Log("Player => " + obj.name + " is marked");
@@ -57,7 +57,18 @@ public class Player : MonoBehaviour
             if (element.IsRewinding) element.InterruptRewind();
         }
 
-        lastMarkedObject = obj;
+        marked = true;
+        markedPos = transform.position;
+
+        if (instantiatedSphere == null)
+        {
+            instantiatedSphere = Instantiate(rewindSphere, markedPos, Quaternion.identity);
+            instantiatedSphere.transform.localScale = new Vector3(rewindDistance*2, rewindDistance*2, 0);
+        }
+        else
+        {
+            instantiatedSphere.transform.position = transform.position;
+        }
     }
 
     private void OnRewindAction()
@@ -77,11 +88,13 @@ public class Player : MonoBehaviour
         }
 
         rewindableObjectList.Clear();
+
+        if (instantiatedSphere != null) Destroy(instantiatedSphere);
     }
 
     private void CheckForRewindDist()
     {
-        if (lastMarkedObject == null) return;
+        if (!marked) return;
 
         if (!InRangeRewind()) CancelRewind();
     }
@@ -91,47 +104,27 @@ public class Player : MonoBehaviour
         if (rewindableObjectList.Count <= 0) return;
 
         rewindableObjectList.Clear();
-        lastMarkedObject = null;
+        marked = false;
+
+        if (instantiatedSphere != null) Destroy(instantiatedSphere);
+
         print("Player : out of range of rewind, all marking of objects canceled");
     }
 
     private bool InRangeRewind()
     {
-        return Vector3.Distance(transform.position, lastMarkedObject.gameObject.transform.position) < rewindDistance; 
+        return Vector3.Distance(transform.position, markedPos) < rewindDistance; 
     }
 
     private void OnInteract()
     {
-        //if (!interactHitBox.canInteract) return;
-
         Debug.Log("Interact with an interactable object");
         interactHitBox.interactableObject.OnInteract();
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    public void OnDeath()
     {
-        if (collision.collider.CompareTag("Roof"))
-        {
-            isCollindingRoof = true;
-        }
-
-        if (collision.collider.CompareTag("Interactable"))
-        {
-            isCollindingPlateform = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Roof"))
-        {
-            isCollindingRoof = false;
-        }
-
-        if (collision.collider.CompareTag("Interactable"))
-        {
-            isCollindingPlateform = false;
-        }
+        Debug.Log("Player dies");
     }
 }

@@ -19,7 +19,7 @@ public class NewPlayerController : MonoBehaviour
     float currentJumpbuffering;
 
     [Header("Physics")]
-    [SerializeField,Range(1,5)] public float gravityIntensifier = 1.3f;
+    [SerializeField] public float gravityIntensifier = 1.3f;
 
     [Header("Boxcast")]
     [SerializeField] private Vector3 boxCastSize;
