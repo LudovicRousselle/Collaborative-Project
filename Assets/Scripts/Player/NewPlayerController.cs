@@ -164,16 +164,20 @@ public class NewPlayerController : MonoBehaviour
 
     private void RayCastWalls()
     {
-        RaycastHit hit;
+        RaycastHit hit = new RaycastHit();
         float rayDist = additionalSideRayDist + sideRayDist;
 
         if (Physics.Raycast(transform.position, Vector3.right, out hit, rayDist))
         {
+            if (hit.collider.isTrigger == true) return;
+
             wallHitDir = 1;
             Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.yellow);
         }
         else if (Physics.Raycast(transform.position, -Vector3.right, out hit, rayDist))
         {
+            if (hit.collider.isTrigger == true) return;
+
             wallHitDir = -1;
             Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
         }
