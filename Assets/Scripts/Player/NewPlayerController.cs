@@ -29,6 +29,11 @@ public class NewPlayerController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private string[] jumpableTags;
 
+    [Header("Wall Detection")]
+    [SerializeField] private float sideRayDist = 0.5f;
+    private float additionalSideRayDist;
+    private int wallHitDir;
+
     public PlayerInput input;
 
     private Rigidbody rb;
@@ -36,7 +41,6 @@ public class NewPlayerController : MonoBehaviour
     private Vector2 inputMove = Vector2.zero;
 
     private bool isGrounded = false;
-    private bool wallHit = false;
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
@@ -55,6 +59,8 @@ public class NewPlayerController : MonoBehaviour
     {
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
+
+        additionalSideRayDist = GetComponent<CapsuleCollider>().radius * 0.8f;
     }
 
     private void SetupAllInputs()
@@ -80,11 +86,11 @@ public class NewPlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         RayCastGround();
-        
+        RayCastWalls();
+
         Move();
 
-        if (!isGrounded || wallHit) rb.AddForce(new Vector3(0, -gravityIntensifier * 100, 0));
-
+        if (!isGrounded) rb.AddForce(new Vector3(0, -gravityIntensifier * 100, 0));
     }
 
     private void Run() 
@@ -108,9 +114,12 @@ public class NewPlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (wallHitDir > 0) inputMove.x = Mathf.Clamp(inputMove.x, -1000, 0);
+        else if (wallHitDir < 0) inputMove.x = Mathf.Clamp(inputMove.x, 0, 1000);
+
         if (inputMove.x > 0 || inputMove.x < 0)
         {
-            if (!wallHit) rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+            rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
         }
     }
 
@@ -138,7 +147,6 @@ public class NewPlayerController : MonoBehaviour
                     }
                 }
 
-                wallHit = false;
                 return;
             }   
         }
@@ -154,6 +162,29 @@ public class NewPlayerController : MonoBehaviour
         isGrounded = false;
     }
 
+    private void RayCastWalls()
+    {
+        RaycastHit hit;
+        float rayDist = additionalSideRayDist + sideRayDist;
+
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, rayDist))
+        {
+            wallHitDir = 1;
+            Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.yellow);
+        }
+        else if (Physics.Raycast(transform.position, -Vector3.right, out hit, rayDist))
+        {
+            wallHitDir = -1;
+            Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
+        }
+        else
+        {
+            wallHitDir = 0;
+            Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.white);
+            Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.white);
+        }
+    }
+
     #region Enable/Disable
     private void OnEnable()
     {
@@ -167,15 +198,6 @@ public class NewPlayerController : MonoBehaviour
     #endregion
 
     #region Triggers&Collisions
-    // private void OnTriggerEnter(Collider collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Interactable"))
-    //     {
-    //         isGrounded = true;
-    //         wallHit = false;
-    //         print("grounded");
-    //     }
-    // }
 
     private void OnTriggerExit(Collider collision)
     {
@@ -184,18 +206,6 @@ public class NewPlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag(item))
             {
                 isGrounded = false;
-                return;
-            }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        foreach (var item in jumpableTags)
-        {
-            if (collision.gameObject.CompareTag(item))
-            {
-                wallHit = true;
                 return;
             }
         }
