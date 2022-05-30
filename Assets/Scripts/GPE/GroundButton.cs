@@ -15,7 +15,7 @@ public class GroundButton : MonoBehaviour
    
     private void OnCollisionStay(Collision collision)
     {
-        if (!((collision.gameObject.tag == "RewindableObject") || (collision.gameObject.tag == "SBlock"))) return;
+        if (!((collision.gameObject.tag == "Rewindable") || (collision.gameObject.tag == "SBlock"))) return;
             // Lancé à une seule frame
         if (!isPressed)
         {
@@ -29,7 +29,7 @@ public class GroundButton : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!((other.gameObject.tag == "RewindableObject") || (other.gameObject.tag == "SBlock"))) return;
+        if (!((other.gameObject.tag == "Rewindable") || (other.gameObject.tag == "SBlock"))) return;
 
         isPressed = false;
         Debug.Log("Button gets deactivated");
