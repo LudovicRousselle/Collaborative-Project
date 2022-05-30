@@ -70,6 +70,7 @@ public class SaveManager : MonoBehaviour
         m_Fading = true;
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Reloaded");
+        m_Fading = false;
+        m_coroutine = null;
     }
 }
