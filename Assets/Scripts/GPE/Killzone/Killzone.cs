@@ -8,7 +8,7 @@ public class Killzone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            print("Killzone : Player dies");
+            Player.Instance.OnDeath();
         }
     }
 }
