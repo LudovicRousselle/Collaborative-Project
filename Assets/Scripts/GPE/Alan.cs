@@ -135,7 +135,6 @@ public class Alan : MonoBehaviour
 
     private IEnumerator SpottedAnimation()
     {
-
         //Play Spotted animation
         m_smoothAnimTransition = 0;
         m_animator.Play("Anim_Spotted", 0);

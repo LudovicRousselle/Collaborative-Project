@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
 
     public void OnDeath()
     {
+        Destroy(gameObject);
         Debug.Log("Player dies");
     }
 }

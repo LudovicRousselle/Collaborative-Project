@@ -21,9 +21,12 @@ public class RotateToTarget : MonoBehaviour
 
     private void RotateTo()
     {
-        Vector3 direction = m_target.position - transform.position;
-        rotation = Quaternion.LookRotation(direction);
-        gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.rotation, rotation, 1);
+        if (m_target != null)
+        {
+            Vector3 direction = m_target.position - transform.position;
+            rotation = Quaternion.LookRotation(direction);
+            gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.rotation, rotation, 1);
+        }
     }
 
     public Quaternion GetRotation()

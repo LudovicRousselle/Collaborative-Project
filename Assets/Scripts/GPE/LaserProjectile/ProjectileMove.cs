@@ -62,6 +62,8 @@ public class ProjectileMove : MonoBehaviour
                 }
             }
 
+            other.SendMessage("OnDeath", SendMessageOptions.DontRequireReceiver);
+
             speed = 0;
             Destroy(gameObject);
         }

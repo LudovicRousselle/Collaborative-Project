@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Transform m_startLevelPos;
     public Vector3 lastCheckPointPos;
 
+    private IEnumerator m_coroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +38,20 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Player.Instance == null)
+        {
+            if (m_coroutine == null)
+            {
+                m_coroutine = ReloadScene();
+                StartCoroutine(m_coroutine);
+            }
+        }
+    }
+
+    IEnumerator ReloadScene()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Reloaded");
     }
 }

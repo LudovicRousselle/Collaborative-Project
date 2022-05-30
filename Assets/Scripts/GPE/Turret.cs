@@ -152,9 +152,6 @@ public class Turret : MonoBehaviour
                 //Attack
                 spawnProjectile.SpawnVFX();
 
-
-                m_player.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
-
                 isDead = true;
                 oneTime = true;
             }
