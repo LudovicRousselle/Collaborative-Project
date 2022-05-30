@@ -7,7 +7,7 @@ public class TrapDoor : MonoBehaviour
     [SerializeField] private bool startOpened = false;
     [SerializeField] private List<GameObject> doors = new List<GameObject>();
 
-    public bool isOpened = false;
+    private bool isOpened = false;
 
     void Start()
     {

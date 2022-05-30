@@ -10,8 +10,6 @@ public class PlayerSmoosCamera : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Transform target2;
     [SerializeField] public static bool targeting;
-    [SerializeField] GameObject[] linkedZoom;
-
     void Start()
     {
         targeting = true;
@@ -21,7 +19,6 @@ public class PlayerSmoosCamera : MonoBehaviour
         if (targeting)
         {
             Vector3 targetPosition = target.position + offset;
-
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
         else if (!targeting)

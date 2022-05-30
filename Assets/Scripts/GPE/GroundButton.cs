@@ -15,7 +15,7 @@ public class GroundButton : MonoBehaviour
    
     private void OnCollisionStay(Collision collision)
     {
-        if (!((collision.gameObject.tag == "Rewindable") || (collision.gameObject.tag == "SBlock"))) return;
+        if (!((collision.gameObject.tag == "RewindableObject") || (collision.gameObject.tag == "SBlock"))) return;
             // Lancé à une seule frame
         if (!isPressed)
         {
@@ -24,17 +24,17 @@ public class GroundButton : MonoBehaviour
             ActivateObjects();
         }            
             
-        //transform.position += new Vector3(0, -buttonDown, 0) * Time.deltaTime;
+        transform.position += new Vector3(0, -buttonDown, 0) * Time.deltaTime;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!((other.gameObject.tag == "Rewindable") || (other.gameObject.tag == "SBlock"))) return;
+        if (!((other.gameObject.tag == "RewindableObject") || (other.gameObject.tag == "SBlock"))) return;
 
         isPressed = false;
         Debug.Log("Button gets deactivated");
         ActivateObjects();
-        //transform.position -= new Vector3(0, -buttonDown, 0) * Time.deltaTime;
+        transform.position -= new Vector3(0, -buttonDown, 0) * Time.deltaTime;
     }
 
     // Méthode shlag pour on/off des objets quand le bouton est activé
