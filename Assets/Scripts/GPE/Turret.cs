@@ -19,6 +19,8 @@ public class Turret : MonoBehaviour
     private bool topRayTouching = false;
     private bool botRayTouching = false;
 
+    [SerializeField] private Transform turret;
+
     bool oneTime = false;
     bool isDead = false;
 
@@ -30,9 +32,16 @@ public class Turret : MonoBehaviour
     private void Update()
     {
 
-        if (!targetingPlayer)
+        if (!targetingPlayer && turret == null)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        }else if (!targetingPlayer && turret != null)
+        {
+            //Debugging
+            turret.rotation = new Quaternion(0, 0, 0, 0);
+
+            //Go Back to Last position
+            MoveToLastPosition();
         }
 
         if (isDead)
@@ -98,7 +107,16 @@ public class Turret : MonoBehaviour
                 {
                     //FeedBack targetPLayer
                     targetingPlayer = true;
-                    transform.LookAt(m_player.transform);
+
+                    if (turret != null)
+                    {
+                        turret.LookAt(m_player.transform);
+                        turret.Rotate(turret.rotation.x - 90, turret.rotation.y - 90, turret.rotation.z -180);
+                    }
+                    else
+                    {
+                        transform.LookAt(m_player.transform);
+                    }
 
                     m_loadingAttack += Time.deltaTime;
                     return true;
@@ -149,6 +167,10 @@ public class Turret : MonoBehaviour
         //Destroy animation
         float delay = 1f;
         Destroy(m_parentFolder, delay);
+    }
+    
+    private void MoveToLastPosition()
+    {
     }
 
     private void OnDrawGizmosSelected()
