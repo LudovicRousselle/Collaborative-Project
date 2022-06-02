@@ -35,7 +35,7 @@ public class PlayerSmoosCamera : MonoBehaviour
             // Move smoothly
             transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
         }
-        else if (!shouldTargetPlayer)
+        else
         {
             if (currentTarget != null)
             {
