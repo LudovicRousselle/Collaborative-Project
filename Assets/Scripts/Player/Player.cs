@@ -32,13 +32,21 @@ public class Player : MonoBehaviour
         interactHitBox = GetComponentInChildren<PlayerInteractHitBox>();
 
         input.Default.Interact.performed += ctx => OnInteract();
-        input.Default.MarkObject.performed += ctx => OnMarkObject();
-        input.Default.Rewind.performed += ctx => OnRewindAction();
+        //input.Default.MarkObject.performed += ctx => OnMarkObject();
+        input.Default.Rewind.performed += ctx => RewindObject();
     }
 
     private void Update()
     {
-        CheckForRewindDist();
+        //CheckForRewindDist();
+    }
+
+    private void RewindObject()
+    {
+        if (!interactHitBox.canMark) return;
+        RewindableObject obj = interactHitBox.rewindableObject;
+
+        obj.OnInteract();
     }
 
     private void OnMarkObject()
@@ -73,6 +81,7 @@ public class Player : MonoBehaviour
 
     private void OnRewindAction()
     {
+
         if (rewindableObjectList.Count == 0)
         {
             print("Player => You didn't mark any object");
