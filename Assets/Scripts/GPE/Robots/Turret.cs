@@ -27,9 +27,11 @@ public class Turret : MonoBehaviour
 
     bool oneTime = false;
     bool isDead = false;
+    public bool isOnSight = false;
 
     private void Start()
     {
+        m_animator.enabled = false;
         m_player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -57,74 +59,87 @@ public class Turret : MonoBehaviour
 
     bool OnSight()
     {
-        Vector3 direction = transform.position - m_player.transform.position;
-        float angle = Vector3.Angle(transform.forward, -direction);
-
-        if (direction.magnitude <= m_sightRange)
+        if (m_player != null)
         {
-            m_timeBeforeAttack = 5 * ((direction.magnitude - 1 )/ m_sightRange);
+            Vector3 direction = transform.position - m_player.transform.position;
+            float angle = Vector3.Angle(transform.forward, -direction);
 
-            if (angle < 30)
+            if (direction.magnitude <= m_sightRange)
             {
-                RaycastHit hitMiddle;
-                RaycastHit hitTop;
-                RaycastHit hitBot;
+                m_timeBeforeAttack = 5 * ((direction.magnitude - 1) / m_sightRange);
 
-                Debug.DrawRay(transform.position, (m_player.transform.position - transform.position).normalized * m_sightRange, Color.yellow);
-                Debug.DrawRay(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
-                Debug.DrawRay(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
-
-                if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
+                if (angle < 30)
                 {
-                    if (hitMiddle.transform.gameObject.CompareTag("Player"))
+                    RaycastHit hitMiddle;
+                    RaycastHit hitTop;
+                    RaycastHit hitBot;
+
+                    Debug.DrawRay(transform.position, (m_player.transform.position - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
+
+                    if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
                     {
-                        middleRayTouching = true;
-                    }else
-                    {
-                        middleRayTouching = false;
+                        if (hitMiddle.transform.gameObject.CompareTag("Player"))
+                        {
+                            middleRayTouching = true;
+                        }
+                        else
+                        {
+                            middleRayTouching = false;
+                        }
                     }
-                }
-                
-                if (Physics.Raycast(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized, out hitTop, m_sightRange))
-                {
-                    if (hitTop.transform.gameObject.CompareTag("Player"))
-                    {
-                        topRayTouching = true;
-                    }else
-                    {
-                        topRayTouching = false;
-                    }
-                }
-                
-                if (Physics.Raycast(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized, out hitBot, m_sightRange))
-                {
-                    if (hitBot.transform.gameObject.CompareTag("Player"))
-                    {
-                        botRayTouching = true;
-                    }else
-                    {
-                        botRayTouching = false;
-                    }
-                }
 
-                if (middleRayTouching || topRayTouching || botRayTouching)
-                {
-                    //FeedBack targetPLayer
-                    targetingPlayer = true;
-
-                    if (turret != null)
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized, out hitTop, m_sightRange))
                     {
-                        turret.LookAt(m_player.transform);
-                        turret.Rotate(turret.rotation.x - 90, turret.rotation.y - 90, turret.rotation.z -180);
+                        if (hitTop.transform.gameObject.CompareTag("Player"))
+                        {
+                            topRayTouching = true;
+                        }
+                        else
+                        {
+                            topRayTouching = false;
+                        }
+                    }
+
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized, out hitBot, m_sightRange))
+                    {
+                        if (hitBot.transform.gameObject.CompareTag("Player"))
+                        {
+                            botRayTouching = true;
+                        }
+                        else
+                        {
+                            botRayTouching = false;
+                        }
+                    }
+
+                    if (middleRayTouching || topRayTouching || botRayTouching)
+                    {
+                        //FeedBack targetPLayer
+                        targetingPlayer = true;
+
+                        if (turret != null)
+                        {
+                            turret.LookAt(m_player.transform);
+                            turret.Rotate(turret.rotation.x - 90, turret.rotation.y - 90, turret.rotation.z - 180);
+                        }
+                        else
+                        {
+                            transform.LookAt(m_player.transform);
+                        }
+
+                        m_loadingAttack += Time.deltaTime;
+                        return true;
                     }
                     else
                     {
-                        transform.LookAt(m_player.transform);
+                        targetingPlayer = false;
+                        m_loadingAttack = 0;
+                        return false;
                     }
-
-                    m_loadingAttack += Time.deltaTime;
-                    return true;
-                }else
+                }
+                else
                 {
                     targetingPlayer = false;
                     m_loadingAttack = 0;
@@ -137,13 +152,8 @@ public class Turret : MonoBehaviour
                 m_loadingAttack = 0;
                 return false;
             }
-        }else
-        {
-            targetingPlayer = false;
-            m_loadingAttack = 0;
-            return false;
         }
-
+        return false;
     }
 
     //Attack the Player
@@ -170,6 +180,11 @@ public class Turret : MonoBehaviour
         if (m_subScript != null)
         {
             m_subScript.enabled = false;
+        }
+
+        if (m_animator.enabled == false)
+        {
+            m_animator.enabled = true;
         }
 
         m_animator.Play("Anim_Death", 0);
@@ -216,8 +231,12 @@ public class Turret : MonoBehaviour
             {
                 if (m_loadingAttack > m_timeBeforeAttack)
                 {
+                    isOnSight = true;
                     Attack();
                 }
+            }else
+            {
+                isOnSight = false;
             }
         }
     }
@@ -226,6 +245,7 @@ public class Turret : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            isOnSight = false;
             targetingPlayer = false;
             m_loadingAttack = 0;
         }

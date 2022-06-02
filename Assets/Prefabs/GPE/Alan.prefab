@@ -579,6 +579,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 05fe2d6c765ecb84298a1973e9844d39, type: 3}
   - {fileID: 8300000, guid: 64d889b0440ab954b94a5c5268987e8b, type: 3}
   m_turnClip: {fileID: 8300000, guid: 479a4b8f9db7b1846be53a4463b4b798, type: 3}
+--- !u!65 &1834984581837685870
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546940024596757837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0.00000002793968, y: 1.38, z: 0.008616686}
 --- !u!114 &2975201136163903744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,19 +606,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindedStateDuration: 0
   parentFolder: {fileID: 7495925045695114245}
---- !u!65 &1834984581837685870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8546940024596757837}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0.00000002793968, y: -0.019999936, z: 0.008616686}
 --- !u!1001 &7466253178880813007
 PrefabInstance:
   m_ObjectHideFlags: 0
