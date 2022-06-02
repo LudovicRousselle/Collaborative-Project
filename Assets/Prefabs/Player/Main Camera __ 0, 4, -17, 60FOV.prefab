@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b65436c63af1b4ca0fd018561cde6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  smoothTime: 0.75
-  target: {fileID: 0}
+  offsetToPlayerPos: {x: 0, y: 0, z: 0}
+  smoothTime: 1.05
+  targetPlayerGO: {fileID: 0}
+  currentTarget: {fileID: 0}
+  shouldTargetPlayer: 0

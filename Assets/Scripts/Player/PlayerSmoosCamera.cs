@@ -9,9 +9,6 @@ public class PlayerSmoosCamera : MonoBehaviour
     [SerializeField] float smoothTime = 0.25f;
     [SerializeField] Transform targetPlayerGO;
 
-    // List of the objects that contain the trigger zones
-    [SerializeField] GameObject[] fixedPositions;
-
     Vector3 currentTargetPosition;
     public Transform currentTarget;
 
