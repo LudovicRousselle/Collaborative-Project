@@ -8,7 +8,8 @@ public class Turret : MonoBehaviour
     public GameObject m_player { get; private set; }
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
-    [SerializeField] private GameObject m_effectToSpawn;
+    [SerializeField] private List<GameObject> m_vfx = new List<GameObject>();
+    private GameObject m_effectToSpawn;
     [SerializeField] private Alan m_subScript;
     [SerializeField] private Animator m_animator;
 
@@ -182,9 +183,13 @@ public class Turret : MonoBehaviour
 
     public void DeathVFX()
     {
-        GameObject vfx;
+        GameObject vfxBoom;
+        GameObject vfxSmoke;
 
-        vfx = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
+        m_effectToSpawn = m_vfx[0];
+        vfxBoom = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
+        m_effectToSpawn = m_vfx[1];
+        vfxSmoke = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
     }
 
     private void MoveToLastPosition()
