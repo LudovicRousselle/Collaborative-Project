@@ -157,9 +157,11 @@ GameObject:
   - component: {fileID: 8807680232738021098}
   - component: {fileID: 6966272122847030728}
   - component: {fileID: 5652514229592931842}
+  - component: {fileID: 327752000}
+  - component: {fileID: 327752001}
   m_Layer: 0
   m_Name: Gear
-  m_TagString: Untagged
+  m_TagString: Rewindable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +230,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &327752000
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694914135572600019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.02, z: 0.02}
+  m_Center: {x: 0, y: 0.0000000037252903, z: 3.637979e-12}
+--- !u!114 &327752001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694914135572600019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5ed6e3a5fc90841a445219a6d8bbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindedStateDuration: 0
+  parentFolder: {fileID: 502750250590469357}
 --- !u!1 &8581309748338815704
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +303,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnProjectile: {fileID: 502750250590469358}
   m_parentFolder: {fileID: 502750250590469357}
+  m_vfx:
+  - {fileID: 1687129093760790855, guid: 837d9968b7ae7b949a087bb2cc469150, type: 3}
+  - {fileID: 7094946849951661406, guid: 2ffa7a0d50d4bb6468bcb4ebbee2ac43, type: 3}
+  m_subScript: {fileID: 0}
+  m_animator: {fileID: 797989400}
   m_sightRange: 20
   targetingPlayer: 0
   turret: {fileID: 9074876709611525978}
@@ -409,6 +443,7 @@ GameObject:
   - component: {fileID: 9074876709611525978}
   - component: {fileID: 7036614379881967833}
   - component: {fileID: 6744076596895573190}
+  - component: {fileID: 797989400}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -483,6 +518,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &797989400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928301994605370922}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d7de91d92c8432f46b65fb62b2a95749, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9008631920426611945
 GameObject:
   m_ObjectHideFlags: 0
