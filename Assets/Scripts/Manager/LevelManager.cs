@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         Debug.Log(scene);
+
+        m_transition.color = Color.black;
     }
 
     // Update is called once per frame
