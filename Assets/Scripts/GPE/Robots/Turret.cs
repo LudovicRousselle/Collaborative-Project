@@ -163,6 +163,9 @@ public class Turret : MonoBehaviour
 
     public void RobotDeath()
     {
+        isDead = true;
+        oneTime = true;
+
         if (m_subScript != null)
         {
             m_subScript.enabled = false;
