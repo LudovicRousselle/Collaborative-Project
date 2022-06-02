@@ -8,6 +8,9 @@ public class Turret : MonoBehaviour
     public GameObject m_player { get; private set; }
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
+    [SerializeField] private GameObject m_effectToSpawn;
+    [SerializeField] private Alan m_subScript;
+    [SerializeField] private Animator m_animator;
 
     //Attack
     [SerializeField] private float m_sightRange;
@@ -158,13 +161,29 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void RobotDeath()
+    public void RobotDeath()
     {
+        if (m_subScript != null)
+        {
+            m_subScript.enabled = false;
+        }
+
+        m_animator.Play("Anim_Death", 0);
+
+        Invoke("DeathVFX", 3.0f);
+
         //Destroy animation
-        float delay = 1f;
+        float delay = 3f;
         Destroy(m_parentFolder, delay);
     }
-    
+
+    public void DeathVFX()
+    {
+        GameObject vfx;
+
+        vfx = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
+    }
+
     private void MoveToLastPosition()
     {
     }
