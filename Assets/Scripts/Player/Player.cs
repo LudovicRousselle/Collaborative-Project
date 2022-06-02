@@ -118,6 +118,8 @@ public class Player : MonoBehaviour
 
     private void OnInteract()
     {
+        if (interactHitBox.interactableObject == null) return;
+
         Debug.Log("Interact with an interactable object");
         interactHitBox.interactableObject.OnInteract();
 
