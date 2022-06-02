@@ -37,11 +37,13 @@ public class PlayerSmoosCamera : MonoBehaviour
         }
         else if (!shouldTargetPlayer)
         {
-            // No offset if going to the trigger zones
-            currentTargetPosition = currentTarget.position;
+            if (currentTarget != null)
+            {
+                // No offset if going to the trigger zones
+                currentTargetPosition = currentTarget.position;
 
-
-            transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
+                transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
+            }
         }
 
         if (timerBetweenSwitches >= 0)
