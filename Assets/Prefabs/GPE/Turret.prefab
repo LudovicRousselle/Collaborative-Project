@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 986833800373642839}
   - component: {fileID: 502750250590469358}
-  - component: {fileID: 8581309749435337882}
+  - component: {fileID: 8488890696409090075}
+  - component: {fileID: 8914003727369251963}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -51,7 +52,20 @@ MonoBehaviour:
   m_vfx:
   - {fileID: 711411913745164626, guid: 5b9bdd171d6b3744d9bab51fe038d85c, type: 3}
   m_rotateToTarget: {fileID: 8581309749301341976}
---- !u!65 &8581309749435337882
+--- !u!135 &8488890696409090075
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502750250590469357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.69
+  m_Center: {x: 0, y: 0, z: 1.09}
+--- !u!65 &8914003727369251963
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,8 +76,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.75, y: 2, z: 1.75}
-  m_Center: {x: -0.22, y: 0, z: 0.88}
+  m_Size: {x: 0.50254357, y: 0.33102462, z: 0.3217608}
+  m_Center: {x: -0.8687282, y: 1.1368724e-15, z: 1.08}
 --- !u!1 &508815949917676538
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1292044852962950647, guid: afb67c4dcd21bd14dbd8a04387cb5811, type: 3}
+  - {fileID: 2100000, guid: 9fdaef85471d2d947868d2afcad673f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,7 +222,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1475423559822242238, guid: afb67c4dcd21bd14dbd8a04387cb5811, type: 3}
+  - {fileID: 2100000, guid: 7b28c50d73e4e2147a632054c8a26d57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,8 +255,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.02}
-  m_Center: {x: 0, y: 0.0000000037252903, z: 3.637979e-12}
+  m_Size: {x: 0.014630397, y: 0.01558879, z: 0.0032261722}
+  m_Center: {x: 0.0026848058, y: 0.0022056128, z: 2.1931595e-17}
 --- !u!114 &327752001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +510,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3356826804887221791, guid: afb67c4dcd21bd14dbd8a04387cb5811, type: 3}
+  - {fileID: 2100000, guid: 78a9c8b5ccddb8a47843fc3fa734d7ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -597,7 +611,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1101974990917252900, guid: afb67c4dcd21bd14dbd8a04387cb5811, type: 3}
+  - {fileID: 2100000, guid: 287e9ed0271cb3046a97de2efb444d80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

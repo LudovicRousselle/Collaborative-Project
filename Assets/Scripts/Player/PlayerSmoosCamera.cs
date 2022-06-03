@@ -9,9 +9,6 @@ public class PlayerSmoosCamera : MonoBehaviour
     [SerializeField] float smoothTime = 0.25f;
     [SerializeField] Transform targetPlayerGO;
 
-    // List of the objects that contain the trigger zones
-    [SerializeField] GameObject[] fixedPositions;
-
     Vector3 currentTargetPosition;
     public Transform currentTarget;
 
@@ -38,13 +35,15 @@ public class PlayerSmoosCamera : MonoBehaviour
             // Move smoothly
             transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
         }
-        else if (!shouldTargetPlayer)
+        else
         {
-            // No offset if going to the trigger zones
-            currentTargetPosition = currentTarget.position;
+            if (currentTarget != null)
+            {
+                // No offset if going to the trigger zones
+                currentTargetPosition = currentTarget.position;
 
-
-            transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
+                transform.position = Vector3.SmoothDamp(transform.position, currentTargetPosition, ref velocity, smoothTime);
+            }
         }
 
         if (timerBetweenSwitches >= 0)
