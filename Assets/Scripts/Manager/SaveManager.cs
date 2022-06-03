@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    public bool ntm;
-
-
     #region singleton
     public static SaveManager instance;
     private void Awake()

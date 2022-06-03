@@ -75,25 +75,22 @@ public class Turret : MonoBehaviour
                     RaycastHit hitBot;
 
                     Debug.DrawRay(transform.position, (m_player.transform.position - transform.position).normalized * m_sightRange, Color.yellow);
-                    Debug.DrawRay(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
-                    Debug.DrawRay(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position + new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position - new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized * m_sightRange, Color.yellow);
 
                     if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
                     {
-                        Debug.Log(hitMiddle.transform.name);
                         if (hitMiddle.transform.gameObject.CompareTag("Player"))
                         {
-                            Debug.Log("WTF");
                             middleRayTouching = true;
                         }
                         else
                         {
-                            Debug.Log("WHAT THE FUCKKK");
                             middleRayTouching = false;
                         }
                     }
 
-                    if (Physics.Raycast(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized, out hitTop, m_sightRange))
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position + new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized, out hitTop, m_sightRange))
                     {
                         if (hitTop.transform.gameObject.CompareTag("Player"))
                         {
@@ -105,7 +102,7 @@ public class Turret : MonoBehaviour
                         }
                     }
 
-                    if (Physics.Raycast(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized, out hitBot, m_sightRange))
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position - new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized, out hitBot, m_sightRange))
                     {
                         if (hitBot.transform.gameObject.CompareTag("Player"))
                         {
@@ -119,7 +116,6 @@ public class Turret : MonoBehaviour
 
                     if (middleRayTouching || topRayTouching || botRayTouching)
                     {
-                        Debug.Log("Last - 4");
                         //FeedBack targetPLayer
                         targetingPlayer = true;
 
@@ -138,7 +134,6 @@ public class Turret : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Last - 3");
                         targetingPlayer = false;
                         m_loadingAttack = 0;
                         return false;
@@ -146,7 +141,6 @@ public class Turret : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Last - 2");
                     targetingPlayer = false;
                     m_loadingAttack = 0;
                     return false;
@@ -154,14 +148,12 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                Debug.Log("Last - 1");
                 targetingPlayer = false;
                 m_loadingAttack = 0;
                 return false;
             }
         }else
         {
-            Debug.Log("Last");
             return false;
         }
     }
