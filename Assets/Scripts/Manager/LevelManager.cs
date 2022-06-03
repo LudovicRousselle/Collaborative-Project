@@ -73,6 +73,8 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
+        DontDestroyOnLoad(instance);
+
         m_Fading = true;
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -87,6 +89,8 @@ public class LevelManager : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
         int buildIndex = scene.buildIndex;
+
+        SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
         SceneManager.LoadScene(buildIndex + 1);
 
         nextLevel = false;
