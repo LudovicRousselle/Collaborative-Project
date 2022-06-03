@@ -10083,6 +10083,11 @@ Transform:
   m_Father: {fileID: 516410933}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &665024567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 792646819452991911, guid: 36bb4a65850873341895f697fba392f2, type: 3}
+  m_PrefabInstance: {fileID: 1547554901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &665576525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23948,17 +23953,21 @@ PrefabInstance:
       propertyPath: m_transition
       value: 
       objectReference: {fileID: 1917921839}
+    - target: {fileID: 408883743, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
+      propertyPath: myLittleInGameCanvas
+      value: 
+      objectReference: {fileID: 665024567}
     - target: {fileID: 1388812072785645853, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1388812072785645853, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 131.05
       objectReference: {fileID: 0}
     - target: {fileID: 1388812072785645853, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.95
+      value: -1.5299997
       objectReference: {fileID: 0}
     - target: {fileID: 3445814742984837812, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_startLevelPos
@@ -24014,7 +24023,7 @@ PrefabInstance:
       objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3445814742984837815, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_Name
-      value: SaveManager
+      value: Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7975312969725457930, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_IsActive

@@ -1825,9 +1825,13 @@ PrefabInstance:
       propertyPath: m_transition
       value: 
       objectReference: {fileID: 1379192651}
+    - target: {fileID: 408883743, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
+      propertyPath: myLittleInGameCanvas
+      value: 
+      objectReference: {fileID: 1498140079}
     - target: {fileID: 1388812072785645853, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44
+      value: 44.059998
       objectReference: {fileID: 0}
     - target: {fileID: 1849068676242160376, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_Size.x
@@ -10644,6 +10648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36bb4a65850873341895f697fba392f2, type: 3}
+--- !u!1 &1498140079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 792646819452991911, guid: 36bb4a65850873341895f697fba392f2, type: 3}
+  m_PrefabInstance: {fileID: 1498140078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511305403
 GameObject:
   m_ObjectHideFlags: 0

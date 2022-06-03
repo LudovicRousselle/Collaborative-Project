@@ -93,6 +93,7 @@ public class LevelManager : MonoBehaviour
         int buildIndex = scene.buildIndex;
 
         SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(myLittleInGameCanvas, SceneManager.GetActiveScene());
         SceneManager.LoadScene(buildIndex + 1);
 
         nextLevel = false;

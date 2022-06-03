@@ -1447,6 +1447,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5436725822489847941, guid: fbffbc6da2e444d409c44c168804081f, type: 3}
   m_PrefabInstance: {fileID: 8668486}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &203951969 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 792646819452991911, guid: 36bb4a65850873341895f697fba392f2, type: 3}
+  m_PrefabInstance: {fileID: 861613140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &205380726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10037,6 +10042,10 @@ PrefabInstance:
       propertyPath: m_transition
       value: 
       objectReference: {fileID: 1014901460}
+    - target: {fileID: 408883743, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
+      propertyPath: myLittleInGameCanvas
+      value: 
+      objectReference: {fileID: 203951969}
     - target: {fileID: 1388812072785645853, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 83.05
@@ -10103,7 +10112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3445814742984837815, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_Name
-      value: SaveManager
+      value: Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7975312969725457936, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_LocalPosition.x
