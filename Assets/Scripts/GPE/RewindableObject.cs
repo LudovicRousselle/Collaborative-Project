@@ -46,7 +46,7 @@ public class RewindableObject : InteractableObject
         StateMachine();
     }
 
-    private void StateMachine() // appelle les fonctions de states en fonction du state actif
+    protected void StateMachine() // appelle les fonctions de states en fonction du state actif
     {
         switch (state)
         {

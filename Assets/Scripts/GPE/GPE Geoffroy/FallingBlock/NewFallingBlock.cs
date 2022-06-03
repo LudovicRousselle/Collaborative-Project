@@ -76,4 +76,14 @@ public class NewFallingBlock : RewindableObject
             collision.gameObject.transform.parent = null;
         }
     }
+
+    private void FixedUpdate()
+    {
+        StateMachine();
+    }
+
+    private void Update()
+    {
+        
+    }
 }
