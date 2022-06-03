@@ -44,10 +44,10 @@ public class Turret : MonoBehaviour
         }else if (!targetingPlayer && turret != null)
         {
             //Debugging
-            turret.rotation = new Quaternion(0, 0, 0, 0);
+            //turret.rotation = new Quaternion(0, 0, 0, 0);
 
             //Go Back to Last position
-            MoveToLastPosition();
+            //MoveToLastPosition();
         }
 
         if (isDead)
@@ -232,9 +232,10 @@ public class Turret : MonoBehaviour
 
             if (OnSight())
             {
+                isOnSight = true;
+
                 if (m_loadingAttack > m_timeBeforeAttack)
                 {
-                    isOnSight = true;
                     Attack();
                 }
             }else
