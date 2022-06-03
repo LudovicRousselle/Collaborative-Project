@@ -131,7 +131,6 @@ public class Player : MonoBehaviour
 
         Debug.Log("Interact with an interactable object");
         interactHitBox.interactableObject.OnInteract();
-
     }
 
     public void OnDeath()
