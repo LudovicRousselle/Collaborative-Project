@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator m_reloadScene;
     private IEnumerator m_nextScene;
+    [SerializeField] private GameObject myLittleInGameCanvas;
 
     //Transitions
     [SerializeField] private Image m_transition;
@@ -74,6 +75,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator ReloadScene()
     {
         DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(myLittleInGameCanvas);
 
         m_Fading = true;
         yield return new WaitForSeconds(2f);
