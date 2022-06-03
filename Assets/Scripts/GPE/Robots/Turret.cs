@@ -80,12 +80,15 @@ public class Turret : MonoBehaviour
 
                     if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
                     {
+                        Debug.Log(hitMiddle.transform.name);
                         if (hitMiddle.transform.gameObject.CompareTag("Player"))
                         {
+                            Debug.Log("WTF");
                             middleRayTouching = true;
                         }
                         else
                         {
+                            Debug.Log("WHAT THE FUCKKK");
                             middleRayTouching = false;
                         }
                     }
@@ -116,6 +119,7 @@ public class Turret : MonoBehaviour
 
                     if (middleRayTouching || topRayTouching || botRayTouching)
                     {
+                        Debug.Log("Last - 4");
                         //FeedBack targetPLayer
                         targetingPlayer = true;
 
@@ -134,6 +138,7 @@ public class Turret : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("Last - 3");
                         targetingPlayer = false;
                         m_loadingAttack = 0;
                         return false;
@@ -141,6 +146,7 @@ public class Turret : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Last - 2");
                     targetingPlayer = false;
                     m_loadingAttack = 0;
                     return false;
@@ -148,12 +154,16 @@ public class Turret : MonoBehaviour
             }
             else
             {
+                Debug.Log("Last - 1");
                 targetingPlayer = false;
                 m_loadingAttack = 0;
                 return false;
             }
+        }else
+        {
+            Debug.Log("Last");
+            return false;
         }
-        return false;
     }
 
     //Attack the Player
@@ -227,6 +237,7 @@ public class Turret : MonoBehaviour
     {
         if (other.tag == "Player" && !isDead)
         {
+
             if (OnSight())
             {
                 if (m_loadingAttack > m_timeBeforeAttack)

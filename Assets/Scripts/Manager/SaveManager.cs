@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    public bool ntm;
+
+
     #region singleton
     public static SaveManager instance;
     private void Awake()
@@ -13,7 +16,6 @@ public class SaveManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
         }
         else
         {
@@ -32,5 +34,9 @@ public class SaveManager : MonoBehaviour
     void Start()
     {
 
+    }
+
+    private void Update()
+    {
     }
 }

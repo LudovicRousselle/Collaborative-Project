@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 502750250590469358}
   - component: {fileID: 8488890696409090075}
   - component: {fileID: 8914003727369251963}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_sightRange: 20
   targetingPlayer: 0
   turret: {fileID: 9074876709611525978}
+  isOnSight: 0
 --- !u!135 &8581309748338815706
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -458,6 +459,7 @@ GameObject:
   - component: {fileID: 7036614379881967833}
   - component: {fileID: 6744076596895573190}
   - component: {fileID: 797989400}
+  - component: {fileID: 21826977}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -551,6 +553,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &21826977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928301994605370922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6207ad54f5e23024699412cdd0b1487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turret: {fileID: 8581309748338815707}
 --- !u!1 &9008631920426611945
 GameObject:
   m_ObjectHideFlags: 0
