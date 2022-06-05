@@ -8,6 +8,7 @@ public class Turret : MonoBehaviour
     public GameObject m_player { get; private set; }
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
+    [SerializeField] private GameObject m_GFX;
     [SerializeField] private List<GameObject> m_vfx = new List<GameObject>();
     private GameObject m_effectToSpawn;
     [SerializeField] private Alan m_subScript;
@@ -26,6 +27,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private AudioSource m_audioSource;
     [SerializeField] private AudioClip m_bipBip;
     [SerializeField] private AudioClip m_laserBlast;
+    [SerializeField] private AudioClip m_explode;
 
     private bool middleRayTouching = false;
     private bool topRayTouching = false;
@@ -213,11 +215,20 @@ public class Turret : MonoBehaviour
 
         //Destroy animation
         float delay = 3f;
-        Destroy(m_parentFolder, delay);
+
+        if (m_GFX != null)
+        {
+            Destroy(m_GFX, delay);
+        }
+
+        Destroy(m_parentFolder, delay + 1);
     }
 
     public void DeathVFX()
     {
+        m_audioSource.pitch = 1;
+        m_audioSource.PlayOneShot(m_explode);
+
         GameObject vfxBoom;
         GameObject vfxSmoke;
 

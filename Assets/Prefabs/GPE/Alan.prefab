@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnProjectile: {fileID: 1638534148}
   m_parentFolder: {fileID: 7495925045695114245}
+  m_GFX: {fileID: 6261267421214675116}
   m_vfx:
   - {fileID: 1687129093760790855, guid: 837d9968b7ae7b949a087bb2cc469150, type: 3}
   - {fileID: 7094946849951661406, guid: 2ffa7a0d50d4bb6468bcb4ebbee2ac43, type: 3}
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_audioSource: {fileID: 7736089479532658311}
   m_bipBip: {fileID: 8300000, guid: 98f2551f75bce1641aa2e7f44811d88c, type: 3}
   m_laserBlast: {fileID: 8300000, guid: 43db25f054884a3498da81e25e1300bd, type: 3}
+  m_explode: {fileID: 8300000, guid: d0301936a63619c41bbe0d3bc59fd0d6, type: 3}
   turret: {fileID: 0}
   isOnSight: 0
 --- !u!135 &1470549794
@@ -2159,6 +2161,11 @@ PrefabInstance:
 --- !u!1 &8546940024596757837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7997934311385195902, guid: 60df922b431a9774187bed7021fca84f, type: 3}
+  m_PrefabInstance: {fileID: 7466253178880813007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6261267421214675116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5658482391893117085, guid: 60df922b431a9774187bed7021fca84f, type: 3}
   m_PrefabInstance: {fileID: 7466253178880813007}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6924228112224813092 stripped
