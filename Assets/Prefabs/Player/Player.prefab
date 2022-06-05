@@ -1667,6 +1667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3481776428393204738}
+  - component: {fileID: 1284863874}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Untagged
@@ -1690,6 +1691,25 @@ Transform:
   m_Father: {fileID: 8515945595658106922}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!95 &1284863874
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258735752818775736}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 0fa1d5e5caa983341bb1d70188ab2428, type: 3}
+  m_Controller: {fileID: 9100000, guid: cc348b3df7ee50f4c8e31a7a1e8278be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4513937095340160328
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,6 +3469,7 @@ MonoBehaviour:
   interactHitBox: {fileID: 8515945595340453950}
   rewindSphere: {fileID: 3690231859657094134, guid: 8ed2a890a90cf194aa5601474076edc2, type: 3}
   rewindDistance: 5
+  m_GFX: {fileID: 4258735752818775736}
 --- !u!114 &8603114611497390374
 MonoBehaviour:
   m_ObjectHideFlags: 0

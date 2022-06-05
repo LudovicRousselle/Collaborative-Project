@@ -262,8 +262,9 @@ public class Turret : MonoBehaviour
 
                 timeBeforeBip = (m_timeBeforeAttack - (m_loadingAttack - 1)) / 10;
 
-                if (loadingBip >= timeBeforeBip && bipbip <= 12)
+                if (loadingBip >= timeBeforeBip)
                 {
+                    m_audioSource.pitch = 1;
                     m_audioSource.PlayOneShot(m_bipBip);
                     loadingBip = 0;
                     bipbip += 1;

@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player.Instance == null)
+        if (Player.Instance.isDead == true)
         {
             if (m_reloadScene == null)
             {
