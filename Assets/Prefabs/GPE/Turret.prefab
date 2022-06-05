@@ -1540,6 +1540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnProjectile: {fileID: 502750250590469358}
   m_parentFolder: {fileID: 502750250590469357}
+  m_GFX: {fileID: 0}
   m_vfx:
   - {fileID: 1687129093760790855, guid: 837d9968b7ae7b949a087bb2cc469150, type: 3}
   - {fileID: 7094946849951661406, guid: 2ffa7a0d50d4bb6468bcb4ebbee2ac43, type: 3}
@@ -1622,7 +1623,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

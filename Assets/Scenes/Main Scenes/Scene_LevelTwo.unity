@@ -721,18 +721,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: runSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653147560267876290, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: boxCastSize.x
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8515945595658106921, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -780,10 +768,6 @@ PrefabInstance:
     - target: {fileID: 8515945595658106927, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768329890369987556, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
@@ -25990,6 +25974,10 @@ PrefabInstance:
     - target: {fileID: 7495925045695114247, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736089479532658311, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7871692265060881110, guid: 7120c8f60359bbe4fb43594210c282f3, type: 3}
       propertyPath: m_Materials.Array.data[0]

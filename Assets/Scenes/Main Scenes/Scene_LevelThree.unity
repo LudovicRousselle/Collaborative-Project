@@ -864,6 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnProjectile: {fileID: 0}
   m_parentFolder: {fileID: 1712190742}
+  m_GFX: {fileID: 0}
   m_vfx: []
   m_subScript: {fileID: 0}
   m_animator: {fileID: 0}
@@ -872,6 +873,7 @@ MonoBehaviour:
   m_audioSource: {fileID: 0}
   m_bipBip: {fileID: 0}
   m_laserBlast: {fileID: 0}
+  m_explode: {fileID: 0}
   turret: {fileID: 0}
   isOnSight: 0
 --- !u!65 &50133484
@@ -8302,14 +8304,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 289515382, guid: 3a34efe00a6af2b4d8374011807fffed, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 289515382, guid: 3a34efe00a6af2b4d8374011807fffed, type: 3}
-      propertyPath: MaxDistance
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 502750250590469357, guid: 3a34efe00a6af2b4d8374011807fffed, type: 3}
       propertyPath: m_Name
       value: Turret (1)
