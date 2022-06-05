@@ -12,6 +12,7 @@ enum State
 public class RewindableObject : InteractableObject
 {
     [SerializeField] protected float rewindedStateDuration;
+    [SerializeField] protected Outline outlineScript;
 
     private bool isRewinding = false;
     public bool IsRewinding
@@ -22,6 +23,7 @@ public class RewindableObject : InteractableObject
     private void Awake()
     {
         gameObject.tag = "Rewindable";
+        
     }
 
     private State state = State.Void;
@@ -46,7 +48,7 @@ public class RewindableObject : InteractableObject
         StateMachine();
     }
 
-    private void StateMachine() // appelle les fonctions de states en fonction du state actif
+    protected void StateMachine() // appelle les fonctions de states en fonction du state actif
     {
         switch (state)
         {
@@ -101,6 +103,15 @@ public class RewindableObject : InteractableObject
     protected virtual void SetStateVoid()
     {
         state = State.Void;
+
+        if (outlineScript == null)
+        {
+            Debug.LogError("No Outline was detected on item " + gameObject.name);
+        }
+        else
+        {
+            outlineScript.enabled = true;
+        }
     }
 
     protected virtual void SetStateRewind()
@@ -108,6 +119,14 @@ public class RewindableObject : InteractableObject
         state = State.Rewind;
         isRewinding = true;
         counter = 0;
+        if (outlineScript == null)
+        {
+            Debug.LogError("No Outline was detected on item " + gameObject.name);
+        }
+        else
+        {
+            outlineScript.enabled = false;
+        }
     }
 
     protected virtual void SetStateAction()
@@ -115,6 +134,14 @@ public class RewindableObject : InteractableObject
         state = State.Action;
         isRewinding = false;
         counter = 0;
+        if (outlineScript == null)
+        {
+            Debug.LogError("No Outline was detected on item " + gameObject.name);
+        }
+        else
+        {
+            outlineScript.enabled = true;
+        }
     }
     #endregion
 }

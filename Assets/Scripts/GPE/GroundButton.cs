@@ -27,7 +27,7 @@ public class GroundButton : MonoBehaviour
         //transform.position += new Vector3(0, -buttonDown, 0) * Time.deltaTime;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
         if (!((other.gameObject.tag == "Rewindable") || (other.gameObject.tag == "SBlock"))) return;
 

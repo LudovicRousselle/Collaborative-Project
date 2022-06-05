@@ -31,7 +31,14 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
-        m_animator.enabled = false;
+        if (turret != null)
+        {
+            m_animator.enabled = false;
+        }else
+        {
+            m_animator.enabled = true;
+        }
+
         m_player = GameObject.FindGameObjectWithTag("Player");
     }
 
