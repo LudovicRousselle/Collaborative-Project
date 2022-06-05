@@ -58,7 +58,7 @@ public class AnimationTurret : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         timeElapsed = 0;
 
@@ -72,7 +72,7 @@ public class AnimationTurret : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         timeElapsed = 0;
 
@@ -86,7 +86,7 @@ public class AnimationTurret : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         transform.rotation = veryStartRotation;
 
@@ -100,6 +100,9 @@ public class AnimationTurret : MonoBehaviour
         Quaternion veryStartRotation = transform.rotation;
         Quaternion targetRotation = transform.rotation * Quaternion.Euler(0, 0, 180);
 
+
+        m_startRotation = targetRotation;
+
         while (timeElapsed < (rotationSpeed) && transform.localRotation.eulerAngles.z != 180)
         {
             transform.rotation = Quaternion.Slerp(veryStartRotation, targetRotation, timeElapsed / (rotationSpeed));
@@ -107,7 +110,8 @@ public class AnimationTurret : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(1.5f);
 
         StartCoroutine(Rotate90());
         StopCoroutine(Rotate180());

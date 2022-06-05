@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8914003727369251963}
   m_Layer: 2
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Robots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1788,6 +1788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_turret: {fileID: 8581309748338815707}
+  rotationSpeed: 0.5
 --- !u!1 &9008631920426611945
 GameObject:
   m_ObjectHideFlags: 0
