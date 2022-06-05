@@ -19,6 +19,14 @@ public class Turret : MonoBehaviour
     public bool targetingPlayer = false;
     private float m_loadingAttack = 0;
 
+    //Sound
+    int bipbip = 0;
+    float loadingBip = 0;
+    float timeBeforeBip = 0;
+    [SerializeField] private AudioSource m_audioSource;
+    [SerializeField] private AudioClip m_bipBip;
+    [SerializeField] private AudioClip m_laserBlast;
+
     private bool middleRayTouching = false;
     private bool topRayTouching = false;
     private bool botRayTouching = false;
@@ -34,7 +42,8 @@ public class Turret : MonoBehaviour
         if (turret != null)
         {
             m_animator.enabled = false;
-        }else
+        }
+        else
         {
             m_animator.enabled = true;
         }
@@ -172,6 +181,8 @@ public class Turret : MonoBehaviour
         {
             if (!oneTime)
             {
+                m_audioSource.PlayOneShot(m_laserBlast);
+
                 //Attack
                 spawnProjectile.SpawnVFX();
 
@@ -241,12 +252,33 @@ public class Turret : MonoBehaviour
             {
                 isOnSight = true;
 
+                loadingBip += Time.deltaTime;
+
+                if (bipbip == 0)
+                {
+                    m_audioSource.Play();
+                    bipbip += 1;
+                }
+
+                timeBeforeBip = (m_timeBeforeAttack - (m_loadingAttack - 1)) / 10;
+
+                if (loadingBip >= timeBeforeBip && bipbip <= 12)
+                {
+                    m_audioSource.PlayOneShot(m_bipBip);
+                    loadingBip = 0;
+                    bipbip += 1;
+                    Debug.Log("Bip" + bipbip);
+                }
+
+
+
                 if (m_loadingAttack > m_timeBeforeAttack)
                 {
                     Attack();
                 }
             }else
             {
+                bipbip = 0;
                 isOnSight = false;
             }
         }
