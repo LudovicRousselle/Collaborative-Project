@@ -28,5 +28,14 @@ public class PlayerSound : MonoBehaviour
         m_AudioSource.PlayOneShot(m_Clip[2]);
     }
 
+    void PlayRewind()
+    {
+        int random = Random.Range(0, 3);
+        float randomPitch = Random.Range(0.8f, 1.01f);
+
+        m_AudioSource.pitch = randomPitch;
+        m_AudioSource.PlayOneShot(m_Clip[3], 1f);
+    }
+
 
 }
