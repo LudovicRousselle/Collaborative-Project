@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip[] m_AudioClip;
 
     private PlayerInput input;
+    private NewPlayerController m_playerController;
     private GameObject instantiatedSphere = default;
 
     private Vector3 markedPos = Vector3.zero;
@@ -33,7 +34,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        input = GetComponent<NewPlayerController>().input;
+        m_playerController = GetComponent<NewPlayerController>();
+        input = m_playerController.input;
         interactHitBox = GetComponentInChildren<PlayerInteractHitBox>();
 
         input.Default.Interact.performed += ctx => OnInteract();
@@ -51,6 +53,7 @@ public class Player : MonoBehaviour
         if (!interactHitBox.canMark) return;
         RewindableObject obj = interactHitBox.rewindableObject;
 
+        m_playerController.RewindAnimation();
         obj.OnInteract();
     }
 

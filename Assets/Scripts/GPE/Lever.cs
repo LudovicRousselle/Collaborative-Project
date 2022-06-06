@@ -31,7 +31,8 @@ public class Lever : InteractableObject
             {
                 if (_go.name.Contains("Conveyor")) // Conveyor Belt
                 {
-                    _go.GetComponent<Conveyor>().speed = -_go.GetComponent<Conveyor>().speed;
+                    // Reverses visually and the speed too
+                    _go.GetComponent<Conveyor>().ReverseConveyorDirection();
                 }
                
             }

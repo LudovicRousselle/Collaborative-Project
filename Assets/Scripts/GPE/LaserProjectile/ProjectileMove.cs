@@ -5,12 +5,15 @@ using UnityEngine;
 public class ProjectileMove : MonoBehaviour
 {
     public float speed;
+    private Transform m_player;
 
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        m_player = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (muzzlePrefab != null)
         {
             var muzzleVFX = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
@@ -35,7 +38,7 @@ public class ProjectileMove : MonoBehaviour
     {
         if (speed != 0)
         {
-            transform.localPosition += transform.forward * speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, m_player.position, speed * Time.deltaTime);
         }else
         {
             Debug.Log("No speed");

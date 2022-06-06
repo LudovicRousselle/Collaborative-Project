@@ -36,11 +36,23 @@ public class NewPlayerController : MonoBehaviour
 
     public PlayerInput input;
 
+    //Animations
+    private Animator m_animator;
+    private bool isGrounded = false;
+    private bool isJumping = false;
+    private bool isMoving = false;
+    private float delayJump = 0;
+    private float delayMove = 0;
+    private float delayIdle = 0;
+    private bool isRewinding = false;
+    private float delayRewind = 0;
+
+
     private Rigidbody rb;
 
     private Vector2 inputMove = Vector2.zero;
+    private Vector3 currentScale;
 
-    private bool isGrounded = false;
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
@@ -50,6 +62,8 @@ public class NewPlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_animator.enabled = true;
         input = new PlayerInput();
 
         SetupAllInputs();
@@ -59,6 +73,8 @@ public class NewPlayerController : MonoBehaviour
     {
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
+
+        currentScale = transform.localScale;
 
         additionalSideRayDist = GetComponent<CapsuleCollider>().radius * 0.8f;
     }
@@ -81,6 +97,63 @@ public class NewPlayerController : MonoBehaviour
         // === [Jump Buffering] ===
         if (currentJumpbuffering > 0)
         {currentJumpbuffering -= Time.deltaTime;}
+
+        if (isJumping)
+        {
+            delayJump += Time.deltaTime;
+        }
+        else
+        {
+            delayMove += Time.deltaTime;
+            delayJump = 0;
+        }
+
+        if (isGrounded && isJumping && delayJump >= 0.5f)
+        {
+            if (!isRewinding)
+            {
+                m_animator.Play("Anim_JumpEnd", 0);
+            }
+            m_animator.Play("Anim_JumpEnd", 1);
+            delayMove = 0;
+            isJumping = false;
+        }
+
+        if (!isGrounded || isJumping)
+        {
+            isMoving = false;
+        }
+
+        if (isRewinding)
+        {
+            delayRewind += Time.deltaTime;
+
+            if (delayRewind >= 1.5f)
+            {
+                isRewinding = false;
+            }
+        }else
+        {
+            delayRewind = 0;
+        }
+
+        if (inputMove.x == 0)
+        {
+            delayIdle += Time.deltaTime;
+
+            if (!isJumping && delayMove >= 0.75f && delayIdle >= 0.1f && !isRewinding)
+            {
+                m_animator.Play("Anim_Idle", 1);
+                if (!isRewinding)
+                {
+                    Debug.Log("Hmmm");
+                    m_animator.Play("Anim_Idle", 0);
+                }
+                delayIdle = 0;
+                isMoving = false;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -95,14 +168,32 @@ public class NewPlayerController : MonoBehaviour
 
     private void Run() 
     {
-        if (groundSpeed == runSpeed) groundSpeed = walkSpeed;
-        else groundSpeed = runSpeed;
+        //if (groundSpeed == runSpeed) 
+        //{
+        //    m_moveAnim = "Anim_Walk";
+        //    groundSpeed = walkSpeed;
+        //}
+        //else
+        //{
+        //    m_moveAnim = "Anim_Run";
+        //    groundSpeed = runSpeed;
+        //}
     }
 
     private void Jump() 
-    {
+    {   
         if (isGrounded)
         {
+            isJumping = true;
+            isMoving = false;
+
+            m_animator.Play("Anim_JumpStart", 1);
+
+            if (!isRewinding)
+            {
+                m_animator.Play("Anim_JumpStart", 0);
+            }
+
             currentSpeed = airSpeed;
             rb.AddForce(new Vector3(0, jumpImpulse * 1000, 0));
         }
@@ -112,6 +203,8 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 activeScale = Vector3.zero;
+
     private void Move()
     {
         if (wallHitDir > 0) inputMove.x = Mathf.Clamp(inputMove.x, -1000, 0);
@@ -120,7 +213,74 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+
+            //if (transform.parent != null)
+            //{
+            //     activeScale = new Vector3(
+            //        currentScale.x * inputMove.x / transform.parent.localScale.x, 
+            //        currentScale.y / transform.parent.localScale.y, 
+            //        currentScale.z / transform.parent.localScale.z);
+
+            //    if (transform.parent.parent != null)
+            //    {
+            //        activeScale = new Vector3 (
+            //            activeScale.x / transform.parent.parent.localScale.x, 
+            //            activeScale.y / transform.parent.parent.localScale.y,
+            //            activeScale.z / transform.parent.parent.localScale.z);
+
+            //        if (transform.parent.parent.parent != null)
+            //        {
+            //            activeScale = new Vector3(
+            //                activeScale.x / transform.parent.parent.parent.localScale.x,
+            //                activeScale.y / transform.parent.parent.parent.localScale.y,
+            //                activeScale.z / transform.parent.parent.parent.localScale.z);
+            //        }
+            //    }
+
+            //}
+            //else 
+            //    activeScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
+
+            if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.parent != null)
+            {
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x / transform.parent.parent.localScale.x / transform.parent.parent.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y / transform.parent.parent.localScale.y / transform.parent.parent.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z / transform.parent.parent.localScale.z / transform.parent.parent.parent.localScale.z);
+            }
+            else if (transform.parent != null && transform.parent.parent != null)
+            {
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x / transform.parent.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y / transform.parent.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z / transform.parent.parent.localScale.z);
+            }
+            else if (transform.parent != null)
+            {
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z);
+            }
+            else
+                transform.localScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
+
+            if (isGrounded && !isMoving && !isJumping && delayMove >= 0.25f)
+            {
+                if (!isRewinding)
+                {
+                    m_animator.Play("Anim_Walk", 0);
+                }
+                m_animator.Play("Anim_Walk", 1);
+                isMoving = true;
+            }
         }
+    }
+
+    public void RewindAnimation()
+    {
+        isRewinding = true;
+        m_animator.Play("Anim_RewindStart", 0);
     }
 
     private void RayCastGround()

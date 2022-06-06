@@ -35,11 +35,13 @@ public class RewindableObject : InteractableObject
 
         if (!isRewinding)
         {
-            SetStateRewind(); //si il est pas entrain de rewind, il rewind
+            Invoke("SetStateRewind", 1.0f); //si il est pas entrain de rewind, il rewind
+            //SetStateRewind();
         }
         else
         {
-            SetStateAction(); //sinon il proceed
+            Invoke("SetStateAction", 1.0f);
+            //SetStateAction(); //sinon il proceed
         }
     }
 
@@ -106,7 +108,7 @@ public class RewindableObject : InteractableObject
 
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
@@ -121,7 +123,7 @@ public class RewindableObject : InteractableObject
         counter = 0;
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
@@ -136,7 +138,7 @@ public class RewindableObject : InteractableObject
         counter = 0;
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
