@@ -1774,6 +1774,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1455251502}
     m_Modifications:
+    - target: {fileID: 875894955668034784, guid: e3d7e0d204011774b92b36c62068ebcb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ecd03fec0a63145469001e044328a5eb, type: 2}
     - target: {fileID: 875894955668034786, guid: e3d7e0d204011774b92b36c62068ebcb, type: 3}
       propertyPath: startOpened
       value: 0
@@ -11259,7 +11263,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4a2c8dd41c1607845ab2d987810ddc33, type: 2}
     - target: {fileID: -1009468649662406654, guid: 60df922b431a9774187bed7021fca84f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -745336186751107351, guid: 60df922b431a9774187bed7021fca84f, type: 3}
       propertyPath: m_LocalPosition.x
