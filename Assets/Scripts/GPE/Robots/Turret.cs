@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
     [SerializeField] private GameObject m_GFX;
+    [SerializeField] private CapsuleCollider m_collider;
     [SerializeField] private List<GameObject> m_vfx = new List<GameObject>();
     private GameObject m_effectToSpawn;
     [SerializeField] private Alan m_subScript;
@@ -33,10 +34,12 @@ public class Turret : MonoBehaviour
     private bool topRayTouching = false;
     private bool botRayTouching = false;
 
+    //Turret Only
     [SerializeField] private Transform turret;
 
+
     bool oneTime = false;
-    bool isDead = false;
+    bool isPlayerDead = false;
     public bool isOnSight = false;
 
     private void Start()
@@ -68,7 +71,7 @@ public class Turret : MonoBehaviour
             //MoveToLastPosition();
         }
 
-        if (isDead)
+        if (isPlayerDead)
         {
             targetingPlayer = false;
         }
@@ -188,7 +191,7 @@ public class Turret : MonoBehaviour
                 //Attack
                 spawnProjectile.SpawnVFX();
 
-                isDead = true;
+                isPlayerDead = true;
                 oneTime = true;
             }
         }
@@ -196,11 +199,13 @@ public class Turret : MonoBehaviour
 
     public void RobotDeath()
     {
-        isDead = true;
+        isPlayerDead = true;
         oneTime = true;
 
         if (m_subScript != null)
         {
+            m_collider.enabled = false;
+            m_subScript.StopAllCoroutines();
             m_subScript.enabled = false;
         }
 
@@ -238,10 +243,6 @@ public class Turret : MonoBehaviour
         vfxSmoke = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
     }
 
-    private void MoveToLastPosition()
-    {
-    }
-
     private void OnDrawGizmosSelected()
     {
             Gizmos.color = Color.red;
@@ -256,7 +257,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && !isDead)
+        if (other.tag == "Player" && !isPlayerDead)
         {
 
             if (OnSight())

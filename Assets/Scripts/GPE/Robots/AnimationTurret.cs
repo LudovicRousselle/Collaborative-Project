@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationTurret : MonoBehaviour
 {
     [SerializeField] private Turret m_turret;
+    [SerializeField] private bool m_canTurnAround;
 
     public float rotationSpeed = 0.5f;
 
@@ -90,7 +91,13 @@ public class AnimationTurret : MonoBehaviour
 
         transform.rotation = veryStartRotation;
 
-        StartCoroutine(Rotate180());
+        if (m_canTurnAround)
+        {
+            StartCoroutine(Rotate180());
+        }else
+        {
+            rotating = false;
+        }
         StopCoroutine(Rotate90());
     }
     IEnumerator Rotate180()
