@@ -39,6 +39,7 @@ public class NewPlayerController : MonoBehaviour
     private Rigidbody rb;
 
     private Vector2 inputMove = Vector2.zero;
+    private Vector3 usedScale;
 
     private bool isGrounded = false;
 
@@ -61,6 +62,8 @@ public class NewPlayerController : MonoBehaviour
         currentSpeed = groundSpeed;
 
         additionalSideRayDist = GetComponent<CapsuleCollider>().radius * 0.8f;
+
+        usedScale = transform.localScale;
     }
 
     private void SetupAllInputs()
@@ -120,6 +123,7 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+            transform.localScale = new Vector3(inputMove.x * usedScale.x, usedScale.y,usedScale.z);
         }
     }
 
