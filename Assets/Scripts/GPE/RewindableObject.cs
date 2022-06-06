@@ -108,7 +108,7 @@ public class RewindableObject : InteractableObject
 
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
@@ -123,7 +123,7 @@ public class RewindableObject : InteractableObject
         counter = 0;
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
@@ -138,7 +138,7 @@ public class RewindableObject : InteractableObject
         counter = 0;
         if (outlineScript == null)
         {
-            Debug.LogError("No Outline was detected on item " + gameObject.name);
+            Debug.LogWarning("No Outline was detected on item " + gameObject.name);
         }
         else
         {
