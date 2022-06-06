@@ -53,11 +53,7 @@ public class Player : MonoBehaviour
         if (!interactHitBox.canMark) return;
         RewindableObject obj = interactHitBox.rewindableObject;
 
-        if (obj != null)
-        {
-            m_playerController.RewindAnimation();
-        }
-
+        m_playerController.RewindAnimation();
         obj.OnInteract();
     }
 
