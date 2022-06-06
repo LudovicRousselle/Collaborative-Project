@@ -6,7 +6,7 @@ public class InteractableObject : MonoBehaviour
 {
     private void Awake()
     {
-        if (gameObject.tag != "Interactable")
+        if (gameObject.tag != "Interactable" && gameObject.tag != "Rewindable")
         {
             gameObject.tag = "Interactable";
         }

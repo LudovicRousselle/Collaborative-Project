@@ -23,6 +23,11 @@ public class RewindableObject : InteractableObject
     private State state = State.Void;
     protected float counter = 0;
 
+    void Start()
+    {
+        gameObject.tag = "Rewindable";
+    }
+
     override public void OnInteract()//lancé qund le joueur press E à côté
     {
         print(gameObject.name + " is being interacted with");

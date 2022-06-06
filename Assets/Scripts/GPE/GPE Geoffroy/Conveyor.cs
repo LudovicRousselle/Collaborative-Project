@@ -21,6 +21,8 @@ public class Conveyor : RewindableObject
 
     private void Start()
     {
+        gameObject.tag = "Rewindable";
+
         GrabMaterials();
 
         // Prevent the belt to reverse itself at the start
@@ -86,7 +88,7 @@ public class Conveyor : RewindableObject
         
         foreach (Material _material in conveyorArrowMaterials)
         {
-            // Incrase the value by 180 then resets it to 0 if it is 360 (so do a 180° flip)
+            // Incrase the value by 180 then resets it to 0 if it is 360 (so do a 180ï¿½ flip)
             _material.SetFloat("Rotation", (_material.GetFloat("Rotation") + 180) % 360);
 
             if (sign == -1)
