@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
         foreach (var obj in interactHitBox.rewindableObject)
         {
             obj.OnInteract();
-            interactHitBox.rewindableObject.Remove(obj);
         }
     }
 

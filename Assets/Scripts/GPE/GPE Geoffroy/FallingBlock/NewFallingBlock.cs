@@ -26,6 +26,16 @@ public class NewFallingBlock : RewindableObject
         killzone = GetComponentInChildren<Killzone>();
     }
 
+    private void Update()
+    {
+
+    }
+
+    private void FixedUpdate()
+    {
+        StateMachine();
+    }
+
     protected override void DoAction()
     {
         rb.AddForce(-Vector3.up * fallingSpeed);
@@ -53,6 +63,19 @@ public class NewFallingBlock : RewindableObject
         if (!killzone.gameObject.activeSelf) killzone.gameObject.SetActive(true);
     }
 
+
+    protected override void SetStateRewind()
+    {
+        base.SetStateRewind();
+        if (killzone.gameObject.activeSelf) killzone.gameObject.SetActive(false);
+    }
+
+    protected override void SetStateAction()
+    {
+        base.SetStateAction();
+        if (!killzone.gameObject.activeSelf) killzone.gameObject.SetActive(true);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(groundTag))
@@ -63,12 +86,6 @@ public class NewFallingBlock : RewindableObject
         }
     }
 
-    protected override void SetStateRewind()
-    {
-        base.SetStateRewind();
-        if (killzone.gameObject.activeSelf) killzone.gameObject.SetActive(false);
-    }
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -77,13 +94,5 @@ public class NewFallingBlock : RewindableObject
         }
     }
 
-    private void FixedUpdate()
-    {
-        StateMachine();
-    }
-
-    private void Update()
-    {
-        
-    }
+    
 }
