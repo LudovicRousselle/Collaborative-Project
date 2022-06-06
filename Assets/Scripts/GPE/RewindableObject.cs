@@ -20,12 +20,6 @@ public class RewindableObject : InteractableObject
         get { return isRewinding; }
     }
 
-    private void Awake()
-    {
-        gameObject.tag = "Rewindable";
-        
-    }
-
     private State state = State.Void;
     protected float counter = 0;
 
