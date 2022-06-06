@@ -35,11 +35,13 @@ public class RewindableObject : InteractableObject
 
         if (!isRewinding)
         {
-            SetStateRewind(); //si il est pas entrain de rewind, il rewind
+            Invoke("SetStateRewind", 1.0f); //si il est pas entrain de rewind, il rewind
+            //SetStateRewind();
         }
         else
         {
-            SetStateAction(); //sinon il proceed
+            Invoke("SetStateAction", 1.0f);
+            //SetStateAction(); //sinon il proceed
         }
     }
 

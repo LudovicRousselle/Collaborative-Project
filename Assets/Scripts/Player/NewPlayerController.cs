@@ -34,14 +34,25 @@ public class NewPlayerController : MonoBehaviour
     private float additionalSideRayDist;
     private int wallHitDir;
 
+    //Animations
     public PlayerInput input;
+    private Animator m_animator;
+    private Animation m_walk;
+    private Animation m_run;
+    private string m_moveAnim;
+    private bool isGrounded = false;
+    private bool isJumping = false;
+    private bool isMoving = false;
+    private float delayJump = 0;
+    private float delayMove = 0;
+    private float delayIdle = 0;
+
 
     private Rigidbody rb;
 
     private Vector2 inputMove = Vector2.zero;
-    private Vector3 usedScale;
 
-    private bool isGrounded = false;
+
 
     private float currentSpeed = 0;
     private float groundSpeed = 0;
@@ -51,6 +62,8 @@ public class NewPlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_animator.enabled = true;
         input = new PlayerInput();
 
         SetupAllInputs();
@@ -58,12 +71,11 @@ public class NewPlayerController : MonoBehaviour
 
     private void Start()
     {
+        m_moveAnim = "Anim_Walk";
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
 
         additionalSideRayDist = GetComponent<CapsuleCollider>().radius * 0.8f;
-
-        usedScale = transform.localScale;
     }
 
     private void SetupAllInputs()
@@ -84,6 +96,41 @@ public class NewPlayerController : MonoBehaviour
         // === [Jump Buffering] ===
         if (currentJumpbuffering > 0)
         {currentJumpbuffering -= Time.deltaTime;}
+
+        if (isJumping)
+        {
+            delayJump += Time.deltaTime;
+        }
+        else
+        {
+            delayMove += Time.deltaTime;
+            delayJump = 0;
+        }
+
+        if (isGrounded && isJumping && delayJump >= 0.5f)
+        {
+            m_animator.Play("Anim_JumpEnd", 0);
+            delayMove = 0;
+            isJumping = false;
+        }
+
+        if (!isGrounded || isJumping)
+        {
+            isMoving = false;
+        }
+
+        if (inputMove.x == 0)
+        {
+            delayIdle += Time.deltaTime;
+
+            if (!isJumping && delayMove >= 0.75f && delayIdle >= 0.1f)
+            {
+                m_animator.Play("Anim_Idle", 0);
+                delayIdle = 0;
+                isMoving = false;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -98,14 +145,26 @@ public class NewPlayerController : MonoBehaviour
 
     private void Run() 
     {
-        if (groundSpeed == runSpeed) groundSpeed = walkSpeed;
-        else groundSpeed = runSpeed;
+        if (groundSpeed == runSpeed) 
+        {
+            m_moveAnim = "Anim_Walk";
+            groundSpeed = walkSpeed;
+        }
+        else
+        {
+            m_moveAnim = "Anim_Run";
+            groundSpeed = runSpeed;
+        }
     }
 
     private void Jump() 
-    {
+    {   
         if (isGrounded)
         {
+            isJumping = true;
+            isMoving = false;
+
+            m_animator.Play("Anim_JumpStart", 0);
             currentSpeed = airSpeed;
             rb.AddForce(new Vector3(0, jumpImpulse * 1000, 0));
         }
@@ -123,8 +182,26 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
-            transform.localScale = new Vector3(inputMove.x * usedScale.x, usedScale.y,usedScale.z);
+
+            if (inputMove.x > 0)
+            {
+                m_animator.SetFloat("Speed", 1f);
+            }else if (inputMove.x < 0)
+            {
+                m_animator.SetFloat("Speed", -1f);
+            }
+
+            if (isGrounded && !isMoving && !isJumping && delayMove >= 0.25f)
+            {
+                m_animator.Play(m_moveAnim, 0);
+                isMoving = true;
+            }
         }
+    }
+
+    public void RewindAnimation()
+    {
+        m_animator.Play("Anim_RewindStart", 0);
     }
 
     private void RayCastGround()
