@@ -10,6 +10,9 @@ public class MouvingPlatform1 : RewindableObject
     private float currentTimerValue;
     [SerializeField] private float watingTimeAtWaypoints;
     public bool isOn;
+
+    [SerializeField] Transform gearTransform;
+    [SerializeField] float gearRotationSpeed;
     
     public bool isRewind;
 
@@ -42,6 +45,10 @@ public class MouvingPlatform1 : RewindableObject
 
             }
 
+            if (gearTransform != null)
+            { 
+                gearTransform.Rotate(Vector3.right * gearRotationSpeed * speed * Time.deltaTime);
+            }
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
         }
     }
