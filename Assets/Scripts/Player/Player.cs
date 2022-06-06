@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerInteractHitBox interactHitBox = default;
     [SerializeField] private GameObject rewindSphere = default;
     [SerializeField] private float rewindDistance = 5;
+    [SerializeField] private GameObject m_GFX;
+
+    private AudioSource m_AudioSource;
+    [SerializeField] private AudioClip[] m_AudioClip;
 
     private PlayerInput input;
     private GameObject instantiatedSphere = default;
@@ -17,6 +20,7 @@ public class Player : MonoBehaviour
     private Vector3 markedPos = Vector3.zero;
 
     private bool marked = false;
+    public bool isDead { get; private set; } = false;
 
     private List<RewindableObject> rewindableObjectList = new List<RewindableObject>();
     private RewindableObject[] prevRewindedObjectList = new RewindableObject[0];
@@ -24,6 +28,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -135,7 +140,12 @@ public class Player : MonoBehaviour
 
     public void OnDeath()
     {
-        Destroy(gameObject);
+        int random = Random.Range(0, 2);
+
+        m_AudioSource.PlayOneShot(m_AudioClip[random]);
+
+        m_GFX.SetActive(false);
+        isDead = true;
         Debug.Log("Player dies");
     }
 }

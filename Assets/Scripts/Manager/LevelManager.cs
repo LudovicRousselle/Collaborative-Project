@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator m_reloadScene;
     private IEnumerator m_nextScene;
+    [SerializeField] private GameObject myLittleInGameCanvas;
 
     //Transitions
     [SerializeField] private Image m_transition;
@@ -40,7 +41,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player.Instance == null)
+        if (Player.Instance.isDead == true)
         {
             if (m_reloadScene == null)
             {
@@ -73,6 +74,9 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator ReloadScene()
     {
+        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(myLittleInGameCanvas);
+
         m_Fading = true;
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -87,6 +91,9 @@ public class LevelManager : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
         int buildIndex = scene.buildIndex;
+
+        SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(myLittleInGameCanvas, SceneManager.GetActiveScene());
         SceneManager.LoadScene(buildIndex + 1);
 
         nextLevel = false;

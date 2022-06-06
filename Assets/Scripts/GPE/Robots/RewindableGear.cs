@@ -8,7 +8,6 @@ public class RewindableGear : RewindableObject
 
     protected override void DoAction()
     {
-        Debug.Log("Do Action");
     }
 
     protected override void OnVoid()

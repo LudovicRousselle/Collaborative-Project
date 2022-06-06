@@ -10,5 +10,11 @@ public class Killzone : MonoBehaviour
         {
             Player.Instance.OnDeath();
         }
+        else if (collision.gameObject.CompareTag("Robots"))
+        {
+            Turret turret = collision.GetComponentInChildren<Turret>();
+            turret.DeathVFX();
+            Destroy(collision.gameObject);
+        }
     }
 }

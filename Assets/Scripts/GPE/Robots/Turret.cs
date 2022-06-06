@@ -8,6 +8,8 @@ public class Turret : MonoBehaviour
     public GameObject m_player { get; private set; }
     public SpawnProjectile spawnProjectile;
     [SerializeField] private GameObject m_parentFolder;
+    [SerializeField] private GameObject m_GFX;
+    [SerializeField] private CapsuleCollider m_collider;
     [SerializeField] private List<GameObject> m_vfx = new List<GameObject>();
     private GameObject m_effectToSpawn;
     [SerializeField] private Alan m_subScript;
@@ -19,17 +21,38 @@ public class Turret : MonoBehaviour
     public bool targetingPlayer = false;
     private float m_loadingAttack = 0;
 
+    //Sound
+    int bipbip = 0;
+    float loadingBip = 0;
+    float timeBeforeBip = 0;
+    [SerializeField] private AudioSource m_audioSource;
+    [SerializeField] private AudioClip m_bipBip;
+    [SerializeField] private AudioClip m_laserBlast;
+    [SerializeField] private AudioClip m_explode;
+
     private bool middleRayTouching = false;
     private bool topRayTouching = false;
     private bool botRayTouching = false;
 
+    //Turret Only
     [SerializeField] private Transform turret;
 
+
     bool oneTime = false;
-    bool isDead = false;
+    bool isPlayerDead = false;
+    public bool isOnSight = false;
 
     private void Start()
     {
+        if (turret != null)
+        {
+            m_animator.enabled = false;
+        }
+        else
+        {
+            m_animator.enabled = true;
+        }
+
         m_player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -42,13 +65,13 @@ public class Turret : MonoBehaviour
         }else if (!targetingPlayer && turret != null)
         {
             //Debugging
-            turret.rotation = new Quaternion(0, 0, 0, 0);
+            //turret.rotation = new Quaternion(0, 0, 0, 0);
 
             //Go Back to Last position
-            MoveToLastPosition();
+            //MoveToLastPosition();
         }
 
-        if (isDead)
+        if (isPlayerDead)
         {
             targetingPlayer = false;
         }
@@ -57,74 +80,87 @@ public class Turret : MonoBehaviour
 
     bool OnSight()
     {
-        Vector3 direction = transform.position - m_player.transform.position;
-        float angle = Vector3.Angle(transform.forward, -direction);
-
-        if (direction.magnitude <= m_sightRange)
+        if (m_player != null)
         {
-            m_timeBeforeAttack = 5 * ((direction.magnitude - 1 )/ m_sightRange);
+            Vector3 direction = transform.position - m_player.transform.position;
+            float angle = Vector3.Angle(transform.forward, -direction);
 
-            if (angle < 30)
+            if (direction.magnitude <= m_sightRange)
             {
-                RaycastHit hitMiddle;
-                RaycastHit hitTop;
-                RaycastHit hitBot;
+                m_timeBeforeAttack = 5 * ((direction.magnitude - 1) / m_sightRange);
 
-                Debug.DrawRay(transform.position, (m_player.transform.position - transform.position).normalized * m_sightRange, Color.yellow);
-                Debug.DrawRay(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
-                Debug.DrawRay(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized * m_sightRange, Color.yellow);
-
-                if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
+                if (angle < 30)
                 {
-                    if (hitMiddle.transform.gameObject.CompareTag("Player"))
+                    RaycastHit hitMiddle;
+                    RaycastHit hitTop;
+                    RaycastHit hitBot;
+
+                    Debug.DrawRay(transform.position, (m_player.transform.position - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position + new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized * m_sightRange, Color.yellow);
+                    Debug.DrawRay(transform.position, ((m_player.transform.position - new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized * m_sightRange, Color.yellow);
+
+                    if (Physics.Raycast(transform.position, (m_player.transform.position - transform.position).normalized, out hitMiddle, m_sightRange))
                     {
-                        middleRayTouching = true;
-                    }else
-                    {
-                        middleRayTouching = false;
+                        if (hitMiddle.transform.gameObject.CompareTag("Player"))
+                        {
+                            middleRayTouching = true;
+                        }
+                        else
+                        {
+                            middleRayTouching = false;
+                        }
                     }
-                }
-                
-                if (Physics.Raycast(transform.position, ((m_player.transform.position + Vector3.up) - transform.position).normalized, out hitTop, m_sightRange))
-                {
-                    if (hitTop.transform.gameObject.CompareTag("Player"))
-                    {
-                        topRayTouching = true;
-                    }else
-                    {
-                        topRayTouching = false;
-                    }
-                }
-                
-                if (Physics.Raycast(transform.position, ((m_player.transform.position - Vector3.up) - transform.position).normalized, out hitBot, m_sightRange))
-                {
-                    if (hitBot.transform.gameObject.CompareTag("Player"))
-                    {
-                        botRayTouching = true;
-                    }else
-                    {
-                        botRayTouching = false;
-                    }
-                }
 
-                if (middleRayTouching || topRayTouching || botRayTouching)
-                {
-                    //FeedBack targetPLayer
-                    targetingPlayer = true;
-
-                    if (turret != null)
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position + new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized, out hitTop, m_sightRange))
                     {
-                        turret.LookAt(m_player.transform);
-                        turret.Rotate(turret.rotation.x - 90, turret.rotation.y - 90, turret.rotation.z -180);
+                        if (hitTop.transform.gameObject.CompareTag("Player"))
+                        {
+                            topRayTouching = true;
+                        }
+                        else
+                        {
+                            topRayTouching = false;
+                        }
+                    }
+
+                    if (Physics.Raycast(transform.position, ((m_player.transform.position - new Vector3(0.0f, 0.87f, 0.0f)) - transform.position).normalized, out hitBot, m_sightRange))
+                    {
+                        if (hitBot.transform.gameObject.CompareTag("Player"))
+                        {
+                            botRayTouching = true;
+                        }
+                        else
+                        {
+                            botRayTouching = false;
+                        }
+                    }
+
+                    if (middleRayTouching || topRayTouching || botRayTouching)
+                    {
+                        //FeedBack targetPLayer
+                        targetingPlayer = true;
+
+                        if (turret != null)
+                        {
+                            turret.LookAt(m_player.transform);
+                            turret.Rotate(turret.rotation.x - 90, turret.rotation.y - 90, turret.rotation.z - 180);
+                        }
+                        else
+                        {
+                            transform.LookAt(m_player.transform);
+                        }
+
+                        m_loadingAttack += Time.deltaTime;
+                        return true;
                     }
                     else
                     {
-                        transform.LookAt(m_player.transform);
+                        targetingPlayer = false;
+                        m_loadingAttack = 0;
+                        return false;
                     }
-
-                    m_loadingAttack += Time.deltaTime;
-                    return true;
-                }else
+                }
+                else
                 {
                     targetingPlayer = false;
                     m_loadingAttack = 0;
@@ -139,11 +175,8 @@ public class Turret : MonoBehaviour
             }
         }else
         {
-            targetingPlayer = false;
-            m_loadingAttack = 0;
             return false;
         }
-
     }
 
     //Attack the Player
@@ -153,10 +186,12 @@ public class Turret : MonoBehaviour
         {
             if (!oneTime)
             {
+                m_audioSource.PlayOneShot(m_laserBlast);
+
                 //Attack
                 spawnProjectile.SpawnVFX();
 
-                isDead = true;
+                isPlayerDead = true;
                 oneTime = true;
             }
         }
@@ -164,12 +199,19 @@ public class Turret : MonoBehaviour
 
     public void RobotDeath()
     {
-        isDead = true;
+        isPlayerDead = true;
         oneTime = true;
 
         if (m_subScript != null)
         {
+            m_collider.enabled = false;
+            m_subScript.StopAllCoroutines();
             m_subScript.enabled = false;
+        }
+
+        if (m_animator.enabled == false)
+        {
+            m_animator.enabled = true;
         }
 
         m_animator.Play("Anim_Death", 0);
@@ -178,11 +220,20 @@ public class Turret : MonoBehaviour
 
         //Destroy animation
         float delay = 3f;
-        Destroy(m_parentFolder, delay);
+
+        if (m_GFX != null)
+        {
+            Destroy(m_GFX, delay);
+        }
+
+        Destroy(m_parentFolder, delay + 1);
     }
 
     public void DeathVFX()
     {
+        m_audioSource.pitch = 1;
+        m_audioSource.PlayOneShot(m_explode);
+
         GameObject vfxBoom;
         GameObject vfxSmoke;
 
@@ -190,10 +241,6 @@ public class Turret : MonoBehaviour
         vfxBoom = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
         m_effectToSpawn = m_vfx[1];
         vfxSmoke = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
-    }
-
-    private void MoveToLastPosition()
-    {
     }
 
     private void OnDrawGizmosSelected()
@@ -210,14 +257,42 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && !isDead)
+        if (other.tag == "Player" && !isPlayerDead)
         {
+
             if (OnSight())
             {
+                isOnSight = true;
+
+                loadingBip += Time.deltaTime;
+
+                if (bipbip == 0)
+                {
+                    m_audioSource.Play();
+                    bipbip += 1;
+                }
+
+                timeBeforeBip = (m_timeBeforeAttack - (m_loadingAttack - 1)) / 10;
+
+                if (loadingBip >= timeBeforeBip)
+                {
+                    m_audioSource.pitch = 1;
+                    m_audioSource.PlayOneShot(m_bipBip);
+                    loadingBip = 0;
+                    bipbip += 1;
+                    Debug.Log("Bip" + bipbip);
+                }
+
+
+
                 if (m_loadingAttack > m_timeBeforeAttack)
                 {
                     Attack();
                 }
+            }else
+            {
+                bipbip = 0;
+                isOnSight = false;
             }
         }
     }
@@ -226,6 +301,7 @@ public class Turret : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            isOnSight = false;
             targetingPlayer = false;
             m_loadingAttack = 0;
         }

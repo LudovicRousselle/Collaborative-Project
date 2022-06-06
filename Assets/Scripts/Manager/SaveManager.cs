@@ -13,7 +13,6 @@ public class SaveManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
         }
         else
         {
@@ -32,5 +31,9 @@ public class SaveManager : MonoBehaviour
     void Start()
     {
 
+    }
+
+    private void Update()
+    {
     }
 }
