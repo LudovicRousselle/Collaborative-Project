@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MT_ConvoyerRotator
+  m_Shader: {fileID: -6465566751694194690, guid: e9155d91e4ea2a94c8d1fea04770d8b0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_0aef648664de48caa6cca7a9e011b8ed_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d1542e6db4471e841b73b3f37cd44b0b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_4d4c6a7908954a3190ac98f081ff7a2e_Texture_1:
+        m_Texture: {fileID: 2800000, guid: e825274e21e66004998bcf2ec823bca1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5ad37c9d7980461ba9183f365fc9080f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 271844f6842d18e449523dd9058fcd0f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_64e735ba63144605821ef84517cf0d01_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 0d5c7057e7242b34dae73d0718365f14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_876fb08b2bf74e31ab977d0f7adf72c7_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6e4252e71670f0c4d9cf2b3e8bc4b7c0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Rotation: 90
+    m_Colors:
+    - Speed: {r: 0, g: 0.25, b: 0, a: 0}
+  m_BuildTextureStacks: []
