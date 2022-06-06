@@ -3,7 +3,17 @@ guid: 22da78c78ccba6e44967ad2b90b04dca
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_LightBulbMain
+    second: {fileID: 2100000, guid: ead9a3e654cfff14eaa4439676b03920, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_LightBulb_Chain
+    second: {fileID: 2100000, guid: 675de399f1869a74e89f7a0846de66cf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
