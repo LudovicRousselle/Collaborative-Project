@@ -53,9 +53,13 @@ public class Player : MonoBehaviour
         if (interactHitBox.rewindableObject.Count <= 0) return;
 
         m_playerController.RewindAnimation();
+
         foreach (var obj in interactHitBox.rewindableObject)
         {
-            obj.OnInteract();
+            if (obj != null)
+            {
+                obj.OnInteract();
+            }
         }
     }
 

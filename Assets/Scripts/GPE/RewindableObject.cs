@@ -32,7 +32,7 @@ public class RewindableObject : InteractableObject
     {
         print(gameObject.name + " is being interacted with");
 
-        if (!isRewinding)
+        if (!isRewinding && this != null)
         {
             Invoke("SetStateRewind", 1.0f); //si il est pas entrain de rewind, il rewind
             //SetStateRewind();

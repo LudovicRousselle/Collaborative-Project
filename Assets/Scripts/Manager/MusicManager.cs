@@ -27,6 +27,13 @@ public class MusicManager : MonoBehaviour
     {
         m_audioSource.clip = m_music;
         m_audioSource.Play();
+    }
 
+    private void Update()
+    {
+        if (!m_audioSource.isPlaying)
+        {
+            m_audioSource.Play();
+        }
     }
 }

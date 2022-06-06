@@ -6,14 +6,6 @@ public class Checkpoint : MonoBehaviour
 {
     private SaveManager m_saveManager;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            m_saveManager.lastCheckPointPos = transform.position;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +16,17 @@ public class Checkpoint : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (m_saveManager != null)
+            {
+                m_saveManager.lastCheckPointPos = transform.position;
+            }
+        }
     }
 }

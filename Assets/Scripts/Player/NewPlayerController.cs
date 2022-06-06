@@ -124,6 +124,13 @@ public class NewPlayerController : MonoBehaviour
             isMoving = false;
         }
 
+        if (!isGrounded && !isJumping)
+        {
+            isJumping = true;
+            m_animator.Play("Anim_JumpDuration", 0);
+            m_animator.Play("Anim_JumpDuration", 1);
+        }
+
         if (isRewinding)
         {
             delayRewind += Time.deltaTime;
@@ -141,12 +148,12 @@ public class NewPlayerController : MonoBehaviour
         {
             delayIdle += Time.deltaTime;
 
-            if (!isJumping && delayMove >= 0.75f && delayIdle >= 0.1f && !isRewinding)
+            if (!isJumping && delayMove >= 0.75f && delayIdle >= 0.1f)
             {
                 m_animator.Play("Anim_Idle", 1);
+
                 if (!isRewinding)
                 {
-                    Debug.Log("Hmmm");
                     m_animator.Play("Anim_Idle", 0);
                 }
                 delayIdle = 0;
@@ -309,6 +316,9 @@ public class NewPlayerController : MonoBehaviour
 
                 return;
             }   
+        }else
+        {
+            isGrounded = false;
         }
 
         if (isGrounded)
@@ -319,7 +329,7 @@ public class NewPlayerController : MonoBehaviour
             }
         }
 
-        isGrounded = false;
+        //isGrounded = false;
     }
 
     private void RayCastWalls()

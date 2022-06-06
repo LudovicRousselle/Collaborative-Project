@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1064926676396543839}
   - component: {fileID: 1064926676396543837}
   - component: {fileID: 1064926676396543838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GearJunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 1064926676601846930}
   - component: {fileID: 1064926676601846931}
   - component: {fileID: 1064926676601846940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint_End
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -270,9 +270,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1064926676661145002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Moving_Platform_Vertical
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 1064926676831959833}
   - component: {fileID: 1064926676831959839}
   - component: {fileID: 1064926676831959832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 1064926677335175836}
   - component: {fileID: 1064926677335175837}
   - component: {fileID: 1064926677335175838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Old_Platform
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -488,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfdd4f529f983844b34017765cb4689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerParent: {fileID: 0}
 --- !u!65 &1064926677335175837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -538,7 +537,7 @@ GameObject:
   - component: {fileID: 1064926677810639393}
   - component: {fileID: 1064926677810639394}
   - component: {fileID: 8352971773930947978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LP_GPE_MovingPlatformVertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfdd4f529f983844b34017765cb4689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerParent: {fileID: 5210905791646292327}
 --- !u!114 &1064926677810639394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,7 +1842,7 @@ GameObject:
   - component: {fileID: 1064926677989470338}
   - component: {fileID: 1064926677989470339}
   - component: {fileID: 1064926677989470348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint_Start
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1926,7 +1924,7 @@ GameObject:
   - component: {fileID: 1064926678063495514}
   - component: {fileID: 1064926678063495512}
   - component: {fileID: 1064926678063495513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2006,7 +2004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5210905791646292327}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EmptyWithoutScale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
