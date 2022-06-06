@@ -50,41 +50,43 @@ public class Player : MonoBehaviour
 
     private void RewindObject()
     {
-        if (!interactHitBox.canMark) return;
-        RewindableObject obj = interactHitBox.rewindableObject;
+        if (interactHitBox.rewindableObject.Count <= 0) return;
 
         m_playerController.RewindAnimation();
-        obj.OnInteract();
+        foreach (var obj in interactHitBox.rewindableObject)
+        {
+            obj.OnInteract();
+        }
     }
 
     private void OnMarkObject()
     {
-        if (!interactHitBox.canMark) return;
-        RewindableObject obj = interactHitBox.rewindableObject;
+        //if (!interactHitBox.canMark) return;
+        //RewindableObject obj = interactHitBox.rewindableObject;
 
-        if (!rewindableObjectList.Contains(obj))
-        {
-            Debug.Log("Player => " + obj.name + " is marked");
-            rewindableObjectList.Add(obj);
-        }
+        //if (!rewindableObjectList.Contains(obj))
+        //{
+        //    Debug.Log("Player => " + obj.name + " is marked");
+        //    rewindableObjectList.Add(obj);
+        //}
 
-        foreach (var element in prevRewindedObjectList)
-        {
-            if (element.IsRewinding) element.InterruptRewind();
-        }
+        //foreach (var element in prevRewindedObjectList)
+        //{
+        //    if (element.IsRewinding) element.InterruptRewind();
+        //}
 
-        marked = true;
-        markedPos = transform.position;
+        //marked = true;
+        //markedPos = transform.position;
 
-        if (instantiatedSphere == null)
-        {
-            instantiatedSphere = Instantiate(rewindSphere, markedPos, Quaternion.identity);
-            instantiatedSphere.transform.localScale = new Vector3(rewindDistance*2, rewindDistance*2, 0);
-        }
-        else
-        {
-            instantiatedSphere.transform.position = transform.position;
-        }
+        //if (instantiatedSphere == null)
+        //{
+        //    instantiatedSphere = Instantiate(rewindSphere, markedPos, Quaternion.identity);
+        //    instantiatedSphere.transform.localScale = new Vector3(rewindDistance*2, rewindDistance*2, 0);
+        //}
+        //else
+        //{
+        //    instantiatedSphere.transform.position = transform.position;
+        //}
     }
 
     private void OnRewindAction()

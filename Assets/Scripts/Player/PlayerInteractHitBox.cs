@@ -10,7 +10,12 @@ public class PlayerInteractHitBox : MonoBehaviour
     [HideInInspector] public bool canInteract = false;
     [HideInInspector] public bool canMark = false;
     [HideInInspector] public InteractableObject interactableObject;
-    [HideInInspector] public RewindableObject rewindableObject;
+    public List<RewindableObject> rewindableObject = new List<RewindableObject>();
+
+    private void Start()
+    {
+        rewindableObject.Clear();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +26,7 @@ public class PlayerInteractHitBox : MonoBehaviour
         }
         else if (other.gameObject.CompareTag(tagRewindable))
         {
-            canMark = true;
-            rewindableObject = other.gameObject.GetComponent<RewindableObject>();
+            rewindableObject.Add(other.gameObject.GetComponent<RewindableObject>());
         }
     }
 
@@ -35,8 +39,8 @@ public class PlayerInteractHitBox : MonoBehaviour
         }
         else if (other.gameObject.CompareTag(tagRewindable))
         {
-            canMark = false;
-            rewindableObject = null;
+            if(rewindableObject.Contains(other.gameObject.GetComponent<RewindableObject>())) 
+                rewindableObject.Remove(other.gameObject.GetComponent<RewindableObject>());
         }
     }
 }
