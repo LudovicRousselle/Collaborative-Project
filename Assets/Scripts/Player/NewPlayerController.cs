@@ -51,7 +51,7 @@ public class NewPlayerController : MonoBehaviour
     private Rigidbody rb;
 
     private Vector2 inputMove = Vector2.zero;
-
+    private Vector3 currentScale;
 
 
     private float currentSpeed = 0;
@@ -74,6 +74,8 @@ public class NewPlayerController : MonoBehaviour
         m_moveAnim = "Anim_Walk";
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
+
+        currentScale = transform.localScale;
 
         additionalSideRayDist = GetComponent<CapsuleCollider>().radius * 0.8f;
     }
@@ -145,16 +147,16 @@ public class NewPlayerController : MonoBehaviour
 
     private void Run() 
     {
-        if (groundSpeed == runSpeed) 
-        {
-            m_moveAnim = "Anim_Walk";
-            groundSpeed = walkSpeed;
-        }
-        else
-        {
-            m_moveAnim = "Anim_Run";
-            groundSpeed = runSpeed;
-        }
+        //if (groundSpeed == runSpeed) 
+        //{
+        //    m_moveAnim = "Anim_Walk";
+        //    groundSpeed = walkSpeed;
+        //}
+        //else
+        //{
+        //    m_moveAnim = "Anim_Run";
+        //    groundSpeed = runSpeed;
+        //}
     }
 
     private void Jump() 
@@ -174,6 +176,8 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 activeScale = Vector3.zero;
+
     private void Move()
     {
         if (wallHitDir > 0) inputMove.x = Mathf.Clamp(inputMove.x, -1000, 0);
@@ -183,13 +187,65 @@ public class NewPlayerController : MonoBehaviour
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
 
-            if (inputMove.x > 0)
+            //if (transform.parent != null)
+            //{
+            //     activeScale = new Vector3(
+            //        currentScale.x * inputMove.x / transform.parent.localScale.x, 
+            //        currentScale.y / transform.parent.localScale.y, 
+            //        currentScale.z / transform.parent.localScale.z);
+
+            //    if (transform.parent.parent != null)
+            //    {
+            //        activeScale = new Vector3 (
+            //            activeScale.x / transform.parent.parent.localScale.x, 
+            //            activeScale.y / transform.parent.parent.localScale.y,
+            //            activeScale.z / transform.parent.parent.localScale.z);
+
+            //        if (transform.parent.parent.parent != null)
+            //        {
+            //            activeScale = new Vector3(
+            //                activeScale.x / transform.parent.parent.parent.localScale.x,
+            //                activeScale.y / transform.parent.parent.parent.localScale.y,
+            //                activeScale.z / transform.parent.parent.parent.localScale.z);
+            //        }
+            //    }
+
+            //}
+            //else 
+            //    activeScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
+
+            if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.parent != null)
             {
-                m_animator.SetFloat("Speed", 1f);
-            }else if (inputMove.x < 0)
-            {
-                m_animator.SetFloat("Speed", -1f);
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x / transform.parent.parent.localScale.x / transform.parent.parent.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y / transform.parent.parent.localScale.y / transform.parent.parent.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z / transform.parent.parent.localScale.z / transform.parent.parent.parent.localScale.z);
             }
+            else if (transform.parent != null && transform.parent.parent != null)
+            {
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x / transform.parent.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y / transform.parent.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z / transform.parent.parent.localScale.z);
+            }
+            else if (transform.parent != null)
+            {
+                transform.localScale = new Vector3(
+                            currentScale.x * inputMove.x / transform.parent.localScale.x,
+                            currentScale.y / transform.parent.localScale.y,
+                            currentScale.z / transform.parent.localScale.z);
+            }
+            else
+                transform.localScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
+
+            //if (inputMove.x > 0)
+            //{
+            m_animator.SetFloat("Speed", 1f);
+            //}
+            //else if (inputMove.x < 0)
+            //{
+            //    m_animator.SetFloat("Speed", -1f);
+            //}
 
             if (isGrounded && !isMoving && !isJumping && delayMove >= 0.25f)
             {
