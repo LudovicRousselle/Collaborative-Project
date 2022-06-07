@@ -47,7 +47,6 @@ public class NewPlayerController : MonoBehaviour
     private bool isRewinding = false;
     private float delayRewind = 0;
 
-
     private Rigidbody rb;
 
     private Vector2 inputMove = Vector2.zero;

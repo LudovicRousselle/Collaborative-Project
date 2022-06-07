@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject m_GFX;
     [SerializeField] GameObject rewindParticleEffect;
     [SerializeField] Transform wristBone;
-
+    private float coolDownRewind = 0;
     private AudioSource m_AudioSource;
     [SerializeField] private AudioClip[] m_AudioClip;
 
@@ -48,23 +48,28 @@ public class Player : MonoBehaviour
     private void Update()
     {
         //CheckForRewindDist();
+        coolDownRewind += Time.deltaTime;
+
     }
 
     private void RewindObject()
     {
-        if (interactHitBox.rewindableObject.Count <= 0) return;
-
-        m_playerController.RewindAnimation();
-
-        Invoke("SpawnRewindParticles", 1.0f);
-
-        foreach (var obj in interactHitBox.rewindableObject)
+        if (coolDownRewind >= 1.25f)
         {
-            if (obj != null)
+            if (interactHitBox.rewindableObject.Count <= 0) return;
+
+            m_playerController.RewindAnimation();
+
+            Invoke("SpawnRewindParticles", 1.0f);
+
+            foreach (var obj in interactHitBox.rewindableObject)
             {
-                obj.OnInteract();
-                if (obj.gameObject.GetComponent<RewindableGear>() != null)
-                    interactHitBox.rewindableObject.Remove(obj);
+                if (obj != null)
+                {
+                    obj.OnInteract();
+                    if (obj.gameObject.GetComponent<RewindableGear>() != null)
+                        interactHitBox.rewindableObject.Remove(obj);
+                }
             }
         }
     }
