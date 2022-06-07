@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
@@ -12,14 +13,11 @@ public class UIManager : MonoBehaviour
 
     //UI
     //Menu
-    [SerializeField] private GameObject m_menu;
+    public GameObject m_menu;
     [SerializeField] private GameObject m_mainMenu;
-    [SerializeField] private GameObject m_option;
-    [SerializeField] private GameObject m_controls;
 
     //Button EventSystem
-    [SerializeField] private GameObject m_firstButtonMainMenu;
-    [SerializeField] private GameObject m_firstButtonOptions;
+    [SerializeField] private Button m_firstButtonMainMenu;
 
     //Menu
     private bool m_isMenuActive;
@@ -38,6 +36,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_playerInput = new PlayerInput();
+        m_playerInput.Enable();
+
+        m_menu.SetActive(false);
         m_eventSystem = EventSystem.current;
         SetupAllInputs();
     }
@@ -53,6 +55,7 @@ public class UIManager : MonoBehaviour
         m_playerInput.Default.PauseGame.performed += ctx => PauseMenu();
         m_playerInput.Default.BackMenu.performed += ctx => BackMenu();
     }
+
 
     private void PauseMenu()
     {
@@ -71,17 +74,7 @@ public class UIManager : MonoBehaviour
 
     public void BackMenu()
     {
-        if (m_controls.activeInHierarchy)
-        {
-            //Goes back to Option Menu
-            OptionMenu();
-        }
-        else if (m_option.activeInHierarchy)
-        {
-            //Goes back to main Menu
-            mainMenu();
-        }
-        else if (m_mainMenu.activeInHierarchy)
+        if (m_mainMenu.activeInHierarchy)
         {
             //Quit the menu
             m_menu.SetActive(false);
@@ -92,24 +85,6 @@ public class UIManager : MonoBehaviour
     private void mainMenu()
     {
         m_mainMenu.SetActive(true);
-        m_option.SetActive(false);
-        m_controls.SetActive(false);
-
-        m_eventSystem.SetSelectedGameObject(m_firstButtonMainMenu);
-    }
-
-    public void OptionMenu()
-    {
-        m_option.SetActive(true);
-        m_mainMenu.SetActive(false);
-        m_controls.SetActive(false);
-
-        m_eventSystem.SetSelectedGameObject(m_firstButtonOptions);
-    }
-
-    public void ControlMenu()
-    {
-        m_option.SetActive(false);
-        m_controls.SetActive(true);
+        m_firstButtonMainMenu.Select();
     }
 }
