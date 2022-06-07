@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator m_reloadScene;
     private IEnumerator m_nextScene;
     [SerializeField] private GameObject myLittleInGameCanvas;
+    [SerializeField] private UIManager m_UIManager;
 
     //Transitions
     [SerializeField] private Image m_transition;
@@ -72,8 +73,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void ButtonReloadScene()
+    {
+        if (m_reloadScene == null)
+        {
+            m_reloadScene = ReloadScene();
+            StartCoroutine(m_reloadScene);
+        }
+    }
+
     IEnumerator ReloadScene()
     {
+        m_UIManager.m_menu.SetActive(false);
+
         DontDestroyOnLoad(instance);
         DontDestroyOnLoad(myLittleInGameCanvas);
 
