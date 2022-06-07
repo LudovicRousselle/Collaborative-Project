@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1015222657}
-  m_IndirectSpecularColor: {r: 0.6587821, g: 0.52558, b: 0.5306248, a: 1}
+  m_IndirectSpecularColor: {r: 0.48701626, g: 0.48251128, b: 0.5353216, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3507,8 +3507,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 452271006}
-  - {fileID: 420575294}
   - {fileID: 1973431171}
+  - {fileID: 420575294}
   m_Father: {fileID: 1323622634}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5561,6 +5561,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LP_Clock
       objectReference: {fileID: 0}
+    - target: {fileID: 6713406816943881379, guid: 52d245ed1867a104eb0034de5bcddfb0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4ced7f105dccbf4fbd3f4c6bb81ca4d, type: 2}
+    - target: {fileID: 6713406816943881379, guid: 52d245ed1867a104eb0034de5bcddfb0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4ced7f105dccbf4fbd3f4c6bb81ca4d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d245ed1867a104eb0034de5bcddfb0, type: 3}
 --- !u!1 &682223429
