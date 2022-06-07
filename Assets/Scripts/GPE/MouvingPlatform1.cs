@@ -11,6 +11,8 @@ public class MouvingPlatform1 : RewindableObject
     [SerializeField] private float watingTimeAtWaypoints;
     public bool isOn;
 
+    public bool isFinishingBlow = false;
+
     [SerializeField] Transform gearTransform;
     [SerializeField] float gearRotationSpeed;
     
@@ -19,38 +21,45 @@ public class MouvingPlatform1 : RewindableObject
 
     void Update()
     {
-        // Seulement si la plateforme est activée
-        if (isOn)
+        if (!isFinishingBlow)
         {
-            // Attente quand on touche un waypoint
-            if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
-            {
-                // Timer
-                currentTimerValue -= Time.deltaTime;
-
-                // Sélectionner le prochain waypoint
-                if (currentTimerValue <= 0)
-                {
-
-                    currentWaypointIndex = currentWaypointIndex + 1;
-
-                    // Reset le timer
-                    currentTimerValue = watingTimeAtWaypoints;
-                    if (currentWaypointIndex >= waypoints.Length)
+            // Seulement si la plateforme est activée
+                    if (isOn)
                     {
-                        currentWaypointIndex = 0;
+                        // Attente quand on touche un waypoint
+                        if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f)
+                        {
+                            // Timer
+                            currentTimerValue -= Time.deltaTime;
+
+                            // Sélectionner le prochain waypoint
+                            if (currentTimerValue <= 0)
+                            {
+
+                                currentWaypointIndex = currentWaypointIndex + 1;
+
+                                // Reset le timer
+                                currentTimerValue = watingTimeAtWaypoints;
+                                if (currentWaypointIndex >= waypoints.Length)
+                                {
+                                    currentWaypointIndex = 0;
+                                }
+
+                            }
+
+                        }
+
+                        if (gearTransform != null)
+                        { 
+                            gearTransform.Rotate(Vector3.right * gearRotationSpeed * speed * Time.deltaTime);
+                        }
+                        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
                     }
 
-                }
-
-            }
-
-            if (gearTransform != null)
-            { 
-                gearTransform.Rotate(Vector3.right * gearRotationSpeed * speed * Time.deltaTime);
-            }
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
         }
+
+
+        
     }
     override protected void DuringRewind()
     {
@@ -80,6 +89,15 @@ public class MouvingPlatform1 : RewindableObject
         for (int i = 0; i < waypoints.Length; i++)
         {
             waypoints[i] = tempWaypoints[waypoints.Length - i];
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((other.gameObject.tag == "Player"))
+        {
+            // Codé dégueulasse mais elle va attendre le joueur puis aller jusqu'au bout
+            isFinishingBlow = false;
         }
     }
 }
