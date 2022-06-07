@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 3445814742984837813}
   - component: {fileID: 3445814742984837812}
   - component: {fileID: 408883743}
+  - component: {fileID: 4727454284180007738}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -77,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca2b41aaf5cb6542b3a284be313624e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ntm: 0
   m_startLevelPos: {fileID: 134495817}
   lastCheckPointPos: {x: 0, y: 0, z: 0}
 --- !u!114 &408883743
@@ -92,9 +92,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d20a17d89916344faf81bf56d7afa25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myLittleInGameCanvas: {fileID: 0}
+  m_UIManager: {fileID: 0}
   m_transition: {fileID: 0}
   m_Fading: 0
   nextLevel: 0
+--- !u!114 &4727454284180007738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3445814742984837815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88369bd2adddeca48a5a1ce91924b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7431963780692251087
 GameObject:
   m_ObjectHideFlags: 0
