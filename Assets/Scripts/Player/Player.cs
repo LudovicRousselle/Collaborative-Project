@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject rewindSphere = default;
     [SerializeField] private float rewindDistance = 5;
     [SerializeField] private GameObject m_GFX;
+    [SerializeField] GameObject rewindParticleEffect;
+    [SerializeField] Transform wristBone;
 
     private AudioSource m_AudioSource;
     [SerializeField] private AudioClip[] m_AudioClip;
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
         if (interactHitBox.rewindableObject.Count <= 0) return;
 
         m_playerController.RewindAnimation();
+
+        Invoke("SpawnRewindParticles", 1.0f);
 
         foreach (var obj in interactHitBox.rewindableObject)
         {
@@ -156,5 +160,10 @@ public class Player : MonoBehaviour
         m_GFX.SetActive(false);
         isDead = true;
         Debug.Log("Player dies");
+    }
+
+    private void SpawnRewindParticles()
+    {
+        Instantiate(rewindParticleEffect, wristBone.position, Quaternion.identity);
     }
 }
