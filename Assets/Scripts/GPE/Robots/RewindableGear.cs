@@ -24,7 +24,7 @@ public class RewindableGear : RewindableObject
     {
         Turret turret = parentFolder.GetComponentInChildren<Turret>();
         turret.RobotDeath();
-        gameObject.tag = "Default";
+
     }
 
     protected override void EndRewind()

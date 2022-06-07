@@ -34,18 +34,18 @@ public class NewPlayerController : MonoBehaviour
     private float additionalSideRayDist;
     private int wallHitDir;
 
-    //Animations
     public PlayerInput input;
+
+    //Animations
     private Animator m_animator;
-    private Animation m_walk;
-    private Animation m_run;
-    private string m_moveAnim;
     private bool isGrounded = false;
     private bool isJumping = false;
     private bool isMoving = false;
     private float delayJump = 0;
     private float delayMove = 0;
     private float delayIdle = 0;
+    private bool isRewinding = false;
+    private float delayRewind = 0;
 
 
     private Rigidbody rb;
@@ -71,7 +71,6 @@ public class NewPlayerController : MonoBehaviour
 
     private void Start()
     {
-        m_moveAnim = "Anim_Walk";
         groundSpeed = walkSpeed;
         currentSpeed = groundSpeed;
 
@@ -111,7 +110,11 @@ public class NewPlayerController : MonoBehaviour
 
         if (isGrounded && isJumping && delayJump >= 0.5f)
         {
-            m_animator.Play("Anim_JumpEnd", 0);
+            if (!isRewinding)
+            {
+                m_animator.Play("Anim_JumpEnd", 0);
+            }
+            m_animator.Play("Anim_JumpEnd", 1);
             delayMove = 0;
             isJumping = false;
         }
@@ -121,13 +124,38 @@ public class NewPlayerController : MonoBehaviour
             isMoving = false;
         }
 
+        if (!isGrounded && !isJumping)
+        {
+            isJumping = true;
+            m_animator.Play("Anim_JumpDuration", 0);
+            m_animator.Play("Anim_JumpDuration", 1);
+        }
+
+        if (isRewinding)
+        {
+            delayRewind += Time.deltaTime;
+
+            if (delayRewind >= 1.5f)
+            {
+                isRewinding = false;
+            }
+        }else
+        {
+            delayRewind = 0;
+        }
+
         if (inputMove.x == 0)
         {
             delayIdle += Time.deltaTime;
 
             if (!isJumping && delayMove >= 0.75f && delayIdle >= 0.1f)
             {
-                m_animator.Play("Anim_Idle", 0);
+                m_animator.Play("Anim_Idle", 1);
+
+                if (!isRewinding)
+                {
+                    m_animator.Play("Anim_Idle", 0);
+                }
                 delayIdle = 0;
                 isMoving = false;
             }
@@ -166,7 +194,13 @@ public class NewPlayerController : MonoBehaviour
             isJumping = true;
             isMoving = false;
 
-            m_animator.Play("Anim_JumpStart", 0);
+            m_animator.Play("Anim_JumpStart", 1);
+
+            if (!isRewinding)
+            {
+                m_animator.Play("Anim_JumpStart", 0);
+            }
+
             currentSpeed = airSpeed;
             rb.AddForce(new Vector3(0, jumpImpulse * 1000, 0));
         }
@@ -176,6 +210,8 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 activeScale = Vector3.zero;
+
     private void Move()
     {
         if (wallHitDir > 0) inputMove.x = Mathf.Clamp(inputMove.x, -1000, 0);
@@ -184,6 +220,33 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
+
+            //if (transform.parent != null)
+            //{
+            //     activeScale = new Vector3(
+            //        currentScale.x * inputMove.x / transform.parent.localScale.x, 
+            //        currentScale.y / transform.parent.localScale.y, 
+            //        currentScale.z / transform.parent.localScale.z);
+
+            //    if (transform.parent.parent != null)
+            //    {
+            //        activeScale = new Vector3 (
+            //            activeScale.x / transform.parent.parent.localScale.x, 
+            //            activeScale.y / transform.parent.parent.localScale.y,
+            //            activeScale.z / transform.parent.parent.localScale.z);
+
+            //        if (transform.parent.parent.parent != null)
+            //        {
+            //            activeScale = new Vector3(
+            //                activeScale.x / transform.parent.parent.parent.localScale.x,
+            //                activeScale.y / transform.parent.parent.parent.localScale.y,
+            //                activeScale.z / transform.parent.parent.parent.localScale.z);
+            //        }
+            //    }
+
+            //}
+            //else 
+            //    activeScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
 
             if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.parent != null)
             {
@@ -209,11 +272,13 @@ public class NewPlayerController : MonoBehaviour
             else
                 transform.localScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
 
-            m_animator.SetFloat("Speed", 1f);
-
             if (isGrounded && !isMoving && !isJumping && delayMove >= 0.25f)
             {
-                m_animator.Play(m_moveAnim, 0);
+                if (!isRewinding)
+                {
+                    m_animator.Play("Anim_Walk", 0);
+                }
+                m_animator.Play("Anim_Walk", 1);
                 isMoving = true;
             }
         }
@@ -221,6 +286,7 @@ public class NewPlayerController : MonoBehaviour
 
     public void RewindAnimation()
     {
+        isRewinding = true;
         m_animator.Play("Anim_RewindStart", 0);
     }
 
@@ -250,6 +316,9 @@ public class NewPlayerController : MonoBehaviour
 
                 return;
             }   
+        }else
+        {
+            isGrounded = false;
         }
 
         if (isGrounded)
@@ -260,7 +329,7 @@ public class NewPlayerController : MonoBehaviour
             }
         }
 
-        isGrounded = false;
+        //isGrounded = false;
     }
 
     private void RayCastWalls()
@@ -282,27 +351,11 @@ public class NewPlayerController : MonoBehaviour
             wallHitDir = -1;
             Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
         }
-        else if (Physics.Raycast(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), Vector3.right, out hit, rayDist))
-        {
-            if (hit.collider.isTrigger == true) return;
-
-            wallHitDir = 1;
-            Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.yellow);
-        }
-        else if (Physics.Raycast(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), -Vector3.right, out hit, rayDist))
-        {
-            if (hit.collider.isTrigger == true) return;
-
-            wallHitDir = -1;
-            Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
-        }
         else
         {
             wallHitDir = 0;
             Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.white);
-            Debug.DrawRay(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), Vector3.right * rayDist, Color.white);
             Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.white);
-            Debug.DrawRay(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), -Vector3.right * rayDist, Color.white);
         }
     }
 
