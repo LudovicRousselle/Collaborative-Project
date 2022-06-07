@@ -176,8 +176,6 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
-    private Vector3 activeScale = Vector3.zero;
-
     private void Move()
     {
         if (wallHitDir > 0) inputMove.x = Mathf.Clamp(inputMove.x, -1000, 0);
@@ -186,33 +184,6 @@ public class NewPlayerController : MonoBehaviour
         if (inputMove.x > 0 || inputMove.x < 0)
         {
             rb.AddForce(new Vector3(inputMove.x * currentSpeed * 100, 0, 0));
-
-            //if (transform.parent != null)
-            //{
-            //     activeScale = new Vector3(
-            //        currentScale.x * inputMove.x / transform.parent.localScale.x, 
-            //        currentScale.y / transform.parent.localScale.y, 
-            //        currentScale.z / transform.parent.localScale.z);
-
-            //    if (transform.parent.parent != null)
-            //    {
-            //        activeScale = new Vector3 (
-            //            activeScale.x / transform.parent.parent.localScale.x, 
-            //            activeScale.y / transform.parent.parent.localScale.y,
-            //            activeScale.z / transform.parent.parent.localScale.z);
-
-            //        if (transform.parent.parent.parent != null)
-            //        {
-            //            activeScale = new Vector3(
-            //                activeScale.x / transform.parent.parent.parent.localScale.x,
-            //                activeScale.y / transform.parent.parent.parent.localScale.y,
-            //                activeScale.z / transform.parent.parent.parent.localScale.z);
-            //        }
-            //    }
-
-            //}
-            //else 
-            //    activeScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
 
             if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.parent != null)
             {
@@ -238,14 +209,7 @@ public class NewPlayerController : MonoBehaviour
             else
                 transform.localScale = new Vector3(currentScale.x * inputMove.x, currentScale.y, currentScale.z);
 
-            //if (inputMove.x > 0)
-            //{
             m_animator.SetFloat("Speed", 1f);
-            //}
-            //else if (inputMove.x < 0)
-            //{
-            //    m_animator.SetFloat("Speed", -1f);
-            //}
 
             if (isGrounded && !isMoving && !isJumping && delayMove >= 0.25f)
             {
@@ -318,11 +282,27 @@ public class NewPlayerController : MonoBehaviour
             wallHitDir = -1;
             Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
         }
+        else if (Physics.Raycast(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), Vector3.right, out hit, rayDist))
+        {
+            if (hit.collider.isTrigger == true) return;
+
+            wallHitDir = 1;
+            Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.yellow);
+        }
+        else if (Physics.Raycast(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), -Vector3.right, out hit, rayDist))
+        {
+            if (hit.collider.isTrigger == true) return;
+
+            wallHitDir = -1;
+            Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.yellow);
+        }
         else
         {
             wallHitDir = 0;
             Debug.DrawRay(transform.position, Vector3.right * rayDist, Color.white);
+            Debug.DrawRay(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), Vector3.right * rayDist, Color.white);
             Debug.DrawRay(transform.position, -Vector3.right * rayDist, Color.white);
+            Debug.DrawRay(boxCastStartingPos.position + new Vector3(0, 0.05f, 0), -Vector3.right * rayDist, Color.white);
         }
     }
 
