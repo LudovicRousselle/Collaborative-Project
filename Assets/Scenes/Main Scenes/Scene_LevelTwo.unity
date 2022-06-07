@@ -5851,6 +5851,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2615453266661069634, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
   m_PrefabInstance: {fileID: 1548081238}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &497949104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2615453266661069635, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
+  m_PrefabInstance: {fileID: 1548081238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497949102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65d22175275b1843bc2ee0008bb5da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &508052976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30051,6 +30062,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.94
       objectReference: {fileID: 0}
+    - target: {fileID: 408883743, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
+      propertyPath: m_UIManager
+      value: 
+      objectReference: {fileID: 497949104}
     - target: {fileID: 408883743, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
       propertyPath: m_transition
       value: 
