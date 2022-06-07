@@ -104,9 +104,18 @@ public class LevelManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         int buildIndex = scene.buildIndex;
 
-        SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
-        SceneManager.MoveGameObjectToScene(myLittleInGameCanvas, SceneManager.GetActiveScene());
-        SceneManager.LoadScene(buildIndex + 1);
+        if (buildIndex == 3)
+        {
+            SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+            SceneManager.MoveGameObjectToScene(myLittleInGameCanvas, SceneManager.GetActiveScene());
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+            SceneManager.MoveGameObjectToScene(myLittleInGameCanvas, SceneManager.GetActiveScene());
+            SceneManager.LoadScene(buildIndex + 1);
+        }
 
         nextLevel = false;
         m_Fading = false;
