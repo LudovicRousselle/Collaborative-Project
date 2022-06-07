@@ -7,10 +7,18 @@ public class PlayerSound : MonoBehaviour
     [SerializeField] private AudioSource m_AudioSource;
     [SerializeField] private AudioClip[] m_Clip;
 
+    [SerializeField] private List<GameObject> m_vfx = new List<GameObject>();
+    private GameObject m_effectToSpawn;
+
     void PlayJump()
     {
         m_AudioSource.pitch = 1;
         m_AudioSource.PlayOneShot(m_Clip[0], 1f);
+
+        GameObject vfxJump;
+
+        m_effectToSpawn = m_vfx[0];
+        vfxJump = Instantiate(m_effectToSpawn, transform.position, Quaternion.identity);
     }
 
     void PlayLanding()
