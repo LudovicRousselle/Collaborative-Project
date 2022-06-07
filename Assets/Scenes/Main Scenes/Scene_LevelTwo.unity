@@ -27941,6 +27941,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1732505672, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1657470181}
+    - target: {fileID: 1732505672, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890911526, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1587698225}
+    - target: {fileID: 1890911526, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonReloadScene
+      objectReference: {fileID: 0}
     - target: {fileID: 2615453266661069634, guid: 518203cacc02e9a4db680d62b50d8624, type: 3}
       propertyPath: m_Name
       value: Canvas(InGame)
@@ -28626,6 +28642,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
   m_PrefabInstance: {fileID: 139784299}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657470181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4727454284180007738, guid: 32450d8f42e484747a30761e10d04c7b, type: 3}
+  m_PrefabInstance: {fileID: 1587698223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88369bd2adddeca48a5a1ce91924b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1660768907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4675923572101066100, guid: e2149b0c6bdf58b41b7852587a878168, type: 3}
