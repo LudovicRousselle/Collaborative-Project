@@ -23234,11 +23234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.95000076
+      value: 125.5
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5999999
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 8515945595658106922, guid: 71eeeb59504d92146b7113f9c3039ac2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25844,7 +25844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1064926677810639392, guid: f6f25210bfd628944ba9d8c20d1bdca9, type: 3}
       propertyPath: m_Center.x
-      value: 0.0013055801
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 1064926677810639392, guid: f6f25210bfd628944ba9d8c20d1bdca9, type: 3}
       propertyPath: m_Center.y
@@ -25868,7 +25868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1064926677810639394, guid: f6f25210bfd628944ba9d8c20d1bdca9, type: 3}
       propertyPath: watingTimeAtWaypoints
-      value: 2.5
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 1064926677810639395, guid: f6f25210bfd628944ba9d8c20d1bdca9, type: 3}
       propertyPath: m_LocalScale.x
@@ -43920,9 +43920,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1577584883}
   - component: {fileID: 1577584882}
+  - component: {fileID: 1577584884}
   m_Layer: 0
   m_Name: FinDuJeu
-  m_TagString: Untagged
+  m_TagString: Rewindable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43935,11 +43936,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577584881}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7717404, y: 2.045521, z: 1.8175833}
-  m_Center: {x: 0, y: 0, z: 0.40879166}
+  m_Size: {x: 2.7717404, y: 2.045521, z: 0.18982697}
+  m_Center: {x: 0, y: 0, z: -0.037204742}
 --- !u!4 &1577584883
 Transform:
   m_ObjectHideFlags: 0
@@ -43948,12 +43949,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577584881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 126.1, y: 8.3, z: 0}
-  m_LocalScale: {x: 2.5599, y: 2.5599, z: 2.5599}
+  m_LocalPosition: {x: 126.1, y: 8.3, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 76
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1577584884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577584881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1348855eb48d10c41a4b96f14a0c21ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindedStateDuration: 0
+  outlineScript: {fileID: 0}
 --- !u!1 &1578218174
 GameObject:
   m_ObjectHideFlags: 0
