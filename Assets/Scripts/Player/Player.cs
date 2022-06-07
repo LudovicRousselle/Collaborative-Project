@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
                         interactHitBox.rewindableObject.Remove(obj);
                 }
             }
+
+            coolDownRewind = 0;
         }
     }
 
