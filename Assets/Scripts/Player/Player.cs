@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
             if (obj != null)
             {
                 obj.OnInteract();
+                if (obj.gameObject.GetComponent<RewindableGear>() != null)
+                    interactHitBox.rewindableObject.Remove(obj);
             }
         }
     }
