@@ -2702,7 +2702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2089353958869945352, guid: d6049b65606732c46af068766beef204, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2089353958869945352, guid: d6049b65606732c46af068766beef204, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2739,6 +2739,14 @@ PrefabInstance:
     - target: {fileID: 2089353958869946357, guid: d6049b65606732c46af068766beef204, type: 3}
       propertyPath: m_Name
       value: SimpleBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601777749428229799, guid: d6049b65606732c46af068766beef204, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601777749428229799, guid: d6049b65606732c46af068766beef204, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.19966336
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6049b65606732c46af068766beef204, type: 3}
@@ -6244,7 +6252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8993309758594734218, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.08
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 8993309758594734218, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10263,6 +10271,14 @@ PrefabInstance:
     - target: {fileID: 8993309758594734222, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
       propertyPath: m_Name
       value: ConveyorBeltMedium (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993309758594734223, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993309758594734223, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
+      propertyPath: m_Center.x
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f590a411fb486e4bb5dd2e2c69aeb07, type: 3}
