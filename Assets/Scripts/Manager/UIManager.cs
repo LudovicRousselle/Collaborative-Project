@@ -64,10 +64,14 @@ public class UIManager : MonoBehaviour
         if (m_isMenuActive)
         {
             m_menu.SetActive(true);
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 0;
             mainMenu();
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 1;
             m_menu.SetActive(false);
         }
     }
@@ -78,6 +82,8 @@ public class UIManager : MonoBehaviour
         {
             //Quit the menu
             m_menu.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 1;
             m_isMenuActive = false;
         }
     }
