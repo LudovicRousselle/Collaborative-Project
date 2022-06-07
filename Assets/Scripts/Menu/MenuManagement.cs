@@ -11,16 +11,14 @@ public class MenuManagement : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void OptionButton()
+    public void QuitGame()
     {
-        SceneManager.LoadScene(4);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
     }
 
-    public void QuitButton()
-    {
-        Application.Quit();
-        Debug.Log("Quit");
-    }
 
     public void GobackButton()
     {
